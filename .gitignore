@@ -15,3 +15,24 @@ artifacts/
 *.ckpt
 .pnpm-store/
 apps/web/.env.local
+
+# Dataset payloads and derived binaries: never commit (see DATA_LICENSE.md)
+*.zip
+*.wav
+*.flac
+*.npz
+*.npy
+*.obj
+*.mtl
+*.glb
+*.ply
+*.h5
+runs/
+checkpoints/
+data/extracted/
+data/index/
+
+# Exception: the tiny CC BY 4.0 AcousticRooms sample for integration work,
+# redistributed with attribution in data/samples/ATTRIBUTION.md
+!data/samples/**/*.wav
+!data/samples/**/*.obj
