@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1.0",
+  "manifest_path": "data/processed/manifest.jsonl",
+  "sample_root": "data/processed",
+  "grid_policy": "per_sample",
+  "frame_policy": "per_sample",
+  "split_group_key": "room_id"
+}

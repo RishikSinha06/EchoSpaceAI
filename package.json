@@ -1,0 +1,10 @@
+{
+  "name": "echospace-ai",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "pnpm --dir apps/web dev",
+    "build": "pnpm --dir apps/web build",
+    "preview": "pnpm --dir apps/web preview"
+  }
+}

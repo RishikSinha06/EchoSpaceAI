@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echospace.local/contracts/v0.1.0/room-scene.schema.json",
+  "title": "EchoSpace metric RoomScene v1",
+  "type": "object",
+  "required": ["format", "scene_id", "scene_version", "units", "coordinate_system", "world_origin_m", "observed_geometry", "inferred_geometry", "observations", "acoustic_measurements"],
+  "properties": {
+    "format": {"const": "echospace.room-scene.v1"},
+    "scene_id": {"type": "string", "minLength": 1},
+    "scene_version": {"type": "integer", "minimum": 1},
+    "units": {"const": "m"},
+    "coordinate_system": {"type": "string", "minLength": 1},
+    "world_origin_m": {"$ref": "#/$defs/vector3"},
+    "footprint_scene_m": {
+      "type": "array", "minItems": 3,
+      "items": {"$ref": "#/$defs/vector3"}
+    },
+    "source_sample_id": {"type": "string", "minLength": 1},
+    "observed_geometry": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "start_scene_m", "end_scene_m", "provenance", "observation_id"],
+        "properties": {
+          "kind": {"const": "wall_segment"},
+          "start_scene_m": {"$ref": "#/$defs/vector3"},
+          "end_scene_m": {"$ref": "#/$defs/vector3"},
+          "provenance": {"const": "measured"},
+          "observation_id": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "inferred_geometry": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "start_scene_m", "end_scene_m", "provenance", "model_version"],
+        "properties": {
+          "kind": {"const": "wall_segment"},
+          "start_scene_m": {"$ref": "#/$defs/vector3"},
+          "end_scene_m": {"$ref": "#/$defs/vector3"},
+          "provenance": {"const": "model"},
+          "model_version": {"type": "string", "minLength": 1},
+          "uncertainty": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["observation_id", "sensor_type", "payload_ref"],
+        "properties": {
+          "observation_id": {"type": "string", "minLength": 1},
+          "sensor_type": {"type": "string", "minLength": 1},
+          "payload_ref": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "acoustic_measurements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rir_id", "rir_ref", "sample_rate_hz", "source_scene_m", "receiver_scene_m"],
+        "properties": {
+          "rir_id": {"type": "string", "minLength": 1},
+          "rir_ref": {"type": "string", "minLength": 1},
+          "sample_rate_hz": {"type": "integer", "minimum": 1},
+          "source_scene_m": {"$ref": "#/$defs/vector3"},
+          "receiver_scene_m": {"$ref": "#/$defs/vector3"},
+          "timing_metadata": {"type": "object"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "vector3": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"type": "number"}
+    }
+  }
+}

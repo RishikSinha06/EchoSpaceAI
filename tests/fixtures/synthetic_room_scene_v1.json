@@ -1,0 +1,22 @@
+{
+  "format": "echospace.room-scene.v1",
+  "scene_id": "synthetic_square",
+  "scene_version": 1,
+  "units": "m",
+  "coordinate_system": "Fixture only: X right, Y up, Z forward",
+  "world_origin_m": [0, 0, 0],
+  "footprint_scene_m": [[0, 0, 0], [2, 0, 0], [2, 0, 2], [0, 0, 2]],
+  "source_sample_id": "synthetic_square_scan_0",
+  "observed_geometry": [
+    {"kind": "wall_segment", "start_scene_m": [0, 0, 0], "end_scene_m": [2, 0, 0], "provenance": "measured", "observation_id": "synthetic_scan_0"}
+  ],
+  "inferred_geometry": [
+    {"kind": "wall_segment", "start_scene_m": [2, 0, 0], "end_scene_m": [2, 0, 2], "provenance": "model", "model_version": "synthetic_fixture"}
+  ],
+  "observations": [
+    {"observation_id": "synthetic_scan_0", "sensor_type": "synthetic_scan", "payload_ref": "sample.npz"}
+  ],
+  "acoustic_measurements": [
+    {"rir_id": "impulse_0", "rir_ref": "sample.npz#rir_waveforms[0]", "sample_rate_hz": 16000, "source_scene_m": [0.75, 0, 0.75], "receiver_scene_m": [1.25, 0, 0.75], "timing_metadata": {"kind": "synthetic_impulse"}}
+  ]
+}

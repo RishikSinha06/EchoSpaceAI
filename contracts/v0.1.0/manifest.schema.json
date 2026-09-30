@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://echospace.local/contracts/v0.1.0/manifest.schema.json",
+  "title": "EchoSpace sample manifest record",
+  "type": "object",
+  "required": ["schema_version", "sample_id", "room_id", "dataset", "geometry_id", "rir_ids", "rir_sample_rate_hz", "sample_path", "split", "frame", "grid"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "sample_id": {"type": "string", "minLength": 1},
+    "room_id": {"type": "string", "minLength": 1},
+    "dataset": {"type": "string", "minLength": 1},
+    "geometry_id": {"type": "string", "minLength": 1},
+    "rir_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "rir_sample_rate_hz": {"type": "integer", "minimum": 1},
+    "sample_path": {"type": "string", "minLength": 1},
+    "split": {"enum": ["unassigned", "train", "val", "test"]},
+    "frame": {
+      "type": "object",
+      "required": ["description", "source_units_to_meters", "source_to_scene"],
+      "properties": {
+        "description": {"type": "string", "minLength": 1},
+        "source_units_to_meters": {"type": "number", "exclusiveMinimum": 0},
+        "source_to_scene": {
+          "type": "array", "minItems": 4, "maxItems": 4,
+          "items": {
+            "type": "array", "minItems": 4, "maxItems": 4,
+            "items": {"type": "number"}
+          }
+        }
+      }
+    },
+    "grid": {
+      "type": "object",
+      "required": ["width", "height", "cell_size_m", "origin_scene_m", "axis_u_scene", "axis_v_scene"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "cell_size_m": {"type": "number", "exclusiveMinimum": 0},
+        "origin_scene_m": {"$ref": "#/$defs/vector3"},
+        "axis_u_scene": {"$ref": "#/$defs/vector3"},
+        "axis_v_scene": {"$ref": "#/$defs/vector3"}
+      }
+    }
+  },
+  "$defs": {
+    "vector3": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"type": "number"}
+    }
+  }
+}
