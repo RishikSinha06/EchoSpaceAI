@@ -1,0 +1,42 @@
+{
+  "record": {
+    "schema_version": "0.1.0",
+    "sample_id": "synthetic_square_scan_0",
+    "room_id": "synthetic_square",
+    "dataset": "synthetic_fixture",
+    "geometry_id": "square_4x4",
+    "rir_ids": ["impulse_0"],
+    "rir_sample_rate_hz": 16000,
+    "sample_path": "sample.npz",
+    "split": "unassigned",
+    "frame": {
+      "description": "Fixture only: X right, Y up, Z forward; audit decides real-data orientation",
+      "source_units_to_meters": 1.0,
+      "source_to_scene": [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    },
+    "grid": {
+      "width": 4,
+      "height": 4,
+      "cell_size_m": 0.5,
+      "origin_scene_m": [0, 0, 0],
+      "axis_u_scene": [1, 0, 0],
+      "axis_v_scene": [0, 0, 1]
+    }
+  },
+  "sample": {
+    "observed_points_scene_m": [[0, 0, 0], [0.5, 0, 0], [1, 0, 0], [1.5, 0, 0]],
+    "observed_cells": [[1, 1, 1, 1], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]],
+    "observed_free": [[0, 0, 0, 0], [0, 1, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+    "observed_wall": [[1, 1, 1, 1], [1, 0, 0, 1], [0, 0, 0, 0], [0, 0, 0, 0]],
+    "valid_cells": [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]],
+    "target_occupancy": [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]],
+    "target_boundary": [[1, 1, 1, 1], [1, 0, 0, 1], [1, 0, 0, 1], [1, 1, 1, 1]],
+    "rir_waveforms": [[1, 0.5, 0.25, 0.125, 0, 0, 0, 0]],
+    "rir_positions_scene_m": [[[0.75, 0, 0.75], [1.25, 0, 0.75]]],
+    "rir_valid": [1]
+  },
+  "prediction": {
+    "occupancy_probability": [[0.9, 0.9, 0.9, 0.9], [0.9, 0.9, 0.9, 0.9], [0.9, 0.9, 0.9, 0.9], [0.9, 0.9, 0.9, 0.9]],
+    "boundary_probability": [[0.8, 0.8, 0.8, 0.8], [0.8, 0.2, 0.2, 0.8], [0.8, 0.2, 0.2, 0.8], [0.8, 0.8, 0.8, 0.8]]
+  }
+}

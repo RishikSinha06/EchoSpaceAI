@@ -1,0 +1,35 @@
+name: Contracts
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-contracts.txt
+      - name: Install contract dependencies
+        run: python -m pip install -e . -r requirements-contracts.txt
+      - name: Validate synthetic fixture and contract boundaries
+        run: python -m unittest discover -s tests -p 'test_contract_v0.py' -v
+
+  web-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build

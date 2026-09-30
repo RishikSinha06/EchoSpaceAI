@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.vite/
+__pycache__/
+.pytest_cache/
+.venv/
+.env
+data/raw/
+data/raw.zip
+data/cache/
+data/processed/
+artifacts/
+*.pt
+*.pth
+*.ckpt
+.pnpm-store/
+apps/web/.env.local

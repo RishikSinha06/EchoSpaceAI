@@ -1,0 +1,1 @@
+Put local source archives in `raw/`, prepared samples in `processed/`, and temporary caches in `cache/`. These directories are ignored by Git. The two supplied planning documents do not contain the actual dataset files.
