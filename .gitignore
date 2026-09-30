@@ -36,3 +36,4 @@ data/index/
 # redistributed with attribution in data/samples/ATTRIBUTION.md
 !data/samples/**/*.wav
 !data/samples/**/*.obj
+*.egg-info/
