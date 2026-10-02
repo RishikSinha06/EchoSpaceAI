@@ -86,6 +86,31 @@ def test_slice_detects_two_disjoint_rooms_and_open_outline() -> None:
     assert not cut.single_closed_interior and cut.open_length_fraction == pytest.approx(1.0)
 
 
+def test_slice_has_no_chord_where_two_outlines_share_a_corner() -> None:
+    # trimesh's section paths mis-orient entities at a degree-4 vertex and
+    # join them with a straight chord that is not in the mesh. Seen on
+    # LivingRoomsWithHallway_idx_6, where a 7 m chord split the room in two.
+    touching = trimesh.util.concatenate([_room(), _room(offset=(6.0, 4.0, 0.0))])
+    cut = ag.floor_slice(touching, UP, 1.1)
+    assert cut.n_parts == 2 and cut.area_m2 == pytest.approx(48.0)
+    assert cut.n_interior_loops == 0 and cut.interior_loop_area_m2 == pytest.approx(0.0)
+    longest_wall = float(SIZE[:2].max())
+    for line in cut.outlines:
+        assert np.linalg.norm(np.diff(line, axis=0), axis=1).max() <= longest_wall + 1e-6
+
+
+def test_slice_counts_an_open_chain_inside_a_closed_room() -> None:
+    # trimesh's section paths drop open chains whenever a closed loop exists,
+    # which made open_length_fraction read 0 for every real room.
+    shelf = trimesh.creation.box(extents=[2.0, 1.0, 2.5])
+    shelf.apply_translation([3.0, 2.0, 1.25])
+    shelf.update_faces(~(np.abs(shelf.face_normals[:, 1] - 1.0) < 1e-6))  # open on +y: a U at the slice
+    cut = ag.floor_slice(trimesh.util.concatenate([_room(), shelf]), UP, 1.1)
+    assert cut.single_closed_interior and cut.area_m2 == pytest.approx(24.0)
+    assert cut.n_interior_loops == 0
+    assert cut.open_length_fraction == pytest.approx(4.0 / 24.0)  # U of 1 + 2 + 1 m against 20 m of walls
+
+
 def test_containment_passes_inside_and_fails_on_axis_swap() -> None:
     room = _room()
     footprint = ag.floor_slice(room, UP, 1.1).footprint

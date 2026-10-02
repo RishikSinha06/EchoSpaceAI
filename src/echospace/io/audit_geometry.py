@@ -16,10 +16,11 @@ import numpy as np
 import shapely
 import trimesh
 from shapely.geometry import LineString, MultiPolygon, Polygon
-from shapely.ops import polygonize_full, unary_union
+from shapely.ops import linemerge, polygonize_full, unary_union
 
 FLOOR_TOLERANCE_M = 1e-3
 SLICE_HEIGHTS_M = (1.0, 1.1, 1.2)
+SLICE_SNAP_DECIMALS = 6
 
 
 def horizontal_axes(up: int) -> tuple[int, int]:
@@ -134,15 +135,23 @@ def floor_slice(mesh: trimesh.Trimesh, up: int, height_above_floor_m: float) -> 
     normal[up] = 1.0
     origin = np.zeros(3)
     origin[up] = float(mesh.bounds[0, up]) + height_above_floor_m
-    section = mesh.section(plane_origin=origin, plane_normal=normal)
-    if section is None:
+    # Raw plane-triangle segments, not ``mesh.section(...).discrete``: trimesh
+    # drops open chains from its paths and, at a vertex shared by more than
+    # two segments, can stitch entities with a chord that is not in the mesh.
+    segments = trimesh.intersections.mesh_plane(mesh, plane_normal=normal, plane_origin=origin)
+    if len(segments) == 0:
         return empty
     axes = list(horizontal_axes(up))
-    lines = [LineString(np.asarray(path)[:, axes]) for path in section.discrete if len(path) >= 2]
-    if not lines:
+    # Snap to 1 um so endpoints shared by neighbouring triangles meet exactly.
+    flat = np.round(np.asarray(segments)[:, :, axes], SLICE_SNAP_DECIMALS)
+    flat = flat[np.any(flat[:, 0] != flat[:, 1], axis=1)]
+    if len(flat) == 0:
         return empty
-    total_length = float(sum(line.length for line in lines))
-    polygons, dangles, cuts, invalid = polygonize_full(unary_union(lines))
+    noded = unary_union(shapely.multilinestrings(flat))
+    merged = linemerge(noded) if not isinstance(noded, LineString) else noded
+    lines = list(merged.geoms) if hasattr(merged, "geoms") else [merged]
+    total_length = float(noded.length)
+    polygons, dangles, cuts, invalid = polygonize_full(noded)
     faces = [face for face in polygons.geoms if face.area > 1e-6]
     if not faces:
         return empty
