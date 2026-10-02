@@ -49,6 +49,13 @@ def test_first_strong_peak_finds_direct_sound_not_reflections() -> None:
         first_strong_peak(np.zeros(10))
 
 
+def test_first_strong_peak_is_not_pulled_onto_a_close_stronger_reflection() -> None:
+    rir = np.zeros(400)
+    rir[98:103] = [0.1, 0.3, 0.8, 0.6, 0.2]  # band-limited direct sound, crest at 100
+    rir[110] = -1.0  # stronger reflection 10 samples later (mic near a wall)
+    assert first_strong_peak(rir) == 100
+
+
 def test_constant_offset_detected_for_correct_coordinates() -> None:
     rng = np.random.default_rng(1)
     src, mic = _positions(rng, 30), _positions(rng, 30)

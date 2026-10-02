@@ -28,16 +28,14 @@ def direct_path_samples(
     return distance / speed_of_sound_m_s * sample_rate_hz
 
 
-def first_strong_peak(
-    waveform: np.ndarray,
-    relative_threshold: float = 0.5,
-    refine_samples: int = 16,
-) -> int:
-    """Index of the first peak whose magnitude reaches a fraction of the maximum.
+def first_strong_peak(waveform: np.ndarray, relative_threshold: float = 0.5) -> int:
+    """Index of the crest of the first peak reaching a fraction of the maximum.
 
     The first sample crossing ``relative_threshold * max|x|`` is found, then
-    refined to the local magnitude maximum within ``refine_samples`` after it,
-    so a rising edge of the direct sound resolves to its crest.
+    followed uphill while the magnitude keeps rising. Searching a fixed window
+    for its maximum instead would jump to a stronger reflection that arrives a
+    few samples after the direct sound, which happens whenever a microphone or
+    source sits close to a surface.
     """
     magnitude = np.abs(np.asarray(waveform, dtype=np.float64).ravel())
     if magnitude.size == 0 or not np.isfinite(magnitude).all():
@@ -45,9 +43,10 @@ def first_strong_peak(
     peak = float(magnitude.max())
     if peak <= 0:
         raise ValueError("waveform is silent")
-    first = int(np.argmax(magnitude >= relative_threshold * peak))
-    window = magnitude[first : first + refine_samples + 1]
-    return first + int(np.argmax(window))
+    index = int(np.argmax(magnitude >= relative_threshold * peak))
+    while index + 1 < magnitude.size and magnitude[index + 1] > magnitude[index]:
+        index += 1
+    return index
 
 
 @dataclass(frozen=True)

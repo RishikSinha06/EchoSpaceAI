@@ -102,6 +102,7 @@ class FloorSlice:
     n_interior_loops: int
     interior_loop_area_m2: float
     open_length_fraction: float
+    outlines: tuple[np.ndarray, ...] = ()  # raw cut polylines (Nx2), for plotting
 
     @property
     def single_closed_interior(self) -> bool:
@@ -161,6 +162,7 @@ def floor_slice(mesh: trimesh.Trimesh, up: int, height_above_floor_m: float) -> 
         n_interior_loops=len(faces) - len(parts),
         interior_loop_area_m2=float(sum(face_areas[len(parts) :])),
         open_length_fraction=open_length / total_length if total_length else 1.0,
+        outlines=tuple(np.asarray(line.coords) for line in lines),
     )
 
 
