@@ -49,3 +49,14 @@ the independent-room counts. Room-level splits must keep each group together.
 ```powershell
 python scripts/audit_duplicates.py          # about 1 min; same --root rules as audit_data.py
 ```
+
+## `audit_reflections.py`: first-reflection check (plan, Stage 0 gate)
+
+Run after `audit_data.py`. For each accepted room it predicts the first
+reflection off the floor and off the longest straight wall (image source) and
+tests, on the manifest's seeded line-of-sight pairs, whether the RIR peaks
+there more than at control times. Writes `reports/d0_reflections.json`.
+
+```powershell
+python scripts/audit_reflections.py         # about 45 min; same --root rules as audit_data.py
+```
