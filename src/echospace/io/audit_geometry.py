@@ -194,6 +194,33 @@ def footprint_vertices(footprint: Polygon | MultiPolygon) -> np.ndarray:
     return np.vstack([np.asarray(part.exterior.coords) for part in parts])
 
 
+def footprint_iou(a: Polygon | MultiPolygon, b: Polygon | MultiPolygon) -> float:
+    """Best overlap of two footprints over translation and the 8 axis rotations/mirrors.
+
+    Both are centred on their centroids; ``b`` is then tried at 0/90/180/270
+    degrees, each with and without a mirror. Catches the same room shell
+    reused under another id with different furniture or tessellation, which
+    ``geometry_signature`` (exact vertices) misses.
+    """
+    from shapely import affinity
+
+    def centred(shape: Polygon | MultiPolygon) -> Polygon | MultiPolygon:
+        centre = shape.centroid
+        return affinity.translate(shape, -centre.x, -centre.y)
+
+    first, second = centred(a), centred(b)
+    union_area = first.area + second.area
+    if union_area <= 0:
+        return 0.0
+    best = 0.0
+    for quarter in range(4):
+        turned = affinity.rotate(second, 90 * quarter, origin=(0, 0))
+        for pose in (turned, affinity.scale(turned, -1, 1, origin=(0, 0))):
+            overlap = first.intersection(pose).area
+            best = max(best, overlap / (union_area - overlap))
+    return float(best)
+
+
 def containment(
     mesh: trimesh.Trimesh,
     footprint: Polygon | MultiPolygon | None,

@@ -126,6 +126,17 @@ def test_slice_counts_an_open_chain_inside_a_closed_room() -> None:
     assert cut.open_length_fraction == pytest.approx(4.0 / 24.0)  # U of 1 + 2 + 1 m against 20 m of walls
 
 
+def test_footprint_iou_matches_moved_turned_and_mirrored_copies_only() -> None:
+    from shapely import affinity
+    from shapely.geometry import Polygon
+
+    ell = Polygon([(0, 0), (6, 0), (6, 2), (2, 2), (2, 5), (0, 5)])
+    copy = affinity.scale(affinity.rotate(affinity.translate(ell, 10, -3), 90), -1, 1)
+    assert ag.footprint_iou(ell, copy) == pytest.approx(1.0)
+    assert ag.footprint_iou(ell, affinity.scale(ell, 1.1, 1.0)) < 0.95
+    assert ag.footprint_iou(ell, Polygon([(0, 0), (6, 0), (6, 5), (0, 5)])) < 0.75
+
+
 def test_containment_passes_inside_and_fails_on_axis_swap() -> None:
     room = _room()
     footprint = ag.floor_slice(room, UP, 1.1).footprint
