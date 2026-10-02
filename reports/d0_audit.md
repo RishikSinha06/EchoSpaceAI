@@ -251,10 +251,8 @@ room; that is the module 6 owner's decision, and this audit did not patch it.
   real LFS objects (about 55 GB) from the dataset's Git LFS remote or its
   authors, placed under the dataset root; the audit can then compare untrimmed
   32 kHz onsets with the 22 050 Hz files.
-- **First-reflection check: not run.** The plan's Stage 0 gate also asks for a
-  visible peak at the image-source time of at least one wall. The audit script
-  checks the direct path only. Direct-path agreement (slope 1.0003, offset 0)
-  makes a frame error unlikely, but the reflection check is still open.
+- First-reflection check: now run, see the section below. It uses a single
+  wall per room (the longest) plus the floor, not every surface.
 - Line of sight uses one ray per pair against a non-watertight mesh, so some
   occluded pairs are classed as clear (the 7 late outliers).
 - Timing was measured on 64 seeded pairs per room (16 512 pairs, 5.5 % of
@@ -262,3 +260,35 @@ room; that is the module 6 owner's decision, and this audit did not patch it.
 - Containment is judged against the 1.1 m outline and the floor-to-ceiling
   range, not against the outline at each position's own height.
 - The `.3dm` files and the material library were not inspected.
+
+### First reflection (plan, Stage 0 gate): PASSED
+
+Written by hand from `reports/d0_reflections.json` (`scripts/audit_reflections.py`,
+criterion committed in `010ac6d` before its first run on real data).
+
+For each accepted room the source is mirrored across the floor and across the
+longest straight wall of the 1.1 m outline (a wall reflection counts only when
+its specular point lies on that wall, between floor and ceiling). On the same
+seeded line-of-sight pairs as the timing check, a pair is a hit when the RIR
+peaks within ±2 samples of the predicted reflection time more strongly than
+the 90th percentile of 16 control windows 8 to 36 samples away (chance about
+10 %). Pairs whose reflection would land within 5 samples of the direct sound
+are skipped. A surface is visible in a room at >= 50 % hits on >= 8 judged pairs.
+
+| Surface | pairs judged | pooled hit rate | rooms visible (of 257) |
+| --- | ---: | ---: | ---: |
+| floor | 14 476 | 46.9 % | 120 |
+| longest wall | 13 909 | 67.3 % | 203 |
+| either | | | **231** |
+
+- The plan's gate needs a visible reflection for at least one wall; 231 of 257
+  accepted rooms meet the stricter per-room rule, so **the gate passes**.
+- The other 26 rooms are not reflection-free: their better surface scores 33 to
+  49 %, three to five times chance, just under the 50 % bar. They are mostly
+  furnished rooms (7 MeetingRoom, 5 Office, 4 Bedrooms, 3 Bathrooms); the list
+  is `summary.rooms_not_visible` in the JSON. Not investigated room by room.
+- The floor is the weaker surface (median room 47 %), consistent with tables,
+  beds and carpets in the specular path; the check does not test occlusion of
+  the reflected path, which can only lower the hit rate.
+- With the direct-path result (offset 0, slope 1.0003) this places the
+  reflections where the mesh says the surfaces are: mesh and RIRs share one frame.

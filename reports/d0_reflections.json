@@ -1,0 +1,4200 @@
+{
+ "method": {
+  "surfaces": [
+   "floor (up = floor height)",
+   "longest straight edge of the 1.1 m outline, as a vertical wall"
+  ],
+  "window_samples": 2,
+  "min_gap_from_direct_samples": 5,
+  "control_shifts_samples": [
+   -8,
+   8,
+   -12,
+   12,
+   -16,
+   16,
+   -20,
+   20,
+   -24,
+   24,
+   -28,
+   28,
+   -32,
+   32,
+   -36,
+   36
+  ],
+  "control_quantile": 0.9,
+  "room_visible_rule": ">= 50% hits on >= 8 judged pairs",
+  "pairs": "line-of-sight pairs from the manifest's pair_offsets (seeded, 64 per room)"
+ },
+ "summary": {
+  "rooms": 257,
+  "rooms_floor_visible": 120,
+  "rooms_wall_visible": 203,
+  "rooms_any_visible": 231,
+  "rooms_judgeable_any": 257,
+  "pooled_hit_rate": {
+   "floor": 0.4691903840840011,
+   "wall": 0.6727298871234453
+  },
+  "pooled_pairs_judged": {
+   "floor": 14476,
+   "wall": 13909
+  },
+  "chance_hit_rate_approx": 0.1,
+  "rooms_not_visible": [
+   "Apartments_idx_12",
+   "Auditorium_idx_0",
+   "Bathrooms_idx_8",
+   "Bathrooms_idx_14",
+   "Bathrooms_idx_16",
+   "Bedrooms_idx_0",
+   "Bedrooms_idx_13",
+   "Bedrooms_idx_28",
+   "Bedrooms_idx_33",
+   "ListeningRoom_idx_0",
+   "LivingRoomsWithHallway_idx_7",
+   "LivingRoomsWithHallway_idx_11",
+   "MeetingRoom_idx_15",
+   "MeetingRoom_idx_16",
+   "MeetingRoom_idx_17",
+   "MeetingRoom_idx_19",
+   "MeetingRoom_idx_23",
+   "MeetingRoom_idx_26",
+   "MeetingRoom_idx_31",
+   "Office_idx_0",
+   "Office_idx_2",
+   "Office_idx_3",
+   "Office_idx_7",
+   "Office_idx_15",
+   "Restaurants_idx_11",
+   "Restaurants_idx_34"
+  ],
+  "gate_passed": true
+ },
+ "rooms": {
+  "Apartments_idx_0": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 37,
+    "hit_rate": 0.6491228070175439,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 40,
+    "n_hits": 21,
+    "hit_rate": 0.525,
+    "visible": true
+   },
+   "wall_length_m": 3.55,
+   "any_visible": true
+  },
+  "Apartments_idx_1": {
+   "floor": {
+    "n_judged": 53,
+    "n_hits": 32,
+    "hit_rate": 0.6037735849056604,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 51,
+    "n_hits": 26,
+    "hit_rate": 0.5098039215686274,
+    "visible": true
+   },
+   "wall_length_m": 5.85,
+   "any_visible": true
+  },
+  "Apartments_idx_2": {
+   "floor": {
+    "n_judged": 40,
+    "n_hits": 21,
+    "hit_rate": 0.525,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 40,
+    "n_hits": 30,
+    "hit_rate": 0.75,
+    "visible": true
+   },
+   "wall_length_m": 5.86,
+   "any_visible": true
+  },
+  "Apartments_idx_3": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 25,
+    "hit_rate": 0.43859649122807015,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 57,
+    "n_hits": 33,
+    "hit_rate": 0.5789473684210527,
+    "visible": true
+   },
+   "wall_length_m": 4.8,
+   "any_visible": true
+  },
+  "Apartments_idx_4": {
+   "floor": {
+    "n_judged": 45,
+    "n_hits": 27,
+    "hit_rate": 0.6,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 36,
+    "n_hits": 21,
+    "hit_rate": 0.5833333333333334,
+    "visible": true
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "Apartments_idx_5": {
+   "floor": {
+    "n_judged": 44,
+    "n_hits": 28,
+    "hit_rate": 0.6363636363636364,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 44,
+    "n_hits": 29,
+    "hit_rate": 0.6590909090909091,
+    "visible": true
+   },
+   "wall_length_m": 6.163,
+   "any_visible": true
+  },
+  "Apartments_idx_6": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 35,
+    "hit_rate": 0.5932203389830508,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 43,
+    "hit_rate": 0.7288135593220338,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "Apartments_idx_7": {
+   "floor": {
+    "n_judged": 53,
+    "n_hits": 24,
+    "hit_rate": 0.4528301886792453,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 53,
+    "n_hits": 35,
+    "hit_rate": 0.660377358490566,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "Apartments_idx_8": {
+   "floor": {
+    "n_judged": 44,
+    "n_hits": 28,
+    "hit_rate": 0.6363636363636364,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 38,
+    "n_hits": 18,
+    "hit_rate": 0.47368421052631576,
+    "visible": false
+   },
+   "wall_length_m": 3.85,
+   "any_visible": true
+  },
+  "Apartments_idx_9": {
+   "floor": {
+    "n_judged": 44,
+    "n_hits": 27,
+    "hit_rate": 0.6136363636363636,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 33,
+    "n_hits": 16,
+    "hit_rate": 0.48484848484848486,
+    "visible": false
+   },
+   "wall_length_m": 3.3,
+   "any_visible": true
+  },
+  "Apartments_idx_10": {
+   "floor": {
+    "n_judged": 58,
+    "n_hits": 31,
+    "hit_rate": 0.5344827586206896,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 42,
+    "n_hits": 26,
+    "hit_rate": 0.6190476190476191,
+    "visible": true
+   },
+   "wall_length_m": 4.6,
+   "any_visible": true
+  },
+  "Apartments_idx_11": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 36,
+    "hit_rate": 0.631578947368421,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 47,
+    "n_hits": 31,
+    "hit_rate": 0.6595744680851063,
+    "visible": true
+   },
+   "wall_length_m": 4.55,
+   "any_visible": true
+  },
+  "Apartments_idx_12": {
+   "floor": {
+    "n_judged": 43,
+    "n_hits": 17,
+    "hit_rate": 0.3953488372093023,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 41,
+    "n_hits": 18,
+    "hit_rate": 0.43902439024390244,
+    "visible": false
+   },
+   "wall_length_m": 3.35,
+   "any_visible": false
+  },
+  "Apartments_idx_13": {
+   "floor": {
+    "n_judged": 54,
+    "n_hits": 29,
+    "hit_rate": 0.5370370370370371,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 54,
+    "n_hits": 34,
+    "hit_rate": 0.6296296296296297,
+    "visible": true
+   },
+   "wall_length_m": 5.4,
+   "any_visible": true
+  },
+  "Apartments_idx_15": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 38,
+    "hit_rate": 0.6785714285714286,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 49,
+    "n_hits": 10,
+    "hit_rate": 0.20408163265306123,
+    "visible": false
+   },
+   "wall_length_m": 6.5,
+   "any_visible": true
+  },
+  "Apartments_idx_16": {
+   "floor": {
+    "n_judged": 34,
+    "n_hits": 18,
+    "hit_rate": 0.5294117647058824,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 34,
+    "n_hits": 18,
+    "hit_rate": 0.5294117647058824,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "Apartments_idx_17": {
+   "floor": {
+    "n_judged": 47,
+    "n_hits": 24,
+    "hit_rate": 0.5106382978723404,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 48,
+    "n_hits": 27,
+    "hit_rate": 0.5625,
+    "visible": true
+   },
+   "wall_length_m": 6.0,
+   "any_visible": true
+  },
+  "Apartments_idx_18": {
+   "floor": {
+    "n_judged": 40,
+    "n_hits": 28,
+    "hit_rate": 0.7,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 31,
+    "n_hits": 13,
+    "hit_rate": 0.41935483870967744,
+    "visible": false
+   },
+   "wall_length_m": 3.45,
+   "any_visible": true
+  },
+  "Apartments_idx_19": {
+   "floor": {
+    "n_judged": 44,
+    "n_hits": 33,
+    "hit_rate": 0.75,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 44,
+    "n_hits": 25,
+    "hit_rate": 0.5681818181818182,
+    "visible": true
+   },
+   "wall_length_m": 5.9,
+   "any_visible": true
+  },
+  "Apartments_idx_21": {
+   "floor": {
+    "n_judged": 46,
+    "n_hits": 29,
+    "hit_rate": 0.6304347826086957,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 45,
+    "n_hits": 28,
+    "hit_rate": 0.6222222222222222,
+    "visible": true
+   },
+   "wall_length_m": 5.4,
+   "any_visible": true
+  },
+  "Apartments_idx_22": {
+   "floor": {
+    "n_judged": 43,
+    "n_hits": 25,
+    "hit_rate": 0.5813953488372093,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 37,
+    "n_hits": 23,
+    "hit_rate": 0.6216216216216216,
+    "visible": true
+   },
+   "wall_length_m": 3.65,
+   "any_visible": true
+  },
+  "Apartments_idx_23": {
+   "floor": {
+    "n_judged": 43,
+    "n_hits": 23,
+    "hit_rate": 0.5348837209302325,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 43,
+    "n_hits": 32,
+    "hit_rate": 0.7441860465116279,
+    "visible": true
+   },
+   "wall_length_m": 6.6,
+   "any_visible": true
+  },
+  "Apartments_idx_24": {
+   "floor": {
+    "n_judged": 43,
+    "n_hits": 25,
+    "hit_rate": 0.5813953488372093,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 42,
+    "n_hits": 24,
+    "hit_rate": 0.5714285714285714,
+    "visible": true
+   },
+   "wall_length_m": 4.95,
+   "any_visible": true
+  },
+  "Apartments_idx_25": {
+   "floor": {
+    "n_judged": 51,
+    "n_hits": 27,
+    "hit_rate": 0.5294117647058824,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 51,
+    "n_hits": 21,
+    "hit_rate": 0.4117647058823529,
+    "visible": false
+   },
+   "wall_length_m": 4.95,
+   "any_visible": true
+  },
+  "Apartments_idx_26": {
+   "floor": {
+    "n_judged": 41,
+    "n_hits": 30,
+    "hit_rate": 0.7317073170731707,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 6,
+    "n_hits": 0,
+    "hit_rate": 0.0,
+    "visible": false
+   },
+   "wall_length_m": 3.6503424496887957,
+   "any_visible": true
+  },
+  "Apartments_idx_27": {
+   "floor": {
+    "n_judged": 35,
+    "n_hits": 18,
+    "hit_rate": 0.5142857142857142,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 35,
+    "n_hits": 15,
+    "hit_rate": 0.42857142857142855,
+    "visible": false
+   },
+   "wall_length_m": 6.4,
+   "any_visible": true
+  },
+  "Apartments_idx_28": {
+   "floor": {
+    "n_judged": 48,
+    "n_hits": 23,
+    "hit_rate": 0.4791666666666667,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 48,
+    "n_hits": 29,
+    "hit_rate": 0.6041666666666666,
+    "visible": true
+   },
+   "wall_length_m": 6.300000000000001,
+   "any_visible": true
+  },
+  "Apartments_idx_29": {
+   "floor": {
+    "n_judged": 53,
+    "n_hits": 33,
+    "hit_rate": 0.6226415094339622,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 53,
+    "n_hits": 26,
+    "hit_rate": 0.49056603773584906,
+    "visible": false
+   },
+   "wall_length_m": 6.1,
+   "any_visible": true
+  },
+  "Apartments_idx_30": {
+   "floor": {
+    "n_judged": 41,
+    "n_hits": 26,
+    "hit_rate": 0.6341463414634146,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 41,
+    "n_hits": 28,
+    "hit_rate": 0.6829268292682927,
+    "visible": true
+   },
+   "wall_length_m": 7.0,
+   "any_visible": true
+  },
+  "Apartments_idx_31": {
+   "floor": {
+    "n_judged": 37,
+    "n_hits": 23,
+    "hit_rate": 0.6216216216216216,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 37,
+    "n_hits": 35,
+    "hit_rate": 0.9459459459459459,
+    "visible": true
+   },
+   "wall_length_m": 5.400000053200371,
+   "any_visible": true
+  },
+  "Apartments_idx_32": {
+   "floor": {
+    "n_judged": 34,
+    "n_hits": 20,
+    "hit_rate": 0.5882352941176471,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 34,
+    "n_hits": 13,
+    "hit_rate": 0.38235294117647056,
+    "visible": false
+   },
+   "wall_length_m": 6.85,
+   "any_visible": true
+  },
+  "Apartments_idx_33": {
+   "floor": {
+    "n_judged": 38,
+    "n_hits": 25,
+    "hit_rate": 0.6578947368421053,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 31,
+    "n_hits": 21,
+    "hit_rate": 0.6774193548387096,
+    "visible": true
+   },
+   "wall_length_m": 5.25,
+   "any_visible": true
+  },
+  "Apartments_idx_34": {
+   "floor": {
+    "n_judged": 30,
+    "n_hits": 18,
+    "hit_rate": 0.6,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 21,
+    "n_hits": 7,
+    "hit_rate": 0.3333333333333333,
+    "visible": false
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "Apartments_idx_35": {
+   "floor": {
+    "n_judged": 33,
+    "n_hits": 22,
+    "hit_rate": 0.6666666666666666,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 29,
+    "n_hits": 16,
+    "hit_rate": 0.5517241379310345,
+    "visible": true
+   },
+   "wall_length_m": 4.9,
+   "any_visible": true
+  },
+  "Apartments_idx_36": {
+   "floor": {
+    "n_judged": 33,
+    "n_hits": 21,
+    "hit_rate": 0.6363636363636364,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 33,
+    "n_hits": 14,
+    "hit_rate": 0.42424242424242425,
+    "visible": false
+   },
+   "wall_length_m": 6.0,
+   "any_visible": true
+  },
+  "Apartments_idx_37": {
+   "floor": {
+    "n_judged": 30,
+    "n_hits": 16,
+    "hit_rate": 0.5333333333333333,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 30,
+    "n_hits": 13,
+    "hit_rate": 0.43333333333333335,
+    "visible": false
+   },
+   "wall_length_m": 5.9,
+   "any_visible": true
+  },
+  "Apartments_idx_38": {
+   "floor": {
+    "n_judged": 40,
+    "n_hits": 15,
+    "hit_rate": 0.375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 40,
+    "n_hits": 29,
+    "hit_rate": 0.725,
+    "visible": true
+   },
+   "wall_length_m": 6.6,
+   "any_visible": true
+  },
+  "Apartments_idx_39": {
+   "floor": {
+    "n_judged": 38,
+    "n_hits": 27,
+    "hit_rate": 0.7105263157894737,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 38,
+    "n_hits": 19,
+    "hit_rate": 0.5,
+    "visible": true
+   },
+   "wall_length_m": 7.8,
+   "any_visible": true
+  },
+  "Apartments_idx_40": {
+   "floor": {
+    "n_judged": 45,
+    "n_hits": 41,
+    "hit_rate": 0.9111111111111111,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 29,
+    "n_hits": 18,
+    "hit_rate": 0.6206896551724138,
+    "visible": true
+   },
+   "wall_length_m": 3.55,
+   "any_visible": true
+  },
+  "Apartments_idx_41": {
+   "floor": {
+    "n_judged": 49,
+    "n_hits": 34,
+    "hit_rate": 0.6938775510204082,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 44,
+    "n_hits": 39,
+    "hit_rate": 0.8863636363636364,
+    "visible": true
+   },
+   "wall_length_m": 5.85,
+   "any_visible": true
+  },
+  "Apartments_idx_42": {
+   "floor": {
+    "n_judged": 58,
+    "n_hits": 33,
+    "hit_rate": 0.5689655172413793,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 58,
+    "n_hits": 49,
+    "hit_rate": 0.8448275862068966,
+    "visible": true
+   },
+   "wall_length_m": 4.8,
+   "any_visible": true
+  },
+  "Apartments_idx_43": {
+   "floor": {
+    "n_judged": 42,
+    "n_hits": 34,
+    "hit_rate": 0.8095238095238095,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 37,
+    "n_hits": 22,
+    "hit_rate": 0.5945945945945946,
+    "visible": true
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "Apartments_idx_44": {
+   "floor": {
+    "n_judged": 50,
+    "n_hits": 34,
+    "hit_rate": 0.68,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 50,
+    "n_hits": 46,
+    "hit_rate": 0.92,
+    "visible": true
+   },
+   "wall_length_m": 6.163,
+   "any_visible": true
+  },
+  "Apartments_idx_45": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 54,
+    "hit_rate": 0.9,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 60,
+    "n_hits": 49,
+    "hit_rate": 0.8166666666666667,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "Apartments_idx_46": {
+   "floor": {
+    "n_judged": 51,
+    "n_hits": 44,
+    "hit_rate": 0.8627450980392157,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 51,
+    "n_hits": 42,
+    "hit_rate": 0.8235294117647058,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "Apartments_idx_47": {
+   "floor": {
+    "n_judged": 44,
+    "n_hits": 19,
+    "hit_rate": 0.4318181818181818,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 38,
+    "n_hits": 32,
+    "hit_rate": 0.8421052631578947,
+    "visible": true
+   },
+   "wall_length_m": 3.85,
+   "any_visible": true
+  },
+  "Apartments_idx_48": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 40,
+    "hit_rate": 0.7017543859649122,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 47,
+    "n_hits": 35,
+    "hit_rate": 0.7446808510638298,
+    "visible": true
+   },
+   "wall_length_m": 3.3,
+   "any_visible": true
+  },
+  "Apartments_idx_49": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 36,
+    "hit_rate": 0.6101694915254238,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 36,
+    "n_hits": 27,
+    "hit_rate": 0.75,
+    "visible": true
+   },
+   "wall_length_m": 4.6,
+   "any_visible": true
+  },
+  "Apartments_idx_50": {
+   "floor": {
+    "n_judged": 54,
+    "n_hits": 32,
+    "hit_rate": 0.5925925925925926,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 41,
+    "n_hits": 28,
+    "hit_rate": 0.6829268292682927,
+    "visible": true
+   },
+   "wall_length_m": 4.55,
+   "any_visible": true
+  },
+  "Apartments_idx_51": {
+   "floor": {
+    "n_judged": 47,
+    "n_hits": 25,
+    "hit_rate": 0.5319148936170213,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 41,
+    "n_hits": 37,
+    "hit_rate": 0.9024390243902439,
+    "visible": true
+   },
+   "wall_length_m": 3.35,
+   "any_visible": true
+  },
+  "Apartments_idx_52": {
+   "floor": {
+    "n_judged": 49,
+    "n_hits": 36,
+    "hit_rate": 0.7346938775510204,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 48,
+    "n_hits": 42,
+    "hit_rate": 0.875,
+    "visible": true
+   },
+   "wall_length_m": 5.4,
+   "any_visible": true
+  },
+  "Apartments_idx_53": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 35,
+    "hit_rate": 0.5645161290322581,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 58,
+    "hit_rate": 0.9354838709677419,
+    "visible": true
+   },
+   "wall_length_m": 7.8500000000000005,
+   "any_visible": true
+  },
+  "Apartments_idx_54": {
+   "floor": {
+    "n_judged": 53,
+    "n_hits": 27,
+    "hit_rate": 0.5094339622641509,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 43,
+    "n_hits": 33,
+    "hit_rate": 0.7674418604651163,
+    "visible": true
+   },
+   "wall_length_m": 6.5,
+   "any_visible": true
+  },
+  "Apartments_idx_55": {
+   "floor": {
+    "n_judged": 35,
+    "n_hits": 27,
+    "hit_rate": 0.7714285714285715,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 35,
+    "n_hits": 30,
+    "hit_rate": 0.8571428571428571,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "Apartments_idx_56": {
+   "floor": {
+    "n_judged": 50,
+    "n_hits": 21,
+    "hit_rate": 0.42,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 50,
+    "n_hits": 42,
+    "hit_rate": 0.84,
+    "visible": true
+   },
+   "wall_length_m": 6.0,
+   "any_visible": true
+  },
+  "Apartments_idx_57": {
+   "floor": {
+    "n_judged": 36,
+    "n_hits": 22,
+    "hit_rate": 0.6111111111111112,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 33,
+    "n_hits": 17,
+    "hit_rate": 0.5151515151515151,
+    "visible": true
+   },
+   "wall_length_m": 3.45,
+   "any_visible": true
+  },
+  "Apartments_idx_58": {
+   "floor": {
+    "n_judged": 36,
+    "n_hits": 19,
+    "hit_rate": 0.5277777777777778,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 35,
+    "n_hits": 24,
+    "hit_rate": 0.6857142857142857,
+    "visible": true
+   },
+   "wall_length_m": 5.9,
+   "any_visible": true
+  },
+  "Apartments_idx_59": {
+   "floor": {
+    "n_judged": 51,
+    "n_hits": 20,
+    "hit_rate": 0.39215686274509803,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 36,
+    "n_hits": 30,
+    "hit_rate": 0.8333333333333334,
+    "visible": true
+   },
+   "wall_length_m": 3.85,
+   "any_visible": true
+  },
+  "Auditorium_idx_0": {
+   "floor": {
+    "n_judged": 51,
+    "n_hits": 20,
+    "hit_rate": 0.39215686274509803,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 51,
+    "n_hits": 23,
+    "hit_rate": 0.45098039215686275,
+    "visible": false
+   },
+   "wall_length_m": 15.77039,
+   "any_visible": false
+  },
+  "Auditorium_idx_1": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 18,
+    "hit_rate": 0.3157894736842105,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 57,
+    "n_hits": 44,
+    "hit_rate": 0.7719298245614035,
+    "visible": true
+   },
+   "wall_length_m": 15.77039,
+   "any_visible": true
+  },
+  "Bathrooms_idx_0": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 30,
+    "hit_rate": 0.46875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 50,
+    "hit_rate": 0.78125,
+    "visible": true
+   },
+   "wall_length_m": 2.45,
+   "any_visible": true
+  },
+  "Bathrooms_idx_1": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 33,
+    "hit_rate": 0.5409836065573771,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 32,
+    "hit_rate": 0.5161290322580645,
+    "visible": true
+   },
+   "wall_length_m": 2.1505813167606567,
+   "any_visible": true
+  },
+  "Bathrooms_idx_2": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 36,
+    "hit_rate": 0.5625,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 34,
+    "hit_rate": 0.53125,
+    "visible": true
+   },
+   "wall_length_m": 2.4,
+   "any_visible": true
+  },
+  "Bathrooms_idx_3": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 32,
+    "hit_rate": 0.5,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall_length_m": 2.45,
+   "any_visible": true
+  },
+  "Bathrooms_idx_4": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 32,
+    "hit_rate": 0.5,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 34,
+    "hit_rate": 0.53125,
+    "visible": true
+   },
+   "wall_length_m": 3.35,
+   "any_visible": true
+  },
+  "Bathrooms_idx_5": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 36,
+    "hit_rate": 0.5625,
+    "visible": true
+   },
+   "wall_length_m": 2.6999999999999997,
+   "any_visible": true
+  },
+  "Bathrooms_idx_6": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 16,
+    "hit_rate": 0.25,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 38,
+    "hit_rate": 0.59375,
+    "visible": true
+   },
+   "wall_length_m": 2.7004629232781556,
+   "any_visible": true
+  },
+  "Bathrooms_idx_7": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 29,
+    "hit_rate": 0.453125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 41,
+    "hit_rate": 0.6507936507936508,
+    "visible": true
+   },
+   "wall_length_m": 2.649999,
+   "any_visible": true
+  },
+  "Bathrooms_idx_8": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 22,
+    "hit_rate": 0.34375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 25,
+    "hit_rate": 0.390625,
+    "visible": false
+   },
+   "wall_length_m": 2.45,
+   "any_visible": false
+  },
+  "Bathrooms_idx_9": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 18,
+    "hit_rate": 0.28125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 48,
+    "hit_rate": 0.75,
+    "visible": true
+   },
+   "wall_length_m": 2.35,
+   "any_visible": true
+  },
+  "Bathrooms_idx_10": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 43,
+    "hit_rate": 0.671875,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 22,
+    "hit_rate": 0.34375,
+    "visible": false
+   },
+   "wall_length_m": 2.75,
+   "any_visible": true
+  },
+  "Bathrooms_idx_11": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 33,
+    "hit_rate": 0.5238095238095238,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 31,
+    "hit_rate": 0.49206349206349204,
+    "visible": false
+   },
+   "wall_length_m": 3.3503731135501904,
+   "any_visible": true
+  },
+  "Bathrooms_idx_12": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 25,
+    "hit_rate": 0.3968253968253968,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 35,
+    "hit_rate": 0.5555555555555556,
+    "visible": true
+   },
+   "wall_length_m": 3.25,
+   "any_visible": true
+  },
+  "Bathrooms_idx_13": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 33,
+    "hit_rate": 0.515625,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 47,
+    "hit_rate": 0.746031746031746,
+    "visible": true
+   },
+   "wall_length_m": 3.0500000000000003,
+   "any_visible": true
+  },
+  "Bathrooms_idx_14": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 25,
+    "hit_rate": 0.390625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 27,
+    "hit_rate": 0.421875,
+    "visible": false
+   },
+   "wall_length_m": 2.25,
+   "any_visible": false
+  },
+  "Bathrooms_idx_16": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 31,
+    "hit_rate": 0.484375,
+    "visible": false
+   },
+   "wall_length_m": 2.450510150968569,
+   "any_visible": false
+  },
+  "Bathrooms_idx_17": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 41,
+    "hit_rate": 0.640625,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 44,
+    "hit_rate": 0.6875,
+    "visible": true
+   },
+   "wall_length_m": 2.9500298371074147,
+   "any_visible": true
+  },
+  "Bathrooms_idx_18": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 27,
+    "hit_rate": 0.421875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 57,
+    "hit_rate": 0.890625,
+    "visible": true
+   },
+   "wall_length_m": 2.25,
+   "any_visible": true
+  },
+  "Bathrooms_idx_19": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 34,
+    "hit_rate": 0.53125,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall_length_m": 2.45,
+   "any_visible": true
+  },
+  "Bathrooms_idx_20": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 13,
+    "hit_rate": 0.203125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 49,
+    "hit_rate": 0.765625,
+    "visible": true
+   },
+   "wall_length_m": 2.45,
+   "any_visible": true
+  },
+  "Bathrooms_idx_21": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 28,
+    "hit_rate": 0.4375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 41,
+    "hit_rate": 0.640625,
+    "visible": true
+   },
+   "wall_length_m": 2.1505813167606567,
+   "any_visible": true
+  },
+  "Bathrooms_idx_23": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 39,
+    "hit_rate": 0.609375,
+    "visible": true
+   },
+   "wall_length_m": 2.45,
+   "any_visible": true
+  },
+  "Bathrooms_idx_24": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 25,
+    "hit_rate": 0.390625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 52,
+    "hit_rate": 0.8125,
+    "visible": true
+   },
+   "wall_length_m": 3.35,
+   "any_visible": true
+  },
+  "Bathrooms_idx_25": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 35,
+    "hit_rate": 0.546875,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 46,
+    "hit_rate": 0.71875,
+    "visible": true
+   },
+   "wall_length_m": 2.6999999999999997,
+   "any_visible": true
+  },
+  "Bathrooms_idx_26": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 27,
+    "hit_rate": 0.421875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 46,
+    "hit_rate": 0.71875,
+    "visible": true
+   },
+   "wall_length_m": 2.7004629232781556,
+   "any_visible": true
+  },
+  "Bathrooms_idx_27": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 30,
+    "hit_rate": 0.46875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 47,
+    "hit_rate": 0.734375,
+    "visible": true
+   },
+   "wall_length_m": 2.649999,
+   "any_visible": true
+  },
+  "Bathrooms_idx_28": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 19,
+    "hit_rate": 0.296875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 43,
+    "hit_rate": 0.671875,
+    "visible": true
+   },
+   "wall_length_m": 2.45,
+   "any_visible": true
+  },
+  "Bathrooms_idx_29": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 17,
+    "hit_rate": 0.265625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 48,
+    "hit_rate": 0.75,
+    "visible": true
+   },
+   "wall_length_m": 2.1999999999999997,
+   "any_visible": true
+  },
+  "Bedrooms_idx_0": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 16,
+    "hit_rate": 0.25396825396825395,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 27,
+    "hit_rate": 0.42857142857142855,
+    "visible": false
+   },
+   "wall_length_m": 4.100304866714182,
+   "any_visible": false
+  },
+  "Bedrooms_idx_1": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 21,
+    "hit_rate": 0.328125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 42,
+    "hit_rate": 0.6666666666666666,
+    "visible": true
+   },
+   "wall_length_m": 2.8500000000000005,
+   "any_visible": true
+  },
+  "Bedrooms_idx_2": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 13,
+    "hit_rate": 0.203125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 43,
+    "hit_rate": 0.671875,
+    "visible": true
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "Bedrooms_idx_3": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 23,
+    "hit_rate": 0.3709677419354839,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 47,
+    "hit_rate": 0.7704918032786885,
+    "visible": true
+   },
+   "wall_length_m": 3.25,
+   "any_visible": true
+  },
+  "Bedrooms_idx_4": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 23,
+    "hit_rate": 0.3709677419354839,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 49,
+    "hit_rate": 0.7903225806451613,
+    "visible": true
+   },
+   "wall_length_m": 4.05,
+   "any_visible": true
+  },
+  "Bedrooms_idx_5": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 17,
+    "hit_rate": 0.265625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 48,
+    "hit_rate": 0.7619047619047619,
+    "visible": true
+   },
+   "wall_length_m": 3.15,
+   "any_visible": true
+  },
+  "Bedrooms_idx_6": {
+   "floor": {
+    "n_judged": 58,
+    "n_hits": 22,
+    "hit_rate": 0.3793103448275862,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 55,
+    "n_hits": 37,
+    "hit_rate": 0.6727272727272727,
+    "visible": true
+   },
+   "wall_length_m": 3.3503731135501904,
+   "any_visible": true
+  },
+  "Bedrooms_idx_7": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 15,
+    "hit_rate": 0.234375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 33,
+    "hit_rate": 0.515625,
+    "visible": true
+   },
+   "wall_length_m": 3.9499999999999997,
+   "any_visible": true
+  },
+  "Bedrooms_idx_8": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 22,
+    "hit_rate": 0.34375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 36,
+    "hit_rate": 0.5625,
+    "visible": true
+   },
+   "wall_length_m": 3.4503622998172236,
+   "any_visible": true
+  },
+  "Bedrooms_idx_9": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 23,
+    "hit_rate": 0.3709677419354839,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 41,
+    "hit_rate": 0.6612903225806451,
+    "visible": true
+   },
+   "wall_length_m": 3.8499999999999996,
+   "any_visible": true
+  },
+  "Bedrooms_idx_10": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 47,
+    "hit_rate": 0.7966101694915254,
+    "visible": true
+   },
+   "wall_length_m": 3.2,
+   "any_visible": true
+  },
+  "Bedrooms_idx_11": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 49,
+    "hit_rate": 0.765625,
+    "visible": true
+   },
+   "wall_length_m": 3.5500000000000003,
+   "any_visible": true
+  },
+  "Bedrooms_idx_12": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 25,
+    "hit_rate": 0.390625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 38,
+    "hit_rate": 0.59375,
+    "visible": true
+   },
+   "wall_length_m": 3.45,
+   "any_visible": true
+  },
+  "Bedrooms_idx_13": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 16,
+    "hit_rate": 0.25396825396825395,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 31,
+    "hit_rate": 0.49206349206349204,
+    "visible": false
+   },
+   "wall_length_m": 2.9499999999999997,
+   "any_visible": false
+  },
+  "Bedrooms_idx_14": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 11,
+    "hit_rate": 0.171875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 51,
+    "hit_rate": 0.796875,
+    "visible": true
+   },
+   "wall_length_m": 3.2,
+   "any_visible": true
+  },
+  "Bedrooms_idx_15": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 15,
+    "hit_rate": 0.234375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 53,
+    "hit_rate": 0.828125,
+    "visible": true
+   },
+   "wall_length_m": 4.0,
+   "any_visible": true
+  },
+  "Bedrooms_idx_16": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 17,
+    "hit_rate": 0.265625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 43,
+    "hit_rate": 0.671875,
+    "visible": true
+   },
+   "wall_length_m": 4.65,
+   "any_visible": true
+  },
+  "Bedrooms_idx_17": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 18,
+    "hit_rate": 0.28125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 55,
+    "hit_rate": 0.859375,
+    "visible": true
+   },
+   "wall_length_m": 3.6500000000000004,
+   "any_visible": true
+  },
+  "Bedrooms_idx_18": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 17,
+    "hit_rate": 0.265625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 47,
+    "hit_rate": 0.734375,
+    "visible": true
+   },
+   "wall_length_m": 3.75,
+   "any_visible": true
+  },
+  "Bedrooms_idx_19": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 52,
+    "hit_rate": 0.8125,
+    "visible": true
+   },
+   "wall_length_m": 4.05,
+   "any_visible": true
+  },
+  "Bedrooms_idx_20": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 19,
+    "hit_rate": 0.30158730158730157,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 33,
+    "hit_rate": 0.5238095238095238,
+    "visible": true
+   },
+   "wall_length_m": 4.100304866714182,
+   "any_visible": true
+  },
+  "Bedrooms_idx_21": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 8,
+    "hit_rate": 0.12698412698412698,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 45,
+    "hit_rate": 0.7142857142857143,
+    "visible": true
+   },
+   "wall_length_m": 2.8500000000000005,
+   "any_visible": true
+  },
+  "Bedrooms_idx_22": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 19,
+    "hit_rate": 0.296875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 59,
+    "hit_rate": 0.921875,
+    "visible": true
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "Bedrooms_idx_23": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 16,
+    "hit_rate": 0.26229508196721313,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 60,
+    "n_hits": 52,
+    "hit_rate": 0.8666666666666667,
+    "visible": true
+   },
+   "wall_length_m": 3.25,
+   "any_visible": true
+  },
+  "Bedrooms_idx_24": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 21,
+    "hit_rate": 0.3333333333333333,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 58,
+    "hit_rate": 0.9206349206349206,
+    "visible": true
+   },
+   "wall_length_m": 4.05,
+   "any_visible": true
+  },
+  "Bedrooms_idx_25": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 13,
+    "hit_rate": 0.203125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 50,
+    "hit_rate": 0.78125,
+    "visible": true
+   },
+   "wall_length_m": 3.15,
+   "any_visible": true
+  },
+  "Bedrooms_idx_26": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 21,
+    "hit_rate": 0.3684210526315789,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 53,
+    "n_hits": 30,
+    "hit_rate": 0.5660377358490566,
+    "visible": true
+   },
+   "wall_length_m": 3.3503731135501904,
+   "any_visible": true
+  },
+  "Bedrooms_idx_27": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 16,
+    "hit_rate": 0.25,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 35,
+    "hit_rate": 0.546875,
+    "visible": true
+   },
+   "wall_length_m": 3.9499999999999997,
+   "any_visible": true
+  },
+  "Bedrooms_idx_28": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 21,
+    "hit_rate": 0.328125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 30,
+    "hit_rate": 0.46875,
+    "visible": false
+   },
+   "wall_length_m": 3.4503622998172236,
+   "any_visible": false
+  },
+  "Bedrooms_idx_29": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 17,
+    "hit_rate": 0.265625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 45,
+    "hit_rate": 0.703125,
+    "visible": true
+   },
+   "wall_length_m": 3.8499999999999996,
+   "any_visible": true
+  },
+  "Bedrooms_idx_30": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 58,
+    "n_hits": 49,
+    "hit_rate": 0.8448275862068966,
+    "visible": true
+   },
+   "wall_length_m": 3.2,
+   "any_visible": true
+  },
+  "Bedrooms_idx_31": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 59,
+    "hit_rate": 0.9365079365079365,
+    "visible": true
+   },
+   "wall_length_m": 3.5500000000000003,
+   "any_visible": true
+  },
+  "Bedrooms_idx_32": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 29,
+    "hit_rate": 0.453125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 37,
+    "hit_rate": 0.578125,
+    "visible": true
+   },
+   "wall_length_m": 3.45,
+   "any_visible": true
+  },
+  "Bedrooms_idx_33": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 16,
+    "hit_rate": 0.25,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 27,
+    "hit_rate": 0.421875,
+    "visible": false
+   },
+   "wall_length_m": 2.9499999999999997,
+   "any_visible": false
+  },
+  "Cafe_idx_0": {
+   "floor": {
+    "n_judged": 42,
+    "n_hits": 14,
+    "hit_rate": 0.3333333333333333,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 42,
+    "n_hits": 35,
+    "hit_rate": 0.8333333333333334,
+    "visible": true
+   },
+   "wall_length_m": 24.49,
+   "any_visible": true
+  },
+  "Cafe_idx_1": {
+   "floor": {
+    "n_judged": 54,
+    "n_hits": 23,
+    "hit_rate": 0.42592592592592593,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 54,
+    "n_hits": 44,
+    "hit_rate": 0.8148148148148148,
+    "visible": true
+   },
+   "wall_length_m": 24.49,
+   "any_visible": true
+  },
+  "ListeningRoom_idx_0": {
+   "floor": {
+    "n_judged": 54,
+    "n_hits": 25,
+    "hit_rate": 0.46296296296296297,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 54,
+    "n_hits": 26,
+    "hit_rate": 0.48148148148148145,
+    "visible": false
+   },
+   "wall_length_m": 6.24,
+   "any_visible": false
+  },
+  "ListeningRoom_idx_1": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 14,
+    "hit_rate": 0.22950819672131148,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 48,
+    "hit_rate": 0.7868852459016393,
+    "visible": true
+   },
+   "wall_length_m": 6.432234,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_0": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 30,
+    "hit_rate": 0.5084745762711864,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 30,
+    "hit_rate": 0.5084745762711864,
+    "visible": true
+   },
+   "wall_length_m": 5.85,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_1": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 29,
+    "hit_rate": 0.4915254237288136,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 48,
+    "hit_rate": 0.8135593220338984,
+    "visible": true
+   },
+   "wall_length_m": 5.86,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_2": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 29,
+    "hit_rate": 0.47540983606557374,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 53,
+    "n_hits": 28,
+    "hit_rate": 0.5283018867924528,
+    "visible": true
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_3": {
+   "floor": {
+    "n_judged": 58,
+    "n_hits": 28,
+    "hit_rate": 0.4827586206896552,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 58,
+    "n_hits": 40,
+    "hit_rate": 0.6896551724137931,
+    "visible": true
+   },
+   "wall_length_m": 6.163,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_4": {
+   "floor": {
+    "n_judged": 52,
+    "n_hits": 27,
+    "hit_rate": 0.5192307692307693,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 52,
+    "n_hits": 42,
+    "hit_rate": 0.8076923076923077,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_5": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 29,
+    "hit_rate": 0.4915254237288136,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 56,
+    "n_hits": 38,
+    "hit_rate": 0.6785714285714286,
+    "visible": true
+   },
+   "wall_length_m": 3.85,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_6": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 41,
+    "hit_rate": 0.7192982456140351,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 55,
+    "n_hits": 27,
+    "hit_rate": 0.4909090909090909,
+    "visible": false
+   },
+   "wall_length_m": 5.4,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_7": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 27,
+    "hit_rate": 0.4426229508196721,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 29,
+    "hit_rate": 0.47540983606557374,
+    "visible": false
+   },
+   "wall_length_m": 7.8500000000000005,
+   "any_visible": false
+  },
+  "LivingRoomsWithHallway_idx_8": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 29,
+    "hit_rate": 0.4603174603174603,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 36,
+    "hit_rate": 0.5714285714285714,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_9": {
+   "floor": {
+    "n_judged": 53,
+    "n_hits": 20,
+    "hit_rate": 0.37735849056603776,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 50,
+    "n_hits": 34,
+    "hit_rate": 0.68,
+    "visible": true
+   },
+   "wall_length_m": 5.4,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_10": {
+   "floor": {
+    "n_judged": 53,
+    "n_hits": 24,
+    "hit_rate": 0.4528301886792453,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 52,
+    "n_hits": 37,
+    "hit_rate": 0.7115384615384616,
+    "visible": true
+   },
+   "wall_length_m": 4.95,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_11": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 25,
+    "hit_rate": 0.4098360655737705,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 28,
+    "hit_rate": 0.45901639344262296,
+    "visible": false
+   },
+   "wall_length_m": 6.4,
+   "any_visible": false
+  },
+  "LivingRoomsWithHallway_idx_12": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 23,
+    "hit_rate": 0.4107142857142857,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 54,
+    "n_hits": 46,
+    "hit_rate": 0.8518518518518519,
+    "visible": true
+   },
+   "wall_length_m": 5.400000053200371,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_13": {
+   "floor": {
+    "n_judged": 58,
+    "n_hits": 26,
+    "hit_rate": 0.4482758620689655,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 57,
+    "n_hits": 30,
+    "hit_rate": 0.5263157894736842,
+    "visible": true
+   },
+   "wall_length_m": 5.25,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_14": {
+   "floor": {
+    "n_judged": 34,
+    "n_hits": 21,
+    "hit_rate": 0.6176470588235294,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 24,
+    "n_hits": 9,
+    "hit_rate": 0.375,
+    "visible": false
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_15": {
+   "floor": {
+    "n_judged": 55,
+    "n_hits": 27,
+    "hit_rate": 0.4909090909090909,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 55,
+    "n_hits": 31,
+    "hit_rate": 0.5636363636363636,
+    "visible": true
+   },
+   "wall_length_m": 4.9,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_16": {
+   "floor": {
+    "n_judged": 39,
+    "n_hits": 25,
+    "hit_rate": 0.6410256410256411,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 39,
+    "n_hits": 23,
+    "hit_rate": 0.5897435897435898,
+    "visible": true
+   },
+   "wall_length_m": 5.9,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_17": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 34,
+    "hit_rate": 0.6071428571428571,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 55,
+    "n_hits": 47,
+    "hit_rate": 0.8545454545454545,
+    "visible": true
+   },
+   "wall_length_m": 6.6,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_18": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 31,
+    "hit_rate": 0.5254237288135594,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 36,
+    "hit_rate": 0.6101694915254238,
+    "visible": true
+   },
+   "wall_length_m": 5.3,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_19": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 32,
+    "hit_rate": 0.5714285714285714,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 37,
+    "n_hits": 7,
+    "hit_rate": 0.1891891891891892,
+    "visible": false
+   },
+   "wall_length_m": 2.8,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_20": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 35,
+    "hit_rate": 0.546875,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 49,
+    "hit_rate": 0.7777777777777778,
+    "visible": true
+   },
+   "wall_length_m": 5.85,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_21": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 41,
+    "hit_rate": 0.6507936507936508,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 52,
+    "hit_rate": 0.8253968253968254,
+    "visible": true
+   },
+   "wall_length_m": 5.86,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_22": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 35,
+    "hit_rate": 0.5737704918032787,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 53,
+    "n_hits": 42,
+    "hit_rate": 0.7924528301886793,
+    "visible": true
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_23": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 44,
+    "hit_rate": 0.7213114754098361,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 53,
+    "hit_rate": 0.8688524590163934,
+    "visible": true
+   },
+   "wall_length_m": 6.163,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_24": {
+   "floor": {
+    "n_judged": 50,
+    "n_hits": 31,
+    "hit_rate": 0.62,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 50,
+    "n_hits": 43,
+    "hit_rate": 0.86,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_25": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 43,
+    "hit_rate": 0.6935483870967742,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 60,
+    "n_hits": 49,
+    "hit_rate": 0.8166666666666667,
+    "visible": true
+   },
+   "wall_length_m": 3.85,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_26": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 38,
+    "hit_rate": 0.6785714285714286,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 53,
+    "n_hits": 40,
+    "hit_rate": 0.7547169811320755,
+    "visible": true
+   },
+   "wall_length_m": 5.4,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_27": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 38,
+    "hit_rate": 0.59375,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 41,
+    "hit_rate": 0.6721311475409836,
+    "visible": true
+   },
+   "wall_length_m": 7.8500000000000005,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_28": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 43,
+    "hit_rate": 0.671875,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 39,
+    "hit_rate": 0.609375,
+    "visible": true
+   },
+   "wall_length_m": 5.8,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_29": {
+   "floor": {
+    "n_judged": 52,
+    "n_hits": 36,
+    "hit_rate": 0.6923076923076923,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 51,
+    "n_hits": 48,
+    "hit_rate": 0.9411764705882353,
+    "visible": true
+   },
+   "wall_length_m": 5.4,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_30": {
+   "floor": {
+    "n_judged": 54,
+    "n_hits": 20,
+    "hit_rate": 0.37037037037037035,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 50,
+    "n_hits": 42,
+    "hit_rate": 0.84,
+    "visible": true
+   },
+   "wall_length_m": 4.95,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_31": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 35,
+    "hit_rate": 0.546875,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 59,
+    "hit_rate": 0.921875,
+    "visible": true
+   },
+   "wall_length_m": 6.4,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_32": {
+   "floor": {
+    "n_judged": 41,
+    "n_hits": 23,
+    "hit_rate": 0.5609756097560976,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 41,
+    "n_hits": 33,
+    "hit_rate": 0.8048780487804879,
+    "visible": true
+   },
+   "wall_length_m": 5.400000053200371,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_33": {
+   "floor": {
+    "n_judged": 53,
+    "n_hits": 37,
+    "hit_rate": 0.6981132075471698,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 51,
+    "n_hits": 45,
+    "hit_rate": 0.8823529411764706,
+    "visible": true
+   },
+   "wall_length_m": 5.25,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_34": {
+   "floor": {
+    "n_judged": 41,
+    "n_hits": 24,
+    "hit_rate": 0.5853658536585366,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 33,
+    "n_hits": 25,
+    "hit_rate": 0.7575757575757576,
+    "visible": true
+   },
+   "wall_length_m": 4.15,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_35": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 37,
+    "hit_rate": 0.6166666666666667,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 58,
+    "n_hits": 38,
+    "hit_rate": 0.6551724137931034,
+    "visible": true
+   },
+   "wall_length_m": 4.9,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_36": {
+   "floor": {
+    "n_judged": 35,
+    "n_hits": 24,
+    "hit_rate": 0.6857142857142857,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 35,
+    "n_hits": 22,
+    "hit_rate": 0.6285714285714286,
+    "visible": true
+   },
+   "wall_length_m": 5.9,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_37": {
+   "floor": {
+    "n_judged": 58,
+    "n_hits": 27,
+    "hit_rate": 0.46551724137931033,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 57,
+    "n_hits": 51,
+    "hit_rate": 0.8947368421052632,
+    "visible": true
+   },
+   "wall_length_m": 6.6,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_38": {
+   "floor": {
+    "n_judged": 54,
+    "n_hits": 23,
+    "hit_rate": 0.42592592592592593,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 54,
+    "n_hits": 34,
+    "hit_rate": 0.6296296296296297,
+    "visible": true
+   },
+   "wall_length_m": 5.3,
+   "any_visible": true
+  },
+  "LivingRoomsWithHallway_idx_39": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 42,
+    "hit_rate": 0.7368421052631579,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 38,
+    "n_hits": 15,
+    "hit_rate": 0.39473684210526316,
+    "visible": false
+   },
+   "wall_length_m": 2.8,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_0": {
+   "floor": {
+    "n_judged": 55,
+    "n_hits": 20,
+    "hit_rate": 0.36363636363636365,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 55,
+    "n_hits": 45,
+    "hit_rate": 0.8181818181818182,
+    "visible": true
+   },
+   "wall_length_m": 6.067375,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_1": {
+   "floor": {
+    "n_judged": 57,
+    "n_hits": 24,
+    "hit_rate": 0.42105263157894735,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 49,
+    "n_hits": 31,
+    "hit_rate": 0.6326530612244898,
+    "visible": true
+   },
+   "wall_length_m": 3.904243,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_2": {
+   "floor": {
+    "n_judged": 51,
+    "n_hits": 9,
+    "hit_rate": 0.17647058823529413,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 51,
+    "n_hits": 27,
+    "hit_rate": 0.5294117647058824,
+    "visible": true
+   },
+   "wall_length_m": 5.32549,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_3": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 14,
+    "hit_rate": 0.23728813559322035,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 58,
+    "n_hits": 38,
+    "hit_rate": 0.6551724137931034,
+    "visible": true
+   },
+   "wall_length_m": 4.802136,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_4": {
+   "floor": {
+    "n_judged": 55,
+    "n_hits": 18,
+    "hit_rate": 0.32727272727272727,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 56,
+    "n_hits": 40,
+    "hit_rate": 0.7142857142857143,
+    "visible": true
+   },
+   "wall_length_m": 5.681654,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_5": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 25,
+    "hit_rate": 0.4166666666666667,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 60,
+    "n_hits": 53,
+    "hit_rate": 0.8833333333333333,
+    "visible": true
+   },
+   "wall_length_m": 5.40865,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_6": {
+   "floor": {
+    "n_judged": 58,
+    "n_hits": 11,
+    "hit_rate": 0.1896551724137931,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 58,
+    "n_hits": 47,
+    "hit_rate": 0.8103448275862069,
+    "visible": true
+   },
+   "wall_length_m": 2.599122,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_7": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 20,
+    "hit_rate": 0.35714285714285715,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 56,
+    "n_hits": 30,
+    "hit_rate": 0.5357142857142857,
+    "visible": true
+   },
+   "wall_length_m": 6.633838,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_8": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 25,
+    "hit_rate": 0.4166666666666667,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 51,
+    "n_hits": 34,
+    "hit_rate": 0.6666666666666666,
+    "visible": true
+   },
+   "wall_length_m": 4.274597,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_9": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 10,
+    "hit_rate": 0.17857142857142858,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 56,
+    "n_hits": 41,
+    "hit_rate": 0.7321428571428571,
+    "visible": true
+   },
+   "wall_length_m": 5.689335,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_10": {
+   "floor": {
+    "n_judged": 50,
+    "n_hits": 18,
+    "hit_rate": 0.36,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 50,
+    "n_hits": 37,
+    "hit_rate": 0.74,
+    "visible": true
+   },
+   "wall_length_m": 4.82373,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_11": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 12,
+    "hit_rate": 0.21428571428571427,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 56,
+    "n_hits": 39,
+    "hit_rate": 0.6964285714285714,
+    "visible": true
+   },
+   "wall_length_m": 4.896276,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_12": {
+   "floor": {
+    "n_judged": 55,
+    "n_hits": 8,
+    "hit_rate": 0.14545454545454545,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 55,
+    "n_hits": 38,
+    "hit_rate": 0.6909090909090909,
+    "visible": true
+   },
+   "wall_length_m": 4.32761,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_13": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 15,
+    "hit_rate": 0.2542372881355932,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 48,
+    "hit_rate": 0.8135593220338984,
+    "visible": true
+   },
+   "wall_length_m": 3.569404,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_14": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 11,
+    "hit_rate": 0.18333333333333332,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 60,
+    "n_hits": 36,
+    "hit_rate": 0.6,
+    "visible": true
+   },
+   "wall_length_m": 2.454985,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_15": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 14,
+    "hit_rate": 0.22950819672131148,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 29,
+    "hit_rate": 0.47540983606557374,
+    "visible": false
+   },
+   "wall_length_m": 4.703408,
+   "any_visible": false
+  },
+  "MeetingRoom_idx_16": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 26,
+    "hit_rate": 0.40625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 16,
+    "hit_rate": 0.25,
+    "visible": false
+   },
+   "wall_length_m": 3.430697,
+   "any_visible": false
+  },
+  "MeetingRoom_idx_17": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 26,
+    "hit_rate": 0.40625,
+    "visible": false
+   },
+   "wall_length_m": 4.130478,
+   "any_visible": false
+  },
+  "MeetingRoom_idx_18": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 13,
+    "hit_rate": 0.203125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 43,
+    "hit_rate": 0.671875,
+    "visible": true
+   },
+   "wall_length_m": 6.970023,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_19": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 9,
+    "hit_rate": 0.140625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 29,
+    "hit_rate": 0.453125,
+    "visible": false
+   },
+   "wall_length_m": 4.984178,
+   "any_visible": false
+  },
+  "MeetingRoom_idx_20": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 61,
+    "hit_rate": 0.953125,
+    "visible": true
+   },
+   "wall_length_m": 6.067375,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_21": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 53,
+    "n_hits": 46,
+    "hit_rate": 0.8679245283018868,
+    "visible": true
+   },
+   "wall_length_m": 3.904243,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_22": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 14,
+    "hit_rate": 0.21875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 62,
+    "hit_rate": 0.96875,
+    "visible": true
+   },
+   "wall_length_m": 5.32549,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_23": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 18,
+    "hit_rate": 0.28125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 24,
+    "hit_rate": 0.375,
+    "visible": false
+   },
+   "wall_length_m": 4.802136,
+   "any_visible": false
+  },
+  "MeetingRoom_idx_24": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 60,
+    "hit_rate": 0.9375,
+    "visible": true
+   },
+   "wall_length_m": 5.681654,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_25": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 58,
+    "hit_rate": 0.90625,
+    "visible": true
+   },
+   "wall_length_m": 5.40865,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_26": {
+   "floor": {
+    "n_judged": 55,
+    "n_hits": 18,
+    "hit_rate": 0.32727272727272727,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 55,
+    "n_hits": 18,
+    "hit_rate": 0.32727272727272727,
+    "visible": false
+   },
+   "wall_length_m": 2.599122,
+   "any_visible": false
+  },
+  "MeetingRoom_idx_27": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 12,
+    "hit_rate": 0.1875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 40,
+    "hit_rate": 0.625,
+    "visible": true
+   },
+   "wall_length_m": 6.633838,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_28": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 23,
+    "hit_rate": 0.359375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 58,
+    "n_hits": 51,
+    "hit_rate": 0.8793103448275862,
+    "visible": true
+   },
+   "wall_length_m": 4.274597,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_29": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 4,
+    "hit_rate": 0.0625,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 54,
+    "hit_rate": 0.84375,
+    "visible": true
+   },
+   "wall_length_m": 5.689335,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_30": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 18,
+    "hit_rate": 0.28125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 61,
+    "hit_rate": 0.953125,
+    "visible": true
+   },
+   "wall_length_m": 4.82373,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_31": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 18,
+    "hit_rate": 0.28125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 26,
+    "hit_rate": 0.40625,
+    "visible": false
+   },
+   "wall_length_m": 4.896276,
+   "any_visible": false
+  },
+  "MeetingRoom_idx_32": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 8,
+    "hit_rate": 0.125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 51,
+    "hit_rate": 0.796875,
+    "visible": true
+   },
+   "wall_length_m": 4.32761,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_33": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 14,
+    "hit_rate": 0.21875,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 54,
+    "hit_rate": 0.8709677419354839,
+    "visible": true
+   },
+   "wall_length_m": 3.569404,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_34": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 15,
+    "hit_rate": 0.234375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 50,
+    "hit_rate": 0.78125,
+    "visible": true
+   },
+   "wall_length_m": 2.454985,
+   "any_visible": true
+  },
+  "MeetingRoom_idx_35": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 28,
+    "hit_rate": 0.4375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 36,
+    "hit_rate": 0.5625,
+    "visible": true
+   },
+   "wall_length_m": 4.703408,
+   "any_visible": true
+  },
+  "Office_idx_0": {
+   "floor": {
+    "n_judged": 48,
+    "n_hits": 18,
+    "hit_rate": 0.375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 48,
+    "n_hits": 9,
+    "hit_rate": 0.1875,
+    "visible": false
+   },
+   "wall_length_m": 8.108936,
+   "any_visible": false
+  },
+  "Office_idx_1": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 42,
+    "hit_rate": 0.6774193548387096,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 19,
+    "hit_rate": 0.3064516129032258,
+    "visible": false
+   },
+   "wall_length_m": 5.890002000000003,
+   "any_visible": true
+  },
+  "Office_idx_2": {
+   "floor": {
+    "n_judged": 42,
+    "n_hits": 16,
+    "hit_rate": 0.38095238095238093,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 42,
+    "n_hits": 10,
+    "hit_rate": 0.23809523809523808,
+    "visible": false
+   },
+   "wall_length_m": 7.787935999999999,
+   "any_visible": false
+  },
+  "Office_idx_3": {
+   "floor": {
+    "n_judged": 47,
+    "n_hits": 22,
+    "hit_rate": 0.46808510638297873,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 47,
+    "n_hits": 21,
+    "hit_rate": 0.44680851063829785,
+    "visible": false
+   },
+   "wall_length_m": 8.108936,
+   "any_visible": false
+  },
+  "Office_idx_4": {
+   "floor": {
+    "n_judged": 46,
+    "n_hits": 21,
+    "hit_rate": 0.45652173913043476,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 35,
+    "n_hits": 31,
+    "hit_rate": 0.8857142857142857,
+    "visible": true
+   },
+   "wall_length_m": 5.105703999999999,
+   "any_visible": true
+  },
+  "Office_idx_5": {
+   "floor": {
+    "n_judged": 56,
+    "n_hits": 19,
+    "hit_rate": 0.3392857142857143,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 53,
+    "n_hits": 37,
+    "hit_rate": 0.6981132075471698,
+    "visible": true
+   },
+   "wall_length_m": 5.342,
+   "any_visible": true
+  },
+  "Office_idx_6": {
+   "floor": {
+    "n_judged": 38,
+    "n_hits": 14,
+    "hit_rate": 0.3684210526315789,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 38,
+    "n_hits": 33,
+    "hit_rate": 0.868421052631579,
+    "visible": true
+   },
+   "wall_length_m": 11.9,
+   "any_visible": true
+  },
+  "Office_idx_7": {
+   "floor": {
+    "n_judged": 31,
+    "n_hits": 10,
+    "hit_rate": 0.3225806451612903,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 27,
+    "n_hits": 11,
+    "hit_rate": 0.4074074074074074,
+    "visible": false
+   },
+   "wall_length_m": 11.215306715135348,
+   "any_visible": false
+  },
+  "Office_idx_8": {
+   "floor": {
+    "n_judged": 43,
+    "n_hits": 19,
+    "hit_rate": 0.4418604651162791,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 43,
+    "n_hits": 29,
+    "hit_rate": 0.6744186046511628,
+    "visible": true
+   },
+   "wall_length_m": 8.108936,
+   "any_visible": true
+  },
+  "Office_idx_10": {
+   "floor": {
+    "n_judged": 28,
+    "n_hits": 12,
+    "hit_rate": 0.42857142857142855,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 28,
+    "n_hits": 19,
+    "hit_rate": 0.6785714285714286,
+    "visible": true
+   },
+   "wall_length_m": 7.787935999999999,
+   "any_visible": true
+  },
+  "Office_idx_11": {
+   "floor": {
+    "n_judged": 37,
+    "n_hits": 22,
+    "hit_rate": 0.5945945945945946,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 37,
+    "n_hits": 21,
+    "hit_rate": 0.5675675675675675,
+    "visible": true
+   },
+   "wall_length_m": 8.108936,
+   "any_visible": true
+  },
+  "Office_idx_12": {
+   "floor": {
+    "n_judged": 35,
+    "n_hits": 23,
+    "hit_rate": 0.6571428571428571,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 24,
+    "n_hits": 21,
+    "hit_rate": 0.875,
+    "visible": true
+   },
+   "wall_length_m": 5.105703999999999,
+   "any_visible": true
+  },
+  "Office_idx_13": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 24,
+    "hit_rate": 0.375,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 59,
+    "hit_rate": 0.9516129032258065,
+    "visible": true
+   },
+   "wall_length_m": 5.342,
+   "any_visible": true
+  },
+  "Office_idx_14": {
+   "floor": {
+    "n_judged": 48,
+    "n_hits": 26,
+    "hit_rate": 0.5416666666666666,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 48,
+    "n_hits": 23,
+    "hit_rate": 0.4791666666666667,
+    "visible": false
+   },
+   "wall_length_m": 11.9,
+   "any_visible": true
+  },
+  "Office_idx_15": {
+   "floor": {
+    "n_judged": 24,
+    "n_hits": 5,
+    "hit_rate": 0.20833333333333334,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 18,
+    "n_hits": 8,
+    "hit_rate": 0.4444444444444444,
+    "visible": false
+   },
+   "wall_length_m": 11.215306715135348,
+   "any_visible": false
+  },
+  "Restaurants_idx_0": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 32,
+    "hit_rate": 0.5161290322580645,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 52,
+    "hit_rate": 0.8387096774193549,
+    "visible": true
+   },
+   "wall_length_m": 4.344532000718259,
+   "any_visible": true
+  },
+  "Restaurants_idx_1": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 48,
+    "hit_rate": 0.7619047619047619,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 45,
+    "hit_rate": 0.7142857142857143,
+    "visible": true
+   },
+   "wall_length_m": 5.674298,
+   "any_visible": true
+  },
+  "Restaurants_idx_2": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 29,
+    "hit_rate": 0.453125,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 53,
+    "hit_rate": 0.8688524590163934,
+    "visible": true
+   },
+   "wall_length_m": 6.5645730013271235,
+   "any_visible": true
+  },
+  "Restaurants_idx_3": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 46,
+    "hit_rate": 0.7301587301587301,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 28,
+    "hit_rate": 0.4444444444444444,
+    "visible": false
+   },
+   "wall_length_m": 5.486426,
+   "any_visible": true
+  },
+  "Restaurants_idx_4": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 39,
+    "hit_rate": 0.609375,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 51,
+    "hit_rate": 0.796875,
+    "visible": true
+   },
+   "wall_length_m": 7.052748,
+   "any_visible": true
+  },
+  "Restaurants_idx_5": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 27,
+    "hit_rate": 0.45,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 60,
+    "n_hits": 35,
+    "hit_rate": 0.5833333333333334,
+    "visible": true
+   },
+   "wall_length_m": 5.481972,
+   "any_visible": true
+  },
+  "Restaurants_idx_6": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 32,
+    "hit_rate": 0.5245901639344263,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 55,
+    "hit_rate": 0.9016393442622951,
+    "visible": true
+   },
+   "wall_length_m": 5.684558,
+   "any_visible": true
+  },
+  "Restaurants_idx_7": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 27,
+    "hit_rate": 0.4576271186440678,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 45,
+    "hit_rate": 0.7627118644067796,
+    "visible": true
+   },
+   "wall_length_m": 5.535876,
+   "any_visible": true
+  },
+  "Restaurants_idx_8": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 54,
+    "hit_rate": 0.84375,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 16,
+    "hit_rate": 0.25,
+    "visible": false
+   },
+   "wall_length_m": 8.318660000002163,
+   "any_visible": true
+  },
+  "Restaurants_idx_9": {
+   "floor": {
+    "n_judged": 59,
+    "n_hits": 19,
+    "hit_rate": 0.3220338983050847,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 45,
+    "hit_rate": 0.7627118644067796,
+    "visible": true
+   },
+   "wall_length_m": 5.582496,
+   "any_visible": true
+  },
+  "Restaurants_idx_10": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 35,
+    "hit_rate": 0.5645161290322581,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 52,
+    "hit_rate": 0.8387096774193549,
+    "visible": true
+   },
+   "wall_length_m": 7.336758001151735,
+   "any_visible": true
+  },
+  "Restaurants_idx_11": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 29,
+    "hit_rate": 0.46774193548387094,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 30,
+    "hit_rate": 0.4838709677419355,
+    "visible": false
+   },
+   "wall_length_m": 6.410216,
+   "any_visible": false
+  },
+  "Restaurants_idx_12": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 29,
+    "hit_rate": 0.46774193548387094,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 50,
+    "hit_rate": 0.8064516129032258,
+    "visible": true
+   },
+   "wall_length_m": 5.749016,
+   "any_visible": true
+  },
+  "Restaurants_idx_13": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 33,
+    "hit_rate": 0.515625,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 53,
+    "hit_rate": 0.828125,
+    "visible": true
+   },
+   "wall_length_m": 7.754688,
+   "any_visible": true
+  },
+  "Restaurants_idx_14": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 32,
+    "hit_rate": 0.5161290322580645,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 43,
+    "n_hits": 19,
+    "hit_rate": 0.4418604651162791,
+    "visible": false
+   },
+   "wall_length_m": 5.273548,
+   "any_visible": true
+  },
+  "Restaurants_idx_15": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 44,
+    "hit_rate": 0.6875,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 30,
+    "n_hits": 20,
+    "hit_rate": 0.6666666666666666,
+    "visible": true
+   },
+   "wall_length_m": 4.282904000098181,
+   "any_visible": true
+  },
+  "Restaurants_idx_16": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 42,
+    "hit_rate": 0.65625,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 44,
+    "hit_rate": 0.6875,
+    "visible": true
+   },
+   "wall_length_m": 5.120476,
+   "any_visible": true
+  },
+  "Restaurants_idx_17": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 34,
+    "hit_rate": 0.53125,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 55,
+    "hit_rate": 0.859375,
+    "visible": true
+   },
+   "wall_length_m": 5.464791004428348,
+   "any_visible": true
+  },
+  "Restaurants_idx_18": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 37,
+    "hit_rate": 0.578125,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 50,
+    "hit_rate": 0.78125,
+    "visible": true
+   },
+   "wall_length_m": 4.282524,
+   "any_visible": true
+  },
+  "Restaurants_idx_19": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 32,
+    "hit_rate": 0.5,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 54,
+    "hit_rate": 0.84375,
+    "visible": true
+   },
+   "wall_length_m": 7.398952,
+   "any_visible": true
+  },
+  "Restaurants_idx_20": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 39,
+    "hit_rate": 0.6190476190476191,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 49,
+    "hit_rate": 0.7777777777777778,
+    "visible": true
+   },
+   "wall_length_m": 4.344532000718259,
+   "any_visible": true
+  },
+  "Restaurants_idx_21": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 50,
+    "hit_rate": 0.7936507936507936,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 56,
+    "hit_rate": 0.8888888888888888,
+    "visible": true
+   },
+   "wall_length_m": 5.674298,
+   "any_visible": true
+  },
+  "Restaurants_idx_22": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 33,
+    "hit_rate": 0.5409836065573771,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 58,
+    "n_hits": 43,
+    "hit_rate": 0.7413793103448276,
+    "visible": true
+   },
+   "wall_length_m": 6.5645730013271235,
+   "any_visible": true
+  },
+  "Restaurants_idx_23": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 52,
+    "hit_rate": 0.8125,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall_length_m": 5.486426,
+   "any_visible": true
+  },
+  "Restaurants_idx_24": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 45,
+    "hit_rate": 0.75,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 59,
+    "n_hits": 45,
+    "hit_rate": 0.7627118644067796,
+    "visible": true
+   },
+   "wall_length_m": 7.052748,
+   "any_visible": true
+  },
+  "Restaurants_idx_25": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 24,
+    "hit_rate": 0.4,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 60,
+    "n_hits": 34,
+    "hit_rate": 0.5666666666666667,
+    "visible": true
+   },
+   "wall_length_m": 5.481972,
+   "any_visible": true
+  },
+  "Restaurants_idx_26": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 53,
+    "hit_rate": 0.828125,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 47,
+    "hit_rate": 0.734375,
+    "visible": true
+   },
+   "wall_length_m": 5.684558,
+   "any_visible": true
+  },
+  "Restaurants_idx_27": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 37,
+    "hit_rate": 0.5967741935483871,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 52,
+    "hit_rate": 0.8387096774193549,
+    "visible": true
+   },
+   "wall_length_m": 5.535876,
+   "any_visible": true
+  },
+  "Restaurants_idx_28": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 60,
+    "hit_rate": 0.9375,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 20,
+    "hit_rate": 0.3125,
+    "visible": false
+   },
+   "wall_length_m": 8.318660000002163,
+   "any_visible": true
+  },
+  "Restaurants_idx_29": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 39,
+    "hit_rate": 0.639344262295082,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 55,
+    "hit_rate": 0.9016393442622951,
+    "visible": true
+   },
+   "wall_length_m": 5.582496,
+   "any_visible": true
+  },
+  "Restaurants_idx_30": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 41,
+    "hit_rate": 0.6507936507936508,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 55,
+    "hit_rate": 0.873015873015873,
+    "visible": true
+   },
+   "wall_length_m": 7.336758001151735,
+   "any_visible": true
+  },
+  "Restaurants_idx_31": {
+   "floor": {
+    "n_judged": 63,
+    "n_hits": 43,
+    "hit_rate": 0.6825396825396826,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 63,
+    "n_hits": 27,
+    "hit_rate": 0.42857142857142855,
+    "visible": false
+   },
+   "wall_length_m": 6.410216,
+   "any_visible": true
+  },
+  "Restaurants_idx_32": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 33,
+    "hit_rate": 0.515625,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 57,
+    "hit_rate": 0.890625,
+    "visible": true
+   },
+   "wall_length_m": 5.749016,
+   "any_visible": true
+  },
+  "Restaurants_idx_33": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 39,
+    "hit_rate": 0.6290322580645161,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 51,
+    "hit_rate": 0.8225806451612904,
+    "visible": true
+   },
+   "wall_length_m": 7.754688,
+   "any_visible": true
+  },
+  "Restaurants_idx_34": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 29,
+    "hit_rate": 0.46774193548387094,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 46,
+    "n_hits": 7,
+    "hit_rate": 0.15217391304347827,
+    "visible": false
+   },
+   "wall_length_m": 5.273548,
+   "any_visible": false
+  },
+  "Restaurants_idx_35": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 46,
+    "hit_rate": 0.7419354838709677,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 37,
+    "n_hits": 31,
+    "hit_rate": 0.8378378378378378,
+    "visible": true
+   },
+   "wall_length_m": 4.282904000098181,
+   "any_visible": true
+  },
+  "Restaurants_idx_36": {
+   "floor": {
+    "n_judged": 62,
+    "n_hits": 45,
+    "hit_rate": 0.7258064516129032,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 62,
+    "n_hits": 42,
+    "hit_rate": 0.6774193548387096,
+    "visible": true
+   },
+   "wall_length_m": 5.120476,
+   "any_visible": true
+  },
+  "Restaurants_idx_37": {
+   "floor": {
+    "n_judged": 61,
+    "n_hits": 43,
+    "hit_rate": 0.7049180327868853,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 61,
+    "n_hits": 56,
+    "hit_rate": 0.9180327868852459,
+    "visible": true
+   },
+   "wall_length_m": 5.464791004428348,
+   "any_visible": true
+  },
+  "Restaurants_idx_38": {
+   "floor": {
+    "n_judged": 60,
+    "n_hits": 28,
+    "hit_rate": 0.4666666666666667,
+    "visible": false
+   },
+   "wall": {
+    "n_judged": 60,
+    "n_hits": 49,
+    "hit_rate": 0.8166666666666667,
+    "visible": true
+   },
+   "wall_length_m": 4.282524,
+   "any_visible": true
+  },
+  "Restaurants_idx_39": {
+   "floor": {
+    "n_judged": 64,
+    "n_hits": 53,
+    "hit_rate": 0.828125,
+    "visible": true
+   },
+   "wall": {
+    "n_judged": 64,
+    "n_hits": 59,
+    "hit_rate": 0.921875,
+    "visible": true
+   },
+   "wall_length_m": 7.398952,
+   "any_visible": true
+  }
+ },
+ "versions": {
+  "python": "3.11.9",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "trimesh": "4.12.2",
+  "shapely": "2.1.2",
+  "rtree": "1.4.1",
+  "matplotlib": "3.10.9",
+  "code_revision": "010ac6d"
+ }
+}
