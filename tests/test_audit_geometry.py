@@ -99,6 +99,21 @@ def test_slice_has_no_chord_where_two_outlines_share_a_corner() -> None:
         assert np.linalg.norm(np.diff(line, axis=0), axis=1).max() <= longest_wall + 1e-6
 
 
+def test_node_segments_closes_a_ring_whose_shared_points_differ_by_one_ulp() -> None:
+    # mesh_plane computes a cut point once per triangle, so the two copies of
+    # a shared point can differ in the last bit. A plain union then leaves the
+    # whole ring as cut edges with no face, as on Apartments_idx_19 at 1.1 m.
+    from shapely.ops import polygonize_full
+
+    corners = np.array([[0.0, 0.0], [4.0, 0.0], [4.0, 4.0], [0.0, 4.0], [0.0, 0.0]])
+    points = np.vstack([np.linspace(a, b, 8)[:-1] for a, b in zip(corners[:-1], corners[1:])] + [corners[:1]])
+    segments = np.stack([points[:-1], points[1:]], axis=1)
+    segments[1:, 0] = np.nextafter(segments[1:, 0], np.inf)
+    polygons, dangles, cuts, invalid = polygonize_full(ag.node_segments(segments))
+    assert [face.area for face in polygons.geoms] == [pytest.approx(16.0)]
+    assert dangles.length + cuts.length + invalid.length == pytest.approx(0.0)
+
+
 def test_slice_counts_an_open_chain_inside_a_closed_room() -> None:
     # trimesh's section paths drop open chains whenever a closed loop exists,
     # which made open_length_fraction read 0 for every real room.

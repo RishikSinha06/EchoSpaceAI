@@ -20,7 +20,7 @@ from shapely.ops import linemerge, polygonize_full, unary_union
 
 FLOOR_TOLERANCE_M = 1e-3
 SLICE_HEIGHTS_M = (1.0, 1.1, 1.2)
-SLICE_SNAP_DECIMALS = 6
+SLICE_GRID_M = 1e-6  # snap-rounding grid for slice linework; 10 um agrees, 0.1 mm does not
 
 
 def horizontal_axes(up: int) -> tuple[int, int]:
@@ -122,6 +122,22 @@ class FloorSlice:
         }
 
 
+def node_segments(segments_2d: np.ndarray, grid_size_m: float = SLICE_GRID_M) -> Any:
+    """Union Nx2x2 segments into a fully noded linework on a fixed grid.
+
+    Neighbouring triangles compute their shared cut point separately, so the
+    two copies can differ in the last bit and leave a ring open. Rounding the
+    coordinates first is not enough: it also bends near-collinear pieces of
+    doubled walls and can turn the room ring into cut edges. GEOS snap-rounding
+    (``grid_size``) nodes robustly on the grid instead.
+    """
+    segments = np.asarray(segments_2d, dtype=np.float64).reshape(-1, 2, 2)
+    segments = segments[np.any(segments[:, 0] != segments[:, 1], axis=1)]
+    if len(segments) == 0:
+        return shapely.multilinestrings(np.empty((0, 2, 2)))
+    return shapely.union_all(shapely.multilinestrings(segments), grid_size=grid_size_m)
+
+
 def floor_slice(mesh: trimesh.Trimesh, up: int, height_above_floor_m: float) -> FloorSlice:
     """Cut the mesh horizontally and describe the loops the cut produces.
 
@@ -142,12 +158,9 @@ def floor_slice(mesh: trimesh.Trimesh, up: int, height_above_floor_m: float) -> 
     if len(segments) == 0:
         return empty
     axes = list(horizontal_axes(up))
-    # Snap to 1 um so endpoints shared by neighbouring triangles meet exactly.
-    flat = np.round(np.asarray(segments)[:, :, axes], SLICE_SNAP_DECIMALS)
-    flat = flat[np.any(flat[:, 0] != flat[:, 1], axis=1)]
-    if len(flat) == 0:
+    noded = node_segments(np.asarray(segments)[:, :, axes])
+    if noded.is_empty:
         return empty
-    noded = unary_union(shapely.multilinestrings(flat))
     merged = linemerge(noded) if not isinstance(noded, LineString) else noded
     lines = list(merged.geoms) if hasattr(merged, "geoms") else [merged]
     total_length = float(noded.length)
