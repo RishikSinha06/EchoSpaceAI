@@ -33,7 +33,7 @@ data/extracted/
 data/index/
 
 # Exception: the tiny CC BY 4.0 AcousticRooms sample for integration work,
-# redistributed with attribution in data/samples/ATTRIBUTION.md
+# redistributed with attribution in data/samples/acousticrooms/ATTRIBUTION.md
 !data/samples/**/*.wav
 !data/samples/**/*.obj
 *.egg-info/
