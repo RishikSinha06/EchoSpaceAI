@@ -37,3 +37,15 @@ A full run writes, relative to the repository root:
 Trial runs (`--limit` or `--rooms`) write to `data/cache/audit_trial/` so they
 cannot overwrite the committed outputs. The acceptance thresholds at the top of
 the script were fixed before the full run; change one only with a recorded reason.
+
+## `audit_duplicates.py`: which accepted rooms are the same physical room
+
+Run after `audit_data.py`. It slices every accepted room at 1.1 m and groups
+rooms that share a geometry signature or a floor footprint (IoU >= 0.999 after
+translation, 90-degree turns and mirrors), then writes
+`reports/d0_duplicates.json` with the groups, a `room_group` id per room and
+the independent-room counts. Room-level splits must keep each group together.
+
+```powershell
+python scripts/audit_duplicates.py          # about 1 min; same --root rules as audit_data.py
+```
