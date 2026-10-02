@@ -1,0 +1,52 @@
+[
+  {
+    "room_id": "MeetingRoom_idx_14",
+    "category": "MeetingRoom",
+    "pairs": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        9
+      ]
+    ],
+    "rir_sample_rate_hz": 22050,
+    "up_axis": "z",
+    "units": "metres"
+  },
+  {
+    "room_id": "Bathrooms_idx_21",
+    "category": "Bathrooms",
+    "pairs": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        6
+      ],
+      [
+        1,
+        7
+      ],
+      [
+        1,
+        8
+      ]
+    ],
+    "rir_sample_rate_hz": 22050,
+    "up_axis": "z",
+    "units": "metres"
+  }
+]

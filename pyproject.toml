@@ -10,7 +10,14 @@ requires-python = ">=3.10"
 dependencies = ["numpy>=1.26,<3"]
 
 [project.optional-dependencies]
-test = ["jsonschema>=4.23,<5"]
+test = ["jsonschema>=4.23,<5", "pytest>=8,<9"]
+audit = [
+    "trimesh>=4.4,<5",
+    "rtree>=1.2,<2",
+    "shapely>=2.0,<3",
+    "scipy>=1.11,<2",
+    "matplotlib>=3.8,<4",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

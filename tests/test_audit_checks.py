@@ -1,0 +1,165 @@
+"""Direct-path arithmetic, timing verdicts and canvas eligibility on a synthetic shoebox."""
+
+from __future__ import annotations
+
+import numpy as np
+import pytest
+
+from echospace.io.audit import (
+    CANVAS_12_8_M,
+    CANVAS_25_6_M,
+    anchored_coverage,
+    anchored_coverage_counts,
+    direct_path_samples,
+    first_strong_peak,
+    fits_bbox,
+    mirror_across_plane,
+    reflection_hit,
+    summarize_timing,
+    wall_specular_point,
+)
+
+FS = 22050
+ROOM_XYZ = np.array([8.0, 3.0, 6.0])  # metres; Y up, as in the scene contract
+TRIM_OFFSET = 40  # samples a fixed upstream trim would leave before the direct sound
+
+
+def _positions(rng: np.random.Generator, n: int) -> np.ndarray:
+    """Points at least 0.5 m from every shoebox surface."""
+    return rng.uniform(0.5, ROOM_XYZ - 0.5, size=(n, 3))
+
+
+def _synthetic_rir(direct: float, length: int = 4000, seed: int = 0) -> np.ndarray:
+    rng = np.random.default_rng(seed)
+    rir = np.zeros(length)
+    arrival = int(round(direct)) + TRIM_OFFSET
+    rir[arrival] = 1.0
+    tail = np.arange(length - arrival - 5)
+    rir[arrival + 5 :] = 0.3 * rng.standard_normal(tail.size) * np.exp(-tail / 600.0)
+    return rir
+
+
+def test_direct_path_samples_matches_hand_computation() -> None:
+    # 3-4-5 triangle: 5 m at 343 m/s and 22.05 kHz
+    assert direct_path_samples([0, 0, 0], [3, 4, 0], FS) == pytest.approx(5 / 343 * FS)
+    assert direct_path_samples([1, 1, 1], [1, 1, 1], FS) == 0.0
+
+
+def test_first_strong_peak_finds_direct_sound_not_reflections() -> None:
+    rir = _synthetic_rir(direct=300.0)
+    assert first_strong_peak(rir) == 300 + TRIM_OFFSET
+    with pytest.raises(ValueError):
+        first_strong_peak(np.zeros(10))
+
+
+def test_first_strong_peak_is_not_pulled_onto_a_close_stronger_reflection() -> None:
+    rir = np.zeros(400)
+    rir[98:103] = [0.1, 0.3, 0.8, 0.6, 0.2]  # band-limited direct sound, crest at 100
+    rir[110] = -1.0  # stronger reflection 10 samples later (mic near a wall)
+    assert first_strong_peak(rir) == 100
+
+
+def test_constant_offset_detected_for_correct_coordinates() -> None:
+    rng = np.random.default_rng(1)
+    src, mic = _positions(rng, 30), _positions(rng, 30)
+    direct = [direct_path_samples(s, m, FS) for s, m in zip(src, mic)]
+    peaks = [first_strong_peak(_synthetic_rir(d, seed=i)) for i, d in enumerate(direct)]
+    summary = summarize_timing(direct, peaks)
+    assert summary.verdict == "constant_offset"
+    assert summary.offset_mean == pytest.approx(TRIM_OFFSET, abs=1.0)
+    assert summary.slope == pytest.approx(1.0, abs=0.01)
+
+
+def test_axis_swap_is_flagged_as_inconsistent() -> None:
+    rng = np.random.default_rng(2)
+    src, mic = _positions(rng, 30), _positions(rng, 30)
+    true_direct = [direct_path_samples(s, m, FS) for s, m in zip(src, mic)]
+    peaks = [first_strong_peak(_synthetic_rir(d, seed=i)) for i, d in enumerate(true_direct)]
+    swap = [0, 2, 1]  # metadata read with Y and Z exchanged for receivers only
+    wrong_direct = [direct_path_samples(s, m[swap], FS) for s, m in zip(src, mic)]
+    assert summarize_timing(wrong_direct, peaks).verdict == "inconsistent"
+
+
+def test_centimetre_units_are_flagged_as_inconsistent() -> None:
+    rng = np.random.default_rng(3)
+    src, mic = _positions(rng, 30), _positions(rng, 30)
+    true_direct = [direct_path_samples(s, m, FS) for s, m in zip(src, mic)]
+    peaks = [first_strong_peak(_synthetic_rir(d, seed=i)) for i, d in enumerate(true_direct)]
+    wrong_direct = [direct_path_samples(s * 100, m * 100, FS) for s, m in zip(src, mic)]
+    assert summarize_timing(wrong_direct, peaks).verdict == "inconsistent"
+
+
+def test_per_pair_onset_trim_is_distinguished_from_coordinate_error() -> None:
+    rng = np.random.default_rng(4)
+    src, mic = _positions(rng, 30), _positions(rng, 30)
+    direct = [direct_path_samples(s, m, FS) for s, m in zip(src, mic)]
+    summary = summarize_timing(direct, [10.0] * len(direct))
+    assert summary.verdict == "per_pair_onset_trim"
+    assert summarize_timing([100.0], [140.0]).verdict == "insufficient"
+
+
+def test_occluded_minority_does_not_condemn_correct_coordinates() -> None:
+    rng = np.random.default_rng(5)
+    src, mic = _positions(rng, 100), _positions(rng, 100)
+    direct = np.array([direct_path_samples(s, m, FS) for s, m in zip(src, mic)])
+    peaks = np.round(direct)
+    peaks[:4] += [90, 150, 300, 800]  # strongest early arrival is a reflection
+    summary = summarize_timing(direct, peaks)
+    assert summary.verdict == "constant_offset"
+    assert summary.offset_std > 50  # the raw spread is still reported honestly
+    assert summary.offset_median == pytest.approx(0.0, abs=0.5)
+    assert summary.n_early == 0
+    peaks[:20] += 200  # 20 % late is no longer a minority
+    assert summarize_timing(direct, peaks).verdict == "inconsistent"
+
+
+def _rectangle(width: float, depth: float) -> np.ndarray:
+    return np.array([[0, 0], [width, 0], [width, depth], [0, depth]], dtype=float)
+
+
+def test_bbox_rule_by_canvas_size() -> None:
+    assert fits_bbox(_rectangle(8.0, 6.0), CANVAS_12_8_M)
+    assert fits_bbox(_rectangle(12.8, 12.8), CANVAS_12_8_M)
+    assert not fits_bbox(_rectangle(14.0, 6.0), CANVAS_12_8_M)
+    assert fits_bbox(_rectangle(14.0, 6.0), CANVAS_25_6_M)
+
+
+def test_anchor_rule_can_fail_where_bbox_passes() -> None:
+    room = _rectangle(10.0, 6.0)
+    assert fits_bbox(room, CANVAS_12_8_M)
+    assert anchored_coverage(room, [5.0, 3.0], CANVAS_12_8_M)  # centred pose: 5 m reach < 6.4 m
+    assert not anchored_coverage(room, [1.0, 3.0], CANVAS_12_8_M)  # near a wall: 9 m reach
+    assert anchored_coverage(room, [1.0, 3.0], CANVAS_25_6_M)
+    poses = np.array([[5.0, 3.0], [1.0, 3.0], [9.0, 1.0], [4.0, 4.0]])
+    assert anchored_coverage_counts(room, poses, CANVAS_12_8_M) == 2
+
+
+def _rir_with_arrivals(arrivals: dict[float, float], length: int = 3000, seed: int = 0) -> np.ndarray:
+    """Decaying noise with sharp arrivals at the given (fractional) samples."""
+    rng = np.random.default_rng(seed)
+    rir = 0.05 * rng.standard_normal(length) * np.exp(-np.arange(length) / 1500.0)
+    for sample, amplitude in arrivals.items():
+        rir[int(round(sample))] += amplitude
+    return rir
+
+
+def test_floor_image_and_reflection_hit_on_synthetic_rir() -> None:
+    source, receiver = np.array([2.0, 3.0, 1.5]), np.array([6.0, 1.0, 1.2])  # Z up, floor z = 0
+    image = mirror_across_plane(source, [0.0, 0.0, 0.0], [0.0, 0.0, 1.0])
+    assert np.allclose(image, [2.0, 3.0, -1.5])
+    direct = direct_path_samples(source, receiver, FS)
+    floor = direct_path_samples(image, receiver, FS)
+    assert floor - direct > 5
+    with_reflection = _rir_with_arrivals({direct: 1.0, floor: 0.4})
+    assert reflection_hit(with_reflection, floor, direct) is True
+    misses = [reflection_hit(_rir_with_arrivals({direct: 1.0}, seed=k), floor, direct) for k in range(200)]
+    assert sum(misses) / len(misses) < 0.2  # chance level is about 10 %
+    assert reflection_hit(with_reflection, direct + 3, direct) is None  # merges with the direct sound
+
+
+def test_wall_specular_point_lies_on_the_segment_or_is_rejected() -> None:
+    wall = ([0.0, 0.0], [8.0, 0.0])  # the y = 0 wall
+    hit = wall_specular_point([2.0, 2.0, 1.0], [6.0, 2.0, 2.0], *wall)
+    assert hit is not None and hit[0] == pytest.approx(0.5) and hit[1] == pytest.approx(1.5)
+    assert wall_specular_point([2.0, 2.0, 1.0], [6.0, 2.0, 2.0], [5.0, 0.0], [8.0, 0.0]) is None  # misses the piece
+    assert wall_specular_point([2.0, 2.0, 1.0], [6.0, -2.0, 2.0], *wall) is None  # opposite sides

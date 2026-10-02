@@ -1,0 +1,1191 @@
+{
+ "slice_height_m": 1.1,
+ "same_footprint_iou": 0.999,
+ "accepted_rooms": 257,
+ "independent": {
+  "by_signature": {
+   "accepted": 175,
+   "bbox_12.8": 171,
+   "anchor_12.8": 171,
+   "bbox_25.6": 174,
+   "anchor_25.6": 174
+  },
+  "by_signature_or_footprint_iou_0.999": {
+   "accepted": 151,
+   "bbox_12.8": 147,
+   "anchor_12.8": 147,
+   "bbox_25.6": 150,
+   "anchor_25.6": 150
+  },
+  "sensitivity_iou_0.99": {
+   "accepted": 150,
+   "bbox_12.8": 146,
+   "anchor_12.8": 146,
+   "bbox_25.6": 149,
+   "anchor_25.6": 149
+  },
+  "sensitivity_iou_0.95": {
+   "accepted": 134,
+   "bbox_12.8": 130,
+   "anchor_12.8": 130,
+   "bbox_25.6": 133,
+   "anchor_25.6": 133
+  }
+ },
+ "groups": [
+  [
+   "Apartments_idx_0",
+   "Apartments_idx_40"
+  ],
+  [
+   "Apartments_idx_1",
+   "Apartments_idx_41"
+  ],
+  [
+   "Apartments_idx_3",
+   "Apartments_idx_42"
+  ],
+  [
+   "Apartments_idx_4",
+   "Apartments_idx_43"
+  ],
+  [
+   "Apartments_idx_5",
+   "Apartments_idx_44"
+  ],
+  [
+   "Apartments_idx_6",
+   "Apartments_idx_45"
+  ],
+  [
+   "Apartments_idx_7",
+   "Apartments_idx_46"
+  ],
+  [
+   "Apartments_idx_8",
+   "Apartments_idx_47"
+  ],
+  [
+   "Apartments_idx_9",
+   "Apartments_idx_48"
+  ],
+  [
+   "Apartments_idx_10",
+   "Apartments_idx_49"
+  ],
+  [
+   "Apartments_idx_11",
+   "Apartments_idx_50"
+  ],
+  [
+   "Apartments_idx_12",
+   "Apartments_idx_51"
+  ],
+  [
+   "Apartments_idx_13",
+   "Apartments_idx_52"
+  ],
+  [
+   "Apartments_idx_15",
+   "Apartments_idx_54"
+  ],
+  [
+   "Apartments_idx_16",
+   "Apartments_idx_55"
+  ],
+  [
+   "Apartments_idx_17",
+   "Apartments_idx_56"
+  ],
+  [
+   "Apartments_idx_18",
+   "Apartments_idx_57"
+  ],
+  [
+   "Apartments_idx_19",
+   "Apartments_idx_58"
+  ],
+  [
+   "Auditorium_idx_0",
+   "Auditorium_idx_1"
+  ],
+  [
+   "Bathrooms_idx_0",
+   "Bathrooms_idx_20"
+  ],
+  [
+   "Bathrooms_idx_1",
+   "Bathrooms_idx_21"
+  ],
+  [
+   "Bathrooms_idx_3",
+   "Bathrooms_idx_23"
+  ],
+  [
+   "Bathrooms_idx_4",
+   "Bathrooms_idx_24"
+  ],
+  [
+   "Bathrooms_idx_5",
+   "Bathrooms_idx_25"
+  ],
+  [
+   "Bathrooms_idx_6",
+   "Bathrooms_idx_26"
+  ],
+  [
+   "Bathrooms_idx_7",
+   "Bathrooms_idx_27"
+  ],
+  [
+   "Bathrooms_idx_8",
+   "Bathrooms_idx_28"
+  ],
+  [
+   "Bedrooms_idx_0",
+   "Bedrooms_idx_20"
+  ],
+  [
+   "Bedrooms_idx_1",
+   "Bedrooms_idx_21"
+  ],
+  [
+   "Bedrooms_idx_2",
+   "Bedrooms_idx_22"
+  ],
+  [
+   "Bedrooms_idx_3",
+   "Bedrooms_idx_23"
+  ],
+  [
+   "Bedrooms_idx_4",
+   "Bedrooms_idx_24"
+  ],
+  [
+   "Bedrooms_idx_5",
+   "Bedrooms_idx_25"
+  ],
+  [
+   "Bedrooms_idx_6",
+   "Bedrooms_idx_26"
+  ],
+  [
+   "Bedrooms_idx_7",
+   "Bedrooms_idx_27"
+  ],
+  [
+   "Bedrooms_idx_8",
+   "Bedrooms_idx_28"
+  ],
+  [
+   "Bedrooms_idx_9",
+   "Bedrooms_idx_29"
+  ],
+  [
+   "Bedrooms_idx_10",
+   "Bedrooms_idx_30"
+  ],
+  [
+   "Bedrooms_idx_11",
+   "Bedrooms_idx_31"
+  ],
+  [
+   "Bedrooms_idx_12",
+   "Bedrooms_idx_32"
+  ],
+  [
+   "Bedrooms_idx_13",
+   "Bedrooms_idx_33"
+  ],
+  [
+   "Cafe_idx_0",
+   "Cafe_idx_1"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_0",
+   "LivingRoomsWithHallway_idx_20"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_1",
+   "LivingRoomsWithHallway_idx_21"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_2",
+   "LivingRoomsWithHallway_idx_22"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_3",
+   "LivingRoomsWithHallway_idx_23"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_4",
+   "LivingRoomsWithHallway_idx_24"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_5",
+   "LivingRoomsWithHallway_idx_25"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_6",
+   "LivingRoomsWithHallway_idx_26"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_7",
+   "LivingRoomsWithHallway_idx_27"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_8",
+   "LivingRoomsWithHallway_idx_28"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_9",
+   "LivingRoomsWithHallway_idx_29"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_10",
+   "LivingRoomsWithHallway_idx_30"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_11",
+   "LivingRoomsWithHallway_idx_31"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_12",
+   "LivingRoomsWithHallway_idx_32"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_13",
+   "LivingRoomsWithHallway_idx_33"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_14",
+   "LivingRoomsWithHallway_idx_34"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_15",
+   "LivingRoomsWithHallway_idx_35"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_16",
+   "LivingRoomsWithHallway_idx_36"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_17",
+   "LivingRoomsWithHallway_idx_37"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_18",
+   "LivingRoomsWithHallway_idx_38"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_19",
+   "LivingRoomsWithHallway_idx_39"
+  ],
+  [
+   "MeetingRoom_idx_0",
+   "MeetingRoom_idx_20"
+  ],
+  [
+   "MeetingRoom_idx_1",
+   "MeetingRoom_idx_21"
+  ],
+  [
+   "MeetingRoom_idx_2",
+   "MeetingRoom_idx_22"
+  ],
+  [
+   "MeetingRoom_idx_3",
+   "MeetingRoom_idx_23"
+  ],
+  [
+   "MeetingRoom_idx_4",
+   "MeetingRoom_idx_24"
+  ],
+  [
+   "MeetingRoom_idx_5",
+   "MeetingRoom_idx_25"
+  ],
+  [
+   "MeetingRoom_idx_6",
+   "MeetingRoom_idx_26"
+  ],
+  [
+   "MeetingRoom_idx_7",
+   "MeetingRoom_idx_27"
+  ],
+  [
+   "MeetingRoom_idx_8",
+   "MeetingRoom_idx_28"
+  ],
+  [
+   "MeetingRoom_idx_9",
+   "MeetingRoom_idx_29"
+  ],
+  [
+   "MeetingRoom_idx_10",
+   "MeetingRoom_idx_30"
+  ],
+  [
+   "MeetingRoom_idx_11",
+   "MeetingRoom_idx_31"
+  ],
+  [
+   "MeetingRoom_idx_12",
+   "MeetingRoom_idx_32"
+  ],
+  [
+   "MeetingRoom_idx_13",
+   "MeetingRoom_idx_33"
+  ],
+  [
+   "MeetingRoom_idx_14",
+   "MeetingRoom_idx_34"
+  ],
+  [
+   "MeetingRoom_idx_15",
+   "MeetingRoom_idx_35"
+  ],
+  [
+   "Office_idx_0",
+   "Office_idx_3",
+   "Office_idx_8",
+   "Office_idx_11"
+  ],
+  [
+   "Office_idx_2",
+   "Office_idx_10"
+  ],
+  [
+   "Office_idx_4",
+   "Office_idx_12"
+  ],
+  [
+   "Office_idx_5",
+   "Office_idx_13"
+  ],
+  [
+   "Office_idx_6",
+   "Office_idx_14"
+  ],
+  [
+   "Office_idx_7",
+   "Office_idx_15"
+  ],
+  [
+   "Restaurants_idx_0",
+   "Restaurants_idx_20"
+  ],
+  [
+   "Restaurants_idx_1",
+   "Restaurants_idx_21"
+  ],
+  [
+   "Restaurants_idx_2",
+   "Restaurants_idx_22"
+  ],
+  [
+   "Restaurants_idx_3",
+   "Restaurants_idx_23"
+  ],
+  [
+   "Restaurants_idx_4",
+   "Restaurants_idx_24"
+  ],
+  [
+   "Restaurants_idx_5",
+   "Restaurants_idx_25"
+  ],
+  [
+   "Restaurants_idx_6",
+   "Restaurants_idx_26"
+  ],
+  [
+   "Restaurants_idx_7",
+   "Restaurants_idx_27"
+  ],
+  [
+   "Restaurants_idx_8",
+   "Restaurants_idx_28"
+  ],
+  [
+   "Restaurants_idx_9",
+   "Restaurants_idx_29"
+  ],
+  [
+   "Restaurants_idx_10",
+   "Restaurants_idx_30"
+  ],
+  [
+   "Restaurants_idx_11",
+   "Restaurants_idx_31"
+  ],
+  [
+   "Restaurants_idx_12",
+   "Restaurants_idx_32"
+  ],
+  [
+   "Restaurants_idx_13",
+   "Restaurants_idx_33"
+  ],
+  [
+   "Restaurants_idx_14",
+   "Restaurants_idx_34"
+  ],
+  [
+   "Restaurants_idx_15",
+   "Restaurants_idx_35"
+  ],
+  [
+   "Restaurants_idx_16",
+   "Restaurants_idx_36"
+  ],
+  [
+   "Restaurants_idx_17",
+   "Restaurants_idx_37"
+  ],
+  [
+   "Restaurants_idx_18",
+   "Restaurants_idx_38"
+  ],
+  [
+   "Restaurants_idx_19",
+   "Restaurants_idx_39"
+  ]
+ ],
+ "signature_groups": [
+  [
+   "Apartments_idx_0",
+   "Apartments_idx_40"
+  ],
+  [
+   "Apartments_idx_4",
+   "Apartments_idx_43"
+  ],
+  [
+   "Apartments_idx_7",
+   "Apartments_idx_46"
+  ],
+  [
+   "Apartments_idx_10",
+   "Apartments_idx_49"
+  ],
+  [
+   "Apartments_idx_11",
+   "Apartments_idx_50"
+  ],
+  [
+   "Apartments_idx_12",
+   "Apartments_idx_51"
+  ],
+  [
+   "Apartments_idx_13",
+   "Apartments_idx_52"
+  ],
+  [
+   "Apartments_idx_15",
+   "Apartments_idx_54"
+  ],
+  [
+   "Apartments_idx_16",
+   "Apartments_idx_55"
+  ],
+  [
+   "Apartments_idx_17",
+   "Apartments_idx_56"
+  ],
+  [
+   "Auditorium_idx_0",
+   "Auditorium_idx_1"
+  ],
+  [
+   "Bathrooms_idx_0",
+   "Bathrooms_idx_20"
+  ],
+  [
+   "Bathrooms_idx_1",
+   "Bathrooms_idx_21"
+  ],
+  [
+   "Bathrooms_idx_3",
+   "Bathrooms_idx_23"
+  ],
+  [
+   "Bathrooms_idx_4",
+   "Bathrooms_idx_24"
+  ],
+  [
+   "Bathrooms_idx_5",
+   "Bathrooms_idx_25"
+  ],
+  [
+   "Bathrooms_idx_6",
+   "Bathrooms_idx_26"
+  ],
+  [
+   "Bathrooms_idx_7",
+   "Bathrooms_idx_27"
+  ],
+  [
+   "Bathrooms_idx_8",
+   "Bathrooms_idx_28"
+  ],
+  [
+   "Bedrooms_idx_0",
+   "Bedrooms_idx_20"
+  ],
+  [
+   "Bedrooms_idx_1",
+   "Bedrooms_idx_21"
+  ],
+  [
+   "Bedrooms_idx_3",
+   "Bedrooms_idx_23"
+  ],
+  [
+   "Bedrooms_idx_4",
+   "Bedrooms_idx_24"
+  ],
+  [
+   "Bedrooms_idx_5",
+   "Bedrooms_idx_25"
+  ],
+  [
+   "Bedrooms_idx_6",
+   "Bedrooms_idx_26"
+  ],
+  [
+   "Bedrooms_idx_7",
+   "Bedrooms_idx_27"
+  ],
+  [
+   "Bedrooms_idx_8",
+   "Bedrooms_idx_28"
+  ],
+  [
+   "Bedrooms_idx_9",
+   "Bedrooms_idx_29"
+  ],
+  [
+   "Bedrooms_idx_11",
+   "Bedrooms_idx_31"
+  ],
+  [
+   "Bedrooms_idx_12",
+   "Bedrooms_idx_32"
+  ],
+  [
+   "Bedrooms_idx_13",
+   "Bedrooms_idx_33"
+  ],
+  [
+   "Cafe_idx_0",
+   "Cafe_idx_1"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_1",
+   "LivingRoomsWithHallway_idx_21"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_2",
+   "LivingRoomsWithHallway_idx_22"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_4",
+   "LivingRoomsWithHallway_idx_24"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_5",
+   "LivingRoomsWithHallway_idx_25"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_6",
+   "LivingRoomsWithHallway_idx_26"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_7",
+   "LivingRoomsWithHallway_idx_27"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_8",
+   "LivingRoomsWithHallway_idx_28"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_9",
+   "LivingRoomsWithHallway_idx_29"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_10",
+   "LivingRoomsWithHallway_idx_30"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_11",
+   "LivingRoomsWithHallway_idx_31"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_12",
+   "LivingRoomsWithHallway_idx_32"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_15",
+   "LivingRoomsWithHallway_idx_35"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_16",
+   "LivingRoomsWithHallway_idx_36"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_18",
+   "LivingRoomsWithHallway_idx_38"
+  ],
+  [
+   "LivingRoomsWithHallway_idx_19",
+   "LivingRoomsWithHallway_idx_39"
+  ],
+  [
+   "MeetingRoom_idx_0",
+   "MeetingRoom_idx_20"
+  ],
+  [
+   "MeetingRoom_idx_1",
+   "MeetingRoom_idx_21"
+  ],
+  [
+   "MeetingRoom_idx_2",
+   "MeetingRoom_idx_22"
+  ],
+  [
+   "MeetingRoom_idx_3",
+   "MeetingRoom_idx_23"
+  ],
+  [
+   "MeetingRoom_idx_4",
+   "MeetingRoom_idx_24"
+  ],
+  [
+   "MeetingRoom_idx_5",
+   "MeetingRoom_idx_25"
+  ],
+  [
+   "MeetingRoom_idx_6",
+   "MeetingRoom_idx_26"
+  ],
+  [
+   "MeetingRoom_idx_7",
+   "MeetingRoom_idx_27"
+  ],
+  [
+   "MeetingRoom_idx_8",
+   "MeetingRoom_idx_28"
+  ],
+  [
+   "MeetingRoom_idx_9",
+   "MeetingRoom_idx_29"
+  ],
+  [
+   "MeetingRoom_idx_10",
+   "MeetingRoom_idx_30"
+  ],
+  [
+   "MeetingRoom_idx_11",
+   "MeetingRoom_idx_31"
+  ],
+  [
+   "MeetingRoom_idx_12",
+   "MeetingRoom_idx_32"
+  ],
+  [
+   "MeetingRoom_idx_13",
+   "MeetingRoom_idx_33"
+  ],
+  [
+   "MeetingRoom_idx_14",
+   "MeetingRoom_idx_34"
+  ],
+  [
+   "MeetingRoom_idx_15",
+   "MeetingRoom_idx_35"
+  ],
+  [
+   "Office_idx_0",
+   "Office_idx_8"
+  ],
+  [
+   "Office_idx_3",
+   "Office_idx_11"
+  ],
+  [
+   "Office_idx_4",
+   "Office_idx_12"
+  ],
+  [
+   "Office_idx_5",
+   "Office_idx_13"
+  ],
+  [
+   "Office_idx_6",
+   "Office_idx_14"
+  ],
+  [
+   "Office_idx_7",
+   "Office_idx_15"
+  ],
+  [
+   "Restaurants_idx_1",
+   "Restaurants_idx_21"
+  ],
+  [
+   "Restaurants_idx_2",
+   "Restaurants_idx_22"
+  ],
+  [
+   "Restaurants_idx_4",
+   "Restaurants_idx_24"
+  ],
+  [
+   "Restaurants_idx_5",
+   "Restaurants_idx_25"
+  ],
+  [
+   "Restaurants_idx_7",
+   "Restaurants_idx_27"
+  ],
+  [
+   "Restaurants_idx_9",
+   "Restaurants_idx_29"
+  ],
+  [
+   "Restaurants_idx_11",
+   "Restaurants_idx_31"
+  ],
+  [
+   "Restaurants_idx_12",
+   "Restaurants_idx_32"
+  ],
+  [
+   "Restaurants_idx_14",
+   "Restaurants_idx_34"
+  ],
+  [
+   "Restaurants_idx_15",
+   "Restaurants_idx_35"
+  ],
+  [
+   "Restaurants_idx_16",
+   "Restaurants_idx_36"
+  ],
+  [
+   "Restaurants_idx_18",
+   "Restaurants_idx_38"
+  ],
+  [
+   "Restaurants_idx_19",
+   "Restaurants_idx_39"
+  ]
+ ],
+ "footprint_pairs_not_sharing_signature": [
+  [
+   "Apartments_idx_1",
+   "Apartments_idx_41",
+   1.0
+  ],
+  [
+   "Apartments_idx_3",
+   "Apartments_idx_42",
+   1.0
+  ],
+  [
+   "Apartments_idx_5",
+   "Apartments_idx_44",
+   1.0
+  ],
+  [
+   "Apartments_idx_6",
+   "Apartments_idx_45",
+   1.0
+  ],
+  [
+   "Apartments_idx_8",
+   "Apartments_idx_47",
+   1.0
+  ],
+  [
+   "Apartments_idx_9",
+   "Apartments_idx_48",
+   1.0
+  ],
+  [
+   "Apartments_idx_18",
+   "Apartments_idx_57",
+   1.0
+  ],
+  [
+   "Apartments_idx_19",
+   "Apartments_idx_58",
+   1.0
+  ],
+  [
+   "Bedrooms_idx_2",
+   "Bedrooms_idx_22",
+   1.0
+  ],
+  [
+   "Bedrooms_idx_10",
+   "Bedrooms_idx_30",
+   1.0
+  ],
+  [
+   "LivingRoomsWithHallway_idx_0",
+   "LivingRoomsWithHallway_idx_20",
+   1.0
+  ],
+  [
+   "LivingRoomsWithHallway_idx_3",
+   "LivingRoomsWithHallway_idx_23",
+   1.0
+  ],
+  [
+   "LivingRoomsWithHallway_idx_13",
+   "LivingRoomsWithHallway_idx_33",
+   1.0
+  ],
+  [
+   "LivingRoomsWithHallway_idx_14",
+   "LivingRoomsWithHallway_idx_34",
+   1.0
+  ],
+  [
+   "LivingRoomsWithHallway_idx_17",
+   "LivingRoomsWithHallway_idx_37",
+   1.0
+  ],
+  [
+   "Office_idx_0",
+   "Office_idx_3",
+   1.0
+  ],
+  [
+   "Office_idx_0",
+   "Office_idx_11",
+   1.0
+  ],
+  [
+   "Office_idx_2",
+   "Office_idx_10",
+   1.0
+  ],
+  [
+   "Office_idx_3",
+   "Office_idx_8",
+   1.0
+  ],
+  [
+   "Office_idx_8",
+   "Office_idx_11",
+   1.0
+  ],
+  [
+   "Restaurants_idx_0",
+   "Restaurants_idx_20",
+   1.0
+  ],
+  [
+   "Restaurants_idx_3",
+   "Restaurants_idx_23",
+   1.0
+  ],
+  [
+   "Restaurants_idx_6",
+   "Restaurants_idx_26",
+   1.0
+  ],
+  [
+   "Restaurants_idx_8",
+   "Restaurants_idx_28",
+   1.0
+  ],
+  [
+   "Restaurants_idx_10",
+   "Restaurants_idx_30",
+   1.0
+  ],
+  [
+   "Restaurants_idx_13",
+   "Restaurants_idx_33",
+   1.0
+  ],
+  [
+   "Restaurants_idx_17",
+   "Restaurants_idx_37",
+   1.0
+  ]
+ ],
+ "room_group": {
+  "Apartments_idx_0": 0,
+  "Apartments_idx_1": 1,
+  "Apartments_idx_2": 2,
+  "Apartments_idx_3": 3,
+  "Apartments_idx_4": 4,
+  "Apartments_idx_5": 5,
+  "Apartments_idx_6": 6,
+  "Apartments_idx_7": 7,
+  "Apartments_idx_8": 8,
+  "Apartments_idx_9": 9,
+  "Apartments_idx_10": 10,
+  "Apartments_idx_11": 11,
+  "Apartments_idx_12": 12,
+  "Apartments_idx_13": 13,
+  "Apartments_idx_15": 14,
+  "Apartments_idx_16": 15,
+  "Apartments_idx_17": 16,
+  "Apartments_idx_18": 17,
+  "Apartments_idx_19": 18,
+  "Apartments_idx_21": 19,
+  "Apartments_idx_22": 20,
+  "Apartments_idx_23": 21,
+  "Apartments_idx_24": 22,
+  "Apartments_idx_25": 23,
+  "Apartments_idx_26": 24,
+  "Apartments_idx_27": 25,
+  "Apartments_idx_28": 26,
+  "Apartments_idx_29": 27,
+  "Apartments_idx_30": 28,
+  "Apartments_idx_31": 29,
+  "Apartments_idx_32": 30,
+  "Apartments_idx_33": 31,
+  "Apartments_idx_34": 32,
+  "Apartments_idx_35": 33,
+  "Apartments_idx_36": 34,
+  "Apartments_idx_37": 35,
+  "Apartments_idx_38": 36,
+  "Apartments_idx_39": 37,
+  "Apartments_idx_40": 0,
+  "Apartments_idx_41": 1,
+  "Apartments_idx_42": 3,
+  "Apartments_idx_43": 4,
+  "Apartments_idx_44": 5,
+  "Apartments_idx_45": 6,
+  "Apartments_idx_46": 7,
+  "Apartments_idx_47": 8,
+  "Apartments_idx_48": 9,
+  "Apartments_idx_49": 10,
+  "Apartments_idx_50": 11,
+  "Apartments_idx_51": 12,
+  "Apartments_idx_52": 13,
+  "Apartments_idx_53": 38,
+  "Apartments_idx_54": 14,
+  "Apartments_idx_55": 15,
+  "Apartments_idx_56": 16,
+  "Apartments_idx_57": 17,
+  "Apartments_idx_58": 18,
+  "Apartments_idx_59": 39,
+  "Auditorium_idx_0": 40,
+  "Auditorium_idx_1": 40,
+  "Bathrooms_idx_0": 41,
+  "Bathrooms_idx_1": 42,
+  "Bathrooms_idx_2": 43,
+  "Bathrooms_idx_3": 44,
+  "Bathrooms_idx_4": 45,
+  "Bathrooms_idx_5": 46,
+  "Bathrooms_idx_6": 47,
+  "Bathrooms_idx_7": 48,
+  "Bathrooms_idx_8": 49,
+  "Bathrooms_idx_9": 50,
+  "Bathrooms_idx_10": 51,
+  "Bathrooms_idx_11": 52,
+  "Bathrooms_idx_12": 53,
+  "Bathrooms_idx_13": 54,
+  "Bathrooms_idx_14": 55,
+  "Bathrooms_idx_16": 56,
+  "Bathrooms_idx_17": 57,
+  "Bathrooms_idx_18": 58,
+  "Bathrooms_idx_19": 59,
+  "Bathrooms_idx_20": 41,
+  "Bathrooms_idx_21": 42,
+  "Bathrooms_idx_23": 44,
+  "Bathrooms_idx_24": 45,
+  "Bathrooms_idx_25": 46,
+  "Bathrooms_idx_26": 47,
+  "Bathrooms_idx_27": 48,
+  "Bathrooms_idx_28": 49,
+  "Bathrooms_idx_29": 60,
+  "Bedrooms_idx_0": 61,
+  "Bedrooms_idx_1": 62,
+  "Bedrooms_idx_2": 63,
+  "Bedrooms_idx_3": 64,
+  "Bedrooms_idx_4": 65,
+  "Bedrooms_idx_5": 66,
+  "Bedrooms_idx_6": 67,
+  "Bedrooms_idx_7": 68,
+  "Bedrooms_idx_8": 69,
+  "Bedrooms_idx_9": 70,
+  "Bedrooms_idx_10": 71,
+  "Bedrooms_idx_11": 72,
+  "Bedrooms_idx_12": 73,
+  "Bedrooms_idx_13": 74,
+  "Bedrooms_idx_14": 75,
+  "Bedrooms_idx_15": 76,
+  "Bedrooms_idx_16": 77,
+  "Bedrooms_idx_17": 78,
+  "Bedrooms_idx_18": 79,
+  "Bedrooms_idx_19": 80,
+  "Bedrooms_idx_20": 61,
+  "Bedrooms_idx_21": 62,
+  "Bedrooms_idx_22": 63,
+  "Bedrooms_idx_23": 64,
+  "Bedrooms_idx_24": 65,
+  "Bedrooms_idx_25": 66,
+  "Bedrooms_idx_26": 67,
+  "Bedrooms_idx_27": 68,
+  "Bedrooms_idx_28": 69,
+  "Bedrooms_idx_29": 70,
+  "Bedrooms_idx_30": 71,
+  "Bedrooms_idx_31": 72,
+  "Bedrooms_idx_32": 73,
+  "Bedrooms_idx_33": 74,
+  "Cafe_idx_0": 81,
+  "Cafe_idx_1": 81,
+  "ListeningRoom_idx_0": 82,
+  "ListeningRoom_idx_1": 83,
+  "LivingRoomsWithHallway_idx_0": 84,
+  "LivingRoomsWithHallway_idx_1": 85,
+  "LivingRoomsWithHallway_idx_2": 86,
+  "LivingRoomsWithHallway_idx_3": 87,
+  "LivingRoomsWithHallway_idx_4": 88,
+  "LivingRoomsWithHallway_idx_5": 89,
+  "LivingRoomsWithHallway_idx_6": 90,
+  "LivingRoomsWithHallway_idx_7": 91,
+  "LivingRoomsWithHallway_idx_8": 92,
+  "LivingRoomsWithHallway_idx_9": 93,
+  "LivingRoomsWithHallway_idx_10": 94,
+  "LivingRoomsWithHallway_idx_11": 95,
+  "LivingRoomsWithHallway_idx_12": 96,
+  "LivingRoomsWithHallway_idx_13": 97,
+  "LivingRoomsWithHallway_idx_14": 98,
+  "LivingRoomsWithHallway_idx_15": 99,
+  "LivingRoomsWithHallway_idx_16": 100,
+  "LivingRoomsWithHallway_idx_17": 101,
+  "LivingRoomsWithHallway_idx_18": 102,
+  "LivingRoomsWithHallway_idx_19": 103,
+  "LivingRoomsWithHallway_idx_20": 84,
+  "LivingRoomsWithHallway_idx_21": 85,
+  "LivingRoomsWithHallway_idx_22": 86,
+  "LivingRoomsWithHallway_idx_23": 87,
+  "LivingRoomsWithHallway_idx_24": 88,
+  "LivingRoomsWithHallway_idx_25": 89,
+  "LivingRoomsWithHallway_idx_26": 90,
+  "LivingRoomsWithHallway_idx_27": 91,
+  "LivingRoomsWithHallway_idx_28": 92,
+  "LivingRoomsWithHallway_idx_29": 93,
+  "LivingRoomsWithHallway_idx_30": 94,
+  "LivingRoomsWithHallway_idx_31": 95,
+  "LivingRoomsWithHallway_idx_32": 96,
+  "LivingRoomsWithHallway_idx_33": 97,
+  "LivingRoomsWithHallway_idx_34": 98,
+  "LivingRoomsWithHallway_idx_35": 99,
+  "LivingRoomsWithHallway_idx_36": 100,
+  "LivingRoomsWithHallway_idx_37": 101,
+  "LivingRoomsWithHallway_idx_38": 102,
+  "LivingRoomsWithHallway_idx_39": 103,
+  "MeetingRoom_idx_0": 104,
+  "MeetingRoom_idx_1": 105,
+  "MeetingRoom_idx_2": 106,
+  "MeetingRoom_idx_3": 107,
+  "MeetingRoom_idx_4": 108,
+  "MeetingRoom_idx_5": 109,
+  "MeetingRoom_idx_6": 110,
+  "MeetingRoom_idx_7": 111,
+  "MeetingRoom_idx_8": 112,
+  "MeetingRoom_idx_9": 113,
+  "MeetingRoom_idx_10": 114,
+  "MeetingRoom_idx_11": 115,
+  "MeetingRoom_idx_12": 116,
+  "MeetingRoom_idx_13": 117,
+  "MeetingRoom_idx_14": 118,
+  "MeetingRoom_idx_15": 119,
+  "MeetingRoom_idx_16": 120,
+  "MeetingRoom_idx_17": 121,
+  "MeetingRoom_idx_18": 122,
+  "MeetingRoom_idx_19": 123,
+  "MeetingRoom_idx_20": 104,
+  "MeetingRoom_idx_21": 105,
+  "MeetingRoom_idx_22": 106,
+  "MeetingRoom_idx_23": 107,
+  "MeetingRoom_idx_24": 108,
+  "MeetingRoom_idx_25": 109,
+  "MeetingRoom_idx_26": 110,
+  "MeetingRoom_idx_27": 111,
+  "MeetingRoom_idx_28": 112,
+  "MeetingRoom_idx_29": 113,
+  "MeetingRoom_idx_30": 114,
+  "MeetingRoom_idx_31": 115,
+  "MeetingRoom_idx_32": 116,
+  "MeetingRoom_idx_33": 117,
+  "MeetingRoom_idx_34": 118,
+  "MeetingRoom_idx_35": 119,
+  "Office_idx_0": 124,
+  "Office_idx_1": 125,
+  "Office_idx_2": 126,
+  "Office_idx_3": 124,
+  "Office_idx_4": 127,
+  "Office_idx_5": 128,
+  "Office_idx_6": 129,
+  "Office_idx_7": 130,
+  "Office_idx_8": 124,
+  "Office_idx_10": 126,
+  "Office_idx_11": 124,
+  "Office_idx_12": 127,
+  "Office_idx_13": 128,
+  "Office_idx_14": 129,
+  "Office_idx_15": 130,
+  "Restaurants_idx_0": 131,
+  "Restaurants_idx_1": 132,
+  "Restaurants_idx_2": 133,
+  "Restaurants_idx_3": 134,
+  "Restaurants_idx_4": 135,
+  "Restaurants_idx_5": 136,
+  "Restaurants_idx_6": 137,
+  "Restaurants_idx_7": 138,
+  "Restaurants_idx_8": 139,
+  "Restaurants_idx_9": 140,
+  "Restaurants_idx_10": 141,
+  "Restaurants_idx_11": 142,
+  "Restaurants_idx_12": 143,
+  "Restaurants_idx_13": 144,
+  "Restaurants_idx_14": 145,
+  "Restaurants_idx_15": 146,
+  "Restaurants_idx_16": 147,
+  "Restaurants_idx_17": 148,
+  "Restaurants_idx_18": 149,
+  "Restaurants_idx_19": 150,
+  "Restaurants_idx_20": 131,
+  "Restaurants_idx_21": 132,
+  "Restaurants_idx_22": 133,
+  "Restaurants_idx_23": 134,
+  "Restaurants_idx_24": 135,
+  "Restaurants_idx_25": 136,
+  "Restaurants_idx_26": 137,
+  "Restaurants_idx_27": 138,
+  "Restaurants_idx_28": 139,
+  "Restaurants_idx_29": 140,
+  "Restaurants_idx_30": 141,
+  "Restaurants_idx_31": 142,
+  "Restaurants_idx_32": 143,
+  "Restaurants_idx_33": 144,
+  "Restaurants_idx_34": 145,
+  "Restaurants_idx_35": 146,
+  "Restaurants_idx_36": 147,
+  "Restaurants_idx_37": 148,
+  "Restaurants_idx_38": 149,
+  "Restaurants_idx_39": 150
+ },
+ "versions": {
+  "python": "3.11.9",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "trimesh": "4.12.2",
+  "shapely": "2.1.2",
+  "rtree": "1.4.1",
+  "matplotlib": "3.10.9",
+  "code_revision": "b48613f"
+ }
+}
