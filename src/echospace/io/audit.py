@@ -54,17 +54,26 @@ def first_strong_peak(
 class TimingSummary:
     """How measured peak positions relate to predicted direct-path delays.
 
-    ``offset = peak - direct``. A constant offset (small ``offset_std``) means
-    a fixed onset was trimmed. A slope near 0 means each RIR was trimmed at its
-    own arrival, so absolute delay carries no geometry. Anything else points
-    to a coordinate, unit or frame error.
+    ``offset = peak - direct``. A constant offset means a fixed onset was
+    trimmed (zero: nothing was trimmed). Peaks that do not move with distance
+    mean each RIR was trimmed at its own arrival, so absolute delay carries no
+    geometry. Anything else points to a coordinate, unit or frame error.
+
+    ``offset_std`` is the raw spread the audit must report. The verdict uses
+    the inlier fraction around the median instead, because one occluded pair
+    whose strongest early arrival is a reflection would otherwise condemn a
+    correct room. ``n_early`` counts arrivals before the direct path could
+    physically reach the receiver; occlusion can never produce those.
     """
 
     n_pairs: int
     offset_mean: float
     offset_std: float
+    offset_median: float
     offset_min: float
     offset_max: float
+    inlier_fraction: float
+    n_early: int
     peak_std: float
     slope: float
     intercept: float
@@ -79,13 +88,15 @@ def summarize_timing(
     direct_samples: Iterable[float],
     peak_samples: Iterable[float],
     constant_tolerance_samples: float = 2.0,
+    min_inlier_fraction: float = 0.95,
 ) -> TimingSummary:
     """Classify the timing convention across many pairs.
 
-    Verdicts: ``constant_offset`` (expected after a fixed trim),
-    ``per_pair_onset_trim`` (peak fixed regardless of distance),
-    ``inconsistent`` (likely coordinate/unit error; must not be patched per
-    pair) and ``insufficient`` (fewer than 2 pairs).
+    Verdicts: ``constant_offset`` (at least ``min_inlier_fraction`` of pairs
+    lie within the tolerance of the median offset), ``per_pair_onset_trim``
+    (peak fixed regardless of distance), ``inconsistent`` (likely
+    coordinate/unit error; must not be patched per pair) and ``insufficient``
+    (fewer than 2 pairs).
     """
     direct = np.asarray(list(direct_samples), dtype=np.float64)
     peaks = np.asarray(list(peak_samples), dtype=np.float64)
@@ -93,33 +104,38 @@ def summarize_timing(
         raise ValueError("direct and peak arrays must match")
     offsets = peaks - direct
     n = int(direct.size)
+    nan = float("nan")
     if n == 0:
-        nan = float("nan")
-        return TimingSummary(0, nan, nan, nan, nan, nan, nan, nan, nan, "insufficient")
+        return TimingSummary(0, nan, nan, nan, nan, nan, nan, 0, nan, nan, nan, nan, "insufficient")
     std = float(offsets.std(ddof=1)) if n > 1 else 0.0
     peak_std = float(peaks.std(ddof=1)) if n > 1 else 0.0
+    median = float(np.median(offsets))
+    inlier_fraction = float((np.abs(offsets - median) <= constant_tolerance_samples).mean())
     if n > 1 and float(direct.std()) > 0:
         slope, intercept = (float(v) for v in np.polyfit(direct, peaks, 1))
         residual_std = float((peaks - (slope * direct + intercept)).std(ddof=1))
     else:
-        slope, intercept, residual_std = float("nan"), float(offsets.mean()), float("nan")
+        slope, intercept, residual_std = nan, float(offsets.mean()), nan
 
     if n < 2:
         verdict = "insufficient"
-    elif std <= constant_tolerance_samples:
-        verdict = "constant_offset"
     elif peak_std <= constant_tolerance_samples:
         # Peaks do not move with distance at all. A unit error (e.g. cm read
         # as m) also gives a near-zero slope, but its peaks still spread.
         verdict = "per_pair_onset_trim"
+    elif inlier_fraction >= min_inlier_fraction:
+        verdict = "constant_offset"
     else:
         verdict = "inconsistent"
     return TimingSummary(
         n_pairs=n,
         offset_mean=float(offsets.mean()),
         offset_std=std,
+        offset_median=median,
         offset_min=float(offsets.min()),
         offset_max=float(offsets.max()),
+        inlier_fraction=inlier_fraction,
+        n_early=int((offsets < -constant_tolerance_samples).sum()),
         peak_std=peak_std,
         slope=slope,
         intercept=intercept,

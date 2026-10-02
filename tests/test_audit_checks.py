@@ -88,6 +88,21 @@ def test_per_pair_onset_trim_is_distinguished_from_coordinate_error() -> None:
     assert summarize_timing([100.0], [140.0]).verdict == "insufficient"
 
 
+def test_occluded_minority_does_not_condemn_correct_coordinates() -> None:
+    rng = np.random.default_rng(5)
+    src, mic = _positions(rng, 100), _positions(rng, 100)
+    direct = np.array([direct_path_samples(s, m, FS) for s, m in zip(src, mic)])
+    peaks = np.round(direct)
+    peaks[:4] += [90, 150, 300, 800]  # strongest early arrival is a reflection
+    summary = summarize_timing(direct, peaks)
+    assert summary.verdict == "constant_offset"
+    assert summary.offset_std > 50  # the raw spread is still reported honestly
+    assert summary.offset_median == pytest.approx(0.0, abs=0.5)
+    assert summary.n_early == 0
+    peaks[:20] += 200  # 20 % late is no longer a minority
+    assert summarize_timing(direct, peaks).verdict == "inconsistent"
+
+
 def _rectangle(width: float, depth: float) -> np.ndarray:
     return np.array([[0, 0], [width, 0], [width, depth], [0, depth]], dtype=float)
 
