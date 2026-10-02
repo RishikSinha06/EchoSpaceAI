@@ -20,7 +20,7 @@ from shapely.ops import linemerge, polygonize_full, unary_union
 
 FLOOR_TOLERANCE_M = 1e-3
 SLICE_HEIGHTS_M = (1.0, 1.1, 1.2)
-SLICE_GRID_M = 1e-6  # snap-rounding grid for slice linework; 10 um agrees, 0.1 mm does not
+SLICE_GRID_M = 1e-6  # snap-rounding grid for slice linework; coarser grids lose rooms (10 um: 2 of 258 at 1.2 m)
 
 
 def horizontal_axes(up: int) -> tuple[int, int]:
