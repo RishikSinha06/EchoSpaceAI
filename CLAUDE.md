@@ -97,3 +97,24 @@ pnpm build
 GitHub Actions runs the contract tests and web build without downloading any
 dataset or requiring a GPU. Add focused checks for each new module; reserve
 full training and external dataset evaluation for recorded experiment runs.
+
+## Branch and commit conventions
+
+- One branch per module, named `module-N-<slug>` (for example
+  `module-2-acousticrooms-audit`), started from the current `main`. Never
+  commit to `main` directly; merge through a pull request reviewed by the other
+  teammate.
+- Conventional Commits scoped by area: `feat(io): ...`, `fix(io): ...`,
+  `test(io): ...`, `docs(audit): ...`, `chore(data): ...`, `ci: ...`. Keep each
+  commit small and to one logical change.
+- Before every `git add`, run `git status` and `git check-ignore -v` on anything
+  under `data/`. Stage explicit paths only; never `git add .` or `git add -A`.
+- Never commit `data/raw/`, `data/cache/`, `*.zip`, `*.npz`, checkpoints or
+  `runs/`. The only `.wav` and `.obj` files allowed in Git are the attributed
+  samples under `data/samples/`.
+- Never force-push, and never amend, rebase or squash commits that have been
+  pushed. Do not rewrite another teammate's commits; add new ones.
+- The pull request description states the module's exit gate and whether it
+  passed, with evidence (test output, report, figures) and any blocked checks.
+- Ask before adding a new dependency. Keep code deterministic (seeded sampling,
+  versions logged, no network calls at runtime) and free of absolute paths.
