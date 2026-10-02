@@ -177,3 +177,87 @@ def _as_xy(points: np.ndarray) -> np.ndarray:
     if array.ndim != 2 or array.shape[1] != 2 or array.shape[0] == 0:
         raise ValueError("expected a non-empty Nx2 array")
     return array
+
+
+# First-reflection check (plan, Stage 0 gate). Fixed before the check was run
+# on real data: a +-2 sample window, 16 control offsets, a 90th-percentile
+# bar, so a hit happens by chance about 10 % of the time.
+REFLECTION_WINDOW_SAMPLES = 2
+REFLECTION_MIN_GAP_SAMPLES = 5
+REFLECTION_CONTROL_SHIFTS = tuple(s for k in range(8, 40, 4) for s in (-k, k))
+REFLECTION_CONTROL_QUANTILE = 0.9
+
+
+def mirror_across_plane(point: Sequence[float], plane_point: Sequence[float], plane_normal: Sequence[float]) -> np.ndarray:
+    """Image of ``point`` in the plane through ``plane_point`` with normal ``plane_normal``."""
+    p = np.asarray(point, dtype=np.float64)
+    n = np.asarray(plane_normal, dtype=np.float64)
+    n = n / np.linalg.norm(n)
+    return p - 2.0 * float(np.dot(p - np.asarray(plane_point, dtype=np.float64), n)) * n
+
+
+def window_peak(waveform: np.ndarray, centre: float, half_width: int = REFLECTION_WINDOW_SAMPLES) -> float | None:
+    """Largest magnitude within ``half_width`` samples of ``centre``; None if off the end."""
+    start, stop = int(round(centre)) - half_width, int(round(centre)) + half_width + 1
+    if start < 0 or stop > len(waveform):
+        return None
+    return float(np.abs(waveform[start:stop]).max())
+
+
+def reflection_hit(waveform: np.ndarray, reflection_samples: float, direct_samples: float) -> bool | None:
+    """Is there a peak at the predicted reflection time, stronger than at control times?
+
+    Returns None when the pair cannot be judged: the reflection would merge
+    with the direct sound, or too few control windows fit away from it.
+    Control windows are the same window shifted by ``REFLECTION_CONTROL_SHIFTS``,
+    skipping any that come near the direct sound.
+    """
+    if reflection_samples - direct_samples < REFLECTION_MIN_GAP_SAMPLES:
+        return None
+    value = window_peak(waveform, reflection_samples)
+    if value is None:
+        return None
+    controls = []
+    for shift in REFLECTION_CONTROL_SHIFTS:
+        centre = reflection_samples + shift
+        if abs(centre - direct_samples) < REFLECTION_MIN_GAP_SAMPLES + REFLECTION_WINDOW_SAMPLES:
+            continue
+        control = window_peak(waveform, centre)
+        if control is not None:
+            controls.append(control)
+    if len(controls) < len(REFLECTION_CONTROL_SHIFTS) // 2:
+        return None
+    return bool(value > np.quantile(controls, REFLECTION_CONTROL_QUANTILE))
+
+
+def wall_specular_point(
+    source_xyz: Sequence[float],
+    receiver_xyz: Sequence[float],
+    wall_start_xy: Sequence[float],
+    wall_end_xy: Sequence[float],
+    horizontal: Sequence[int] = (0, 1),
+) -> tuple[float, float] | None:
+    """Where the first-order reflection off a vertical wall hits it.
+
+    Returns ``(t, height)``: ``t`` in [0, 1] along the wall segment and the
+    height of the hit on the up axis, or None if the reflection path misses the
+    segment or the two points sit on opposite sides of the wall.
+    """
+    h0, h1 = horizontal
+    up = 3 - h0 - h1
+    s, r = np.asarray(source_xyz, float), np.asarray(receiver_xyz, float)
+    a, b = np.asarray(wall_start_xy, float), np.asarray(wall_end_xy, float)
+    direction = b - a
+    normal = np.array([-direction[1], direction[0]])
+    side_s, side_r = float(np.dot(s[[h0, h1]] - a, normal)), float(np.dot(r[[h0, h1]] - a, normal))
+    if side_s * side_r <= 0:
+        return None
+    image = s[[h0, h1]] - 2.0 * side_s / float(np.dot(normal, normal)) * normal
+    path = r[[h0, h1]] - image
+    matrix = np.array([direction, -path]).T
+    if abs(np.linalg.det(matrix)) < 1e-12:
+        return None
+    t, u = np.linalg.solve(matrix, image - a)
+    if not (0.0 <= t <= 1.0 and 0.0 <= u <= 1.0):
+        return None
+    return float(t), float(s[up] + (r[up] - s[up]) * u)

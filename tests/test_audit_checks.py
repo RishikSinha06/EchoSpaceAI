@@ -13,7 +13,10 @@ from echospace.io.audit import (
     direct_path_samples,
     first_strong_peak,
     fits_bbox,
+    mirror_across_plane,
+    reflection_hit,
     summarize_timing,
+    wall_specular_point,
 )
 
 FS = 22050
@@ -129,3 +132,34 @@ def test_anchor_rule_can_fail_where_bbox_passes() -> None:
     assert anchored_coverage(room, [1.0, 3.0], CANVAS_25_6_M)
     poses = np.array([[5.0, 3.0], [1.0, 3.0], [9.0, 1.0], [4.0, 4.0]])
     assert anchored_coverage_counts(room, poses, CANVAS_12_8_M) == 2
+
+
+def _rir_with_arrivals(arrivals: dict[float, float], length: int = 3000, seed: int = 0) -> np.ndarray:
+    """Decaying noise with sharp arrivals at the given (fractional) samples."""
+    rng = np.random.default_rng(seed)
+    rir = 0.05 * rng.standard_normal(length) * np.exp(-np.arange(length) / 1500.0)
+    for sample, amplitude in arrivals.items():
+        rir[int(round(sample))] += amplitude
+    return rir
+
+
+def test_floor_image_and_reflection_hit_on_synthetic_rir() -> None:
+    source, receiver = np.array([2.0, 3.0, 1.5]), np.array([6.0, 1.0, 1.2])  # Z up, floor z = 0
+    image = mirror_across_plane(source, [0.0, 0.0, 0.0], [0.0, 0.0, 1.0])
+    assert np.allclose(image, [2.0, 3.0, -1.5])
+    direct = direct_path_samples(source, receiver, FS)
+    floor = direct_path_samples(image, receiver, FS)
+    assert floor - direct > 5
+    with_reflection = _rir_with_arrivals({direct: 1.0, floor: 0.4})
+    assert reflection_hit(with_reflection, floor, direct) is True
+    misses = [reflection_hit(_rir_with_arrivals({direct: 1.0}, seed=k), floor, direct) for k in range(200)]
+    assert sum(misses) / len(misses) < 0.2  # chance level is about 10 %
+    assert reflection_hit(with_reflection, direct + 3, direct) is None  # merges with the direct sound
+
+
+def test_wall_specular_point_lies_on_the_segment_or_is_rejected() -> None:
+    wall = ([0.0, 0.0], [8.0, 0.0])  # the y = 0 wall
+    hit = wall_specular_point([2.0, 2.0, 1.0], [6.0, 2.0, 2.0], *wall)
+    assert hit is not None and hit[0] == pytest.approx(0.5) and hit[1] == pytest.approx(1.5)
+    assert wall_specular_point([2.0, 2.0, 1.0], [6.0, 2.0, 2.0], [5.0, 0.0], [8.0, 0.0]) is None  # misses the piece
+    assert wall_specular_point([2.0, 2.0, 1.0], [6.0, -2.0, 2.0], *wall) is None  # opposite sides

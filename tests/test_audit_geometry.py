@@ -137,6 +137,12 @@ def test_footprint_iou_matches_moved_turned_and_mirrored_copies_only() -> None:
     assert ag.footprint_iou(ell, Polygon([(0, 0), (6, 0), (6, 5), (0, 5)])) < 0.75
 
 
+def test_longest_wall_survives_collinear_pieces() -> None:
+    cut = ag.floor_slice(_room(), UP, 1.1)  # each wall is cut into several mesh segments
+    start, end = ag.longest_wall(cut.footprint)
+    assert np.linalg.norm(end - start) == pytest.approx(6.0)
+
+
 def test_containment_passes_inside_and_fails_on_axis_swap() -> None:
     room = _room()
     footprint = ag.floor_slice(room, UP, 1.1).footprint

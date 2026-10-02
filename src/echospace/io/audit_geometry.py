@@ -194,6 +194,19 @@ def footprint_vertices(footprint: Polygon | MultiPolygon) -> np.ndarray:
     return np.vstack([np.asarray(part.exterior.coords) for part in parts])
 
 
+def longest_wall(footprint: Polygon | MultiPolygon, simplify_m: float = 0.05) -> tuple[np.ndarray, np.ndarray]:
+    """End points of the longest straight edge of the largest part's outline.
+
+    The outline is simplified first so a wall split into collinear pieces by
+    the mesh counts as one edge.
+    """
+    parts = list(footprint.geoms) if isinstance(footprint, MultiPolygon) else [footprint]
+    ring = np.asarray(max(parts, key=lambda part: part.area).exterior.simplify(simplify_m).coords)
+    lengths = np.linalg.norm(np.diff(ring, axis=0), axis=1)
+    k = int(np.argmax(lengths))
+    return ring[k].copy(), ring[k + 1].copy()
+
+
 def footprint_iou(a: Polygon | MultiPolygon, b: Polygon | MultiPolygon) -> float:
     """Best overlap of two footprints over translation and the 8 axis rotations/mirrors.
 
