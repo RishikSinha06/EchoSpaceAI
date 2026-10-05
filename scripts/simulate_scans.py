@@ -4,8 +4,8 @@ For every accepted room in the D0 manifest it builds, per occlusion type,
 ``--seeds`` free-running scans (their coverage bins fill the histogram) and one
 scan aimed at each coverage bin (whether that bin is reachable at all, which
 P6 needs for its fixed test masks). Every built sample is checked against
-contract v0.1.0. It also draws an overlay per occlusion type for 20 rooms
-spread across categories: the plan's Stage 1 gate asks for a visual check of
+contract v0.1.0. It also draws an overlay per occlusion type for 20 distinct
+rooms (one per D0 duplicate group) that yield a sample, spread across categories: the plan's Stage 1 gate asks for a visual check of
 20 samples and a histogram over all coverage bins and occlusion types.
 
     python scripts/simulate_scans.py                # all accepted rooms
@@ -185,7 +185,18 @@ def main() -> int:
         accepted = [row["room_id"] for row in map(json.loads, handle) if row["accepted"]]
     room_ids = figure_rooms(accepted, args.limit) if args.limit else sorted(accepted, key=natural_key)
     out = REPO / "data" / "cache" / "scan_trial" if args.limit else REPO
-    drawn = set(figure_rooms(room_ids, FIGURE_ROOMS))
+    # Overlay candidates: round-robin across categories, one room per D0 duplicate
+    # group; the first FIGURE_ROOMS of them that yield a sample are drawn.
+    groups_path = REPO / "reports" / "d0_duplicates.json"
+    room_group = json.loads(groups_path.read_text(encoding="utf-8"))["room_group"] if groups_path.exists() else {}
+    distinct, seen_groups = [], set()
+    for room_id in sorted(room_ids, key=natural_key):
+        group = room_group.get(room_id, room_id)
+        if group not in seen_groups:
+            seen_groups.add(group)
+            distinct.append(room_id)
+    candidates = figure_rooms(distinct, 3 * FIGURE_ROOMS)
+    kept: dict[str, tuple[dict[str, ScanSample | None], dict[str, str]]] = {}
     index = ar.load_cached_index(root, REPO / args.index_cache)
     if index is None:
         raise SystemExit("index cache missing or stale; run scripts/audit_data.py first")
@@ -225,11 +236,14 @@ def main() -> int:
                     aimed[kind][f"{bin_name}:{outcome}"] += 1
                 entry["types"][kind] = {"free_runs": runs, "aimed_bins": reachable}
             rooms[room_id] = entry
-            if room_id in drawn:
-                sizes[room_id] = draw_room(room_id, shown, outcomes, out / "reports" / "figures" / "p4" / f"p4_{room_id}.png")
+            if room_id in candidates and any(sample is not None for sample in shown.values()):
+                kept[room_id] = (shown, outcomes)
             summary = " ".join(f"{k}={'/'.join(str(r['bin'] or r['outcome'])[:4] for r in entry['types'][k]['free_runs'])}" for k in OCCLUSION_TYPES)
             print(f"[{position}/{len(room_ids)}] {room_id}: {summary} [{time.time() - tick:.1f}s]", flush=True)
 
+    for room_id in [r for r in candidates if r in kept][:FIGURE_ROOMS]:
+        shown, outcomes = kept[room_id]
+        sizes[room_id] = draw_room(room_id, shown, outcomes, out / "reports" / "figures" / "p4" / f"p4_{room_id}.png")
     histogram_bytes = draw_histogram(free_runs, out / "reports" / "figures" / "p4" / "p4_coverage_histogram.png")
     feasible = {
         kind: {b: sum(1 for r in rooms.values() if "types" in r and r["types"][kind]["aimed_bins"][b] == "ok") for b in COVERAGE_BINS}
