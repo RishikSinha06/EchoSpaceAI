@@ -110,18 +110,20 @@ def build_scan_sample(
     coverage_bin_name: str | None = None,
     shift_m: float = 0.0,
     wall_dropout: float = 0.0,
+    max_attempts: int = 40,
 ) -> ScanSample:
     """Simulate one scan and return it with its grid, observation and P3 target.
 
     ``shift_m=0`` gives the deterministic frame for fixed test masks; training
-    uses ``TRAINING_SHIFT_M``. If the room clips the 12.8 m canvas around the
+    uses ``TRAINING_SHIFT_M``. ``max_attempts`` caps the redraws per coverage
+    bin (see ``generate_scan``). If the room clips the 12.8 m canvas around the
     observed anchor, the scan is redrawn; after ``MAX_FRAME_ATTEMPTS`` the last
     ``GeometryLabelError`` is raised.
     """
     rng = sample_rng(room_id, occlusion_type, seed)
     last_error: Exception | None = None
     for _ in range(MAX_FRAME_ATTEMPTS):
-        scan = generate_scan(room, occlusion_type, rng, coverage_bin_name)
+        scan = generate_scan(room, occlusion_type, rng, coverage_bin_name, max_attempts)
         try:
             grid = observed_frame(scan, room.scan_height_scene_m, rng, shift_m)
             labels = rasterize_footprint(room.footprint, grid)
