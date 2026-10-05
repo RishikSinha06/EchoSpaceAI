@@ -38,6 +38,9 @@ P3's scanner-anchored geometry labels and diagnostic CLI are described in
 [docs/p3_geometry_handoff.md](docs/p3_geometry_handoff.md). These are complete
 geometry targets, not partial scans or training samples.
 
+P4's simulated partial scans and observation-only grid frame are described in
+[docs/p4_scan_handoff.md](docs/p4_scan_handoff.md).
+
 ## Repository map
 
 `apps/web` browser viewer; `src/echospace` future dataset adapters, geometry, models and inference; `configs` experiment configuration; `docs` formats and decisions; `scripts` CLI entry points; `tests` small fixtures; `data` local datasets; `artifacts` outputs.

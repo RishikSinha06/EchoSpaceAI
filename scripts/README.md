@@ -60,3 +60,18 @@ there more than at control times. Writes `reports/d0_reflections.json`.
 ```powershell
 python scripts/audit_reflections.py         # about 45 min; same --root rules as audit_data.py
 ```
+
+## `simulate_scans.py`: P4 scan-simulator gate
+
+Run after the D0 audit. For every accepted room it builds free-running partial
+scans of each occlusion type (viewpoint, missing wall, doorway, L-wing) and one
+scan aimed at each coverage bin, validates every sample against contract
+v0.1.0, and draws overlays for 20 rooms. See `docs/p4_scan_handoff.md`.
+
+```powershell
+python scripts/simulate_scans.py --limit 6     # trial, into data/cache/scan_trial/
+python scripts/simulate_scans.py               # all accepted rooms, about 1 h
+```
+
+Writes `reports/p4_scan_check.md`, `reports/p4_scans_summary.json` and
+`reports/figures/p4/`. Same `--root` rules as `audit_data.py`.
