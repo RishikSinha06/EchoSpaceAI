@@ -34,6 +34,10 @@ The research pipeline's provisional JSONL/NPZ and metric RoomScene interfaces
 are in [contracts/v0.1.0/README.md](contracts/v0.1.0/README.md). Run their
 synthetic contract checks using [docs/step1_contract_handoff.md](docs/step1_contract_handoff.md).
 
+P3's scanner-anchored geometry labels and diagnostic CLI are described in
+[docs/p3_geometry_handoff.md](docs/p3_geometry_handoff.md). These are complete
+geometry targets, not partial scans or training samples.
+
 ## Repository map
 
 `apps/web` browser viewer; `src/echospace` future dataset adapters, geometry, models and inference; `configs` experiment configuration; `docs` formats and decisions; `scripts` CLI entry points; `tests` small fixtures; `data` local datasets; `artifacts` outputs.
@@ -45,5 +49,9 @@ ACOUSTICROOMS_ROOT=C:/path/to/AcousticRooms-clean-main/AcousticRooms-clean-main
 
 Then restart pnpm dev. The viewer lists the OBJ meshes from room_mesh_obj_format and loads each on demand, without copying the dataset into Git. The section cut slider hides upper geometry for inspection. Export GLB writes the original full mesh for a native viewer; it does not bake the section cut.
 
-The dataset checkout currently tested contains 258 OBJ meshes across ten categories. Its single_channel_ir.zip, metadata.zip, and depth_map.zip files are Git LFS pointers, not downloaded archives. The mesh browser therefore does not display RIRs or source/receiver markers. Some simulation_info folder names disagree with the name inside simulation.json; those positions must be audited before they are overlaid on a mesh.
-AcousticRooms OBJ files use Z as the vertical axis. The dataset browser rotates them into the viewer's Y-up coordinate system before measuring dimensions or exporting GLB.
+The local D0 audit indexed 258 OBJ meshes across ten categories and verified
+the main RIR and metadata archives; see [reports/d0_audit.md](reports/d0_audit.md).
+The browser currently lists meshes but does not display RIRs or source/receiver
+markers. Some `simulation_info` JSON names disagree with their folders; the
+audited folder key must be used when joining positions. AcousticRooms OBJ files
+use Z as the vertical axis. The browser rotates them into its Y-up frame.
