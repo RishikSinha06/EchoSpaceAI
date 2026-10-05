@@ -141,6 +141,23 @@ def test_coverage_bins_are_honoured_or_refused() -> None:
         generate_scan(room_from_outline(box(0, 0, 4, 3)), "viewpoint", np.random.default_rng(0), "low", max_attempts=5)
 
 
+def test_generate_scan_never_returns_a_scan_below_the_lowest_bin(monkeypatch: pytest.MonkeyPatch) -> None:
+    # Regression: with no bin requested, None == None used to accept a scan with
+    # 0.11 coverage (Apartments_idx_37 doorway).
+    from dataclasses import replace
+
+    from echospace.scans import occlusion
+
+    room = room_from_outline(SHOEBOX)
+    real = viewpoint_scan(room, np.random.default_rng(0))
+    coverages = iter([0.05, 0.10, 0.5])
+    monkeypatch.setitem(occlusion.GENERATORS, "viewpoint", lambda r, g: replace(real, coverage=next(coverages)))
+    assert generate_scan(room, "viewpoint", np.random.default_rng(0)).coverage == 0.5
+    monkeypatch.setitem(occlusion.GENERATORS, "viewpoint", lambda r, g: replace(real, coverage=0.05))
+    with pytest.raises(ScanNotFeasible):
+        generate_scan(room, "viewpoint", np.random.default_rng(0), max_attempts=3)
+
+
 # --- grid frame (no leakage) -----------------------------------------------------
 
 def test_frame_heading_follows_observed_walls_not_mesh_axes() -> None:

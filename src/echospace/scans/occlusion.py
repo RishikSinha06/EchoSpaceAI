@@ -255,8 +255,8 @@ def generate_scan(
         raise ValueError(f"unknown coverage bin {coverage_bin_name!r}")
     for _ in range(max_attempts):
         scan = GENERATORS[occlusion_type](room, rng)
-        if coverage_bin_name is None and scan.coverage_bin is not None:
-            return scan
-        if scan.coverage_bin == coverage_bin_name:
+        if scan.coverage_bin is None:
+            continue  # below the lowest bin: too empty to use, whatever was asked
+        if coverage_bin_name is None or scan.coverage_bin == coverage_bin_name:
             return scan
     raise ScanNotFeasible(f"{occlusion_type} did not reach coverage bin {coverage_bin_name} in {max_attempts} attempts")
