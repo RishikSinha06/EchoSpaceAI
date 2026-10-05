@@ -19,6 +19,7 @@ from echospace.io.audit_geometry import FloorSlice  # noqa: E402
 from echospace.scans import (  # noqa: E402
     COVERAGE_BINS,
     RoomGeometry,
+    RoomGeometryError,
     ScanNotApplicable,
     ScanNotFeasible,
     build_scan_sample,
@@ -70,6 +71,22 @@ def test_room_geometry_separates_footprint_free_region_and_walls() -> None:
     assert len(room.walls) == 4 and room.wall_length_m == pytest.approx(20.0)
     assert room.is_convex and not room_from_outline(L_ROOM).is_convex
     assert room.footprint.bounds[1] < 0  # scene Z = -source y
+
+
+def test_a_speck_outside_the_wall_does_not_reject_the_room() -> None:
+    # Regression: Apartments_idx_18/_22/_57 have a 0.005 m2 closed loop 0.1 m
+    # outside the wall; D0 accepts them (largest part >= 98 %), so must P4.
+    from shapely.geometry import MultiPolygon
+
+    speck = box(6.1, 1.0, 6.15, 1.1)
+    lines = (np.asarray(SHOEBOX.exterior.coords), np.asarray(speck.exterior.coords))
+    total = SHOEBOX.area + speck.area
+    cut = FloorSlice(1.1, MultiPolygon([SHOEBOX, speck]), 2, total, SHOEBOX.area / total, 0, 0.0, 0.0, lines)
+    room = RoomGeometry.from_slice(cut)
+    assert room.footprint.area == pytest.approx(24.0) and room.free_region.area == pytest.approx(24.0)
+    two_rooms = FloorSlice(1.1, MultiPolygon([SHOEBOX, box(8, 0, 12, 4)]), 2, 40.0, 0.6, 0, 0.0, 0.0, lines)
+    with pytest.raises(RoomGeometryError):
+        RoomGeometry.from_slice(two_rooms)
 
 
 def test_from_mesh_matches_the_outline_route() -> None:

@@ -59,9 +59,13 @@ class RoomGeometry:
     @classmethod
     def from_slice(cls, cut: FloorSlice, floor_height_m: float = 0.0) -> RoomGeometry:
         """Build from a ``floor_slice`` of a Z-up AcousticRooms mesh."""
-        if cut.footprint is None or not cut.single_closed_interior or cut.n_parts != 1:
+        if cut.footprint is None or not cut.single_closed_interior:
             raise RoomGeometryError("slice is not one closed room interior")
-        footprint = _to_scene(cut.footprint)
+        # D0's rule: the largest part holds >= 98 % of the sliced area. Specks
+        # beyond it (e.g. a 5 x 10 cm loop in a wall cavity of Apartments_idx_18)
+        # are not part of the room.
+        parts = list(getattr(cut.footprint, "geoms", [cut.footprint]))
+        footprint = _to_scene(max(parts, key=lambda part: part.area))
         lines = [_to_scene(LineString(line)) for line in cut.outlines if len(line) >= 2]
         faces = [face for face in polygonize(MultiLineString(lines)) if face.area > 1e-6]
         if not faces:
