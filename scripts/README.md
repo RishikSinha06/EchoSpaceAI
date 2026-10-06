@@ -75,3 +75,20 @@ python scripts/simulate_scans.py               # all accepted rooms, about 1 h
 
 Writes `reports/p4_scan_check.md`, `reports/p4_scans_summary.json` and
 `reports/figures/p4/`. Same `--root` rules as `audit_data.py`.
+
+## `check_acoustics.py`: P5 acoustic integration gate
+
+Uses the attributed two-room sample already in Git and the D0 manifest. Checks
+all eight WAVs, clean-cache round trips, nested K bundles on P4 observed-free
+masks, contract validity, training augmentation and unchanged validation/test
+audio. No download or training split is created.
+
+```powershell
+python -m pip install -e ".[test,audit]"
+python scripts/check_acoustics.py
+```
+
+Configuration: `configs/p5_acoustics.json`. Outputs: ignored
+`artifacts/p5_check/` and `data/cache/p5_waveforms/`. Use `--out-dir`,
+`--cache-dir`, `--config`, `--samples-root` and `--audit-manifest` to override
+paths. See `docs/p5_acoustic_handoff.md` for eligibility and gate limits.

@@ -1,0 +1,18 @@
+{
+  "processor_version": "p5.1",
+  "preprocessing": {
+    "sample_rate_hz": 16000,
+    "window_ms": 80.0,
+    "alignment": "emission",
+    "normalization": "preserve"
+  },
+  "bundle_sizes": [1, 2, 4, 8],
+  "augmentation": {
+    "gain_db": [-3.0, 3.0],
+    "snr_db": [25.0, 40.0],
+    "lowpass_hz": [3000.0, 7000.0],
+    "pose_std_m": 0.02,
+    "pose_attempts": 8
+  },
+  "notes": "Initial P5 settings; P0/P6 still freeze the study condition. No augmentation is cached."
+}
