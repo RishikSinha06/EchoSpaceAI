@@ -1,5 +1,20 @@
 Dataset inspection, preprocessing, training, evaluation, and export CLIs go here.
 
+## P7 baseline foundation
+
+`check_baselines.py` runs B0/A/P on a common synthetic freeze with disjoint
+train/val/test rooms; `train_baselines.py freeze` materializes P6 items and
+`train_baselines.py run` trains/runs the same baselines on that immutable set.
+Install existing extras plus the optional model dependency:
+
+```powershell
+python -m pip install -e ".[test,audit,model]"
+python scripts/check_baselines.py
+```
+
+See `docs/p7_baselines_handoff.md` for real-data commands, checkpoint provenance
+and the distinction between the synthetic foundation and full P6 held-out gates.
+
 ## `audit_data.py`: AcousticRooms D0 audit (module 2)
 
 Checks whether AcousticRooms geometry and acoustics are paired correctly and

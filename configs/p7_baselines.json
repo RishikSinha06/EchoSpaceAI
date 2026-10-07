@@ -1,0 +1,10 @@
+{
+  "format": "p7.config.1",
+  "variants": ["B0", "A", "P"],
+  "spatial": {"base_channels": 16, "grid_size": 64, "cell_size_m": 0.2, "height_scale_m": 3.0},
+  "wall": {"minimum_run_cells": 3, "extension_cells": 64},
+  "training": {"seed": 0, "epochs": 100, "batch_size": 8, "learning_rate": 0.001,
+    "weight_decay": 0.0001, "patience": 10, "min_delta": 0.0001,
+    "bce_weight": 1.0, "dice_weight": 1.0, "amp": true, "device": "cpu", "threads": 2},
+  "notes": "P7 foundations: all baselines consume one immutable P6 freeze. No waveforms or fusion. Test samples never select checkpoints. Full-fold benchmark remains separate from smoke evidence."
+}
