@@ -168,3 +168,38 @@ def test_missing_root_and_bad_metadata_raise(tmp_path: Path, dataset_root: Path)
     index = ar.build_index(dataset_root)
     with ar.ArchiveReader(dataset_root) as reader, pytest.raises(ar.AcousticRoomsError):
         ar.load_pair_metadata(reader, index.rooms["Cafe_idx_7"].metadata[(2, 2)])
+
+
+def test_stored_nested_zips_are_read_through_file_windows(tmp_path: Path) -> None:
+    # Regression: members of a STORED zip inside a zip were read through
+    # ZipExtFile, which rescans the inner zip on every backward seek (0.5 s per
+    # WAV in the real Apartments archive). They must read the same bytes,
+    # out of order, through a direct window at every nesting depth.
+    import io
+    import zipfile
+
+    payloads = {f"room/S{i:03d}_R001_hybrid_IR.wav": bytes([i]) * (1000 + i) for i in range(20)}
+    inner = io.BytesIO()
+    with zipfile.ZipFile(inner, "w", zipfile.ZIP_STORED) as archive:
+        for name, data in payloads.items():
+            archive.writestr(name, data)
+    middle = io.BytesIO()
+    with zipfile.ZipFile(middle, "w", zipfile.ZIP_STORED) as archive:
+        archive.writestr("prefix_padding.bin", b"x" * 777)  # inner zip does not start at 0
+        archive.writestr("Cat.zip", inner.getvalue())
+    with zipfile.ZipFile(tmp_path / "outer.zip", "w", zipfile.ZIP_STORED) as archive:
+        archive.writestr("readme.txt", b"hello")
+        archive.writestr("wrap/middle.zip", middle.getvalue())
+        archive.writestr("wrap/Cat.zip", inner.getvalue())
+    with zipfile.ZipFile(tmp_path / "deflated.zip", "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr("Cat.zip", inner.getvalue())
+
+    chains = [("outer.zip", "wrap/Cat.zip"), ("outer.zip", "wrap/middle.zip", "Cat.zip"), ("deflated.zip", "Cat.zip")]
+    with ar.ArchiveReader(tmp_path) as reader:
+        for chain in chains:
+            for name in reversed(sorted(payloads)):  # backward order forces seeks
+                assert reader.read(ar.MemberRef((*chain, name))) == payloads[name]
+        assert ("outer.zip", "wrap/Cat.zip") in reader._spans
+        assert ("outer.zip", "wrap/middle.zip", "Cat.zip") in reader._spans
+        assert ("deflated.zip", "Cat.zip") not in reader._spans  # compressed: in-memory fallback
+    assert not reader._windows  # closed

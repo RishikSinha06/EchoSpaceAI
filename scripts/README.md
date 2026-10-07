@@ -92,3 +92,18 @@ Configuration: `configs/p5_acoustics.json`. Outputs: ignored
 `artifacts/p5_check/` and `data/cache/p5_waveforms/`. Use `--out-dir`,
 `--cache-dir`, `--config`, `--samples-root` and `--audit-manifest` to override
 paths. See `docs/p5_acoustic_handoff.md` for eligibility and gate limits.
+
+## P6 dataset pipeline
+
+Run after the D0 audit (`audit_data.py`, `audit_duplicates.py`). See
+`docs/p6_dataset_handoff.md` for the dataset API.
+
+```powershell
+python scripts/build_room_cache.py      # data/processed/rooms/ (all processed RIRs, ~45 min)
+python scripts/make_eval_masks.py       # fixed test masks + data/splits/eval_masks.json (~1 h, resumable)
+python scripts/make_splits.py           # data/splits/folds.json
+python scripts/check_dataset.py         # gate: reports/p6_dataset_check.md, reports/figures/p6/
+```
+
+`make_eval_masks.py` and `make_splits.py` refuse to overwrite their committed
+JSON without `--replace`.
