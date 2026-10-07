@@ -206,6 +206,9 @@ class ArchiveReader:
     def __init__(self, root: str | os.PathLike[str]) -> None:
         self.root = Path(root)
         self._zips: dict[Chain, zipfile.ZipFile] = {}
+        # Zips whose bytes are one contiguous run of a real file: (path, offset).
+        self._spans: dict[Chain, tuple[Path, int]] = {}
+        self._windows: list[io.BufferedReader] = []
 
     def __enter__(self) -> "ArchiveReader":
         return self
@@ -216,7 +219,11 @@ class ArchiveReader:
     def close(self) -> None:
         for handle in reversed(list(self._zips.values())):
             handle.close()
+        for window in self._windows:
+            window.close()
         self._zips.clear()
+        self._spans.clear()
+        self._windows.clear()
 
     def open_zip(self, chain: Chain) -> zipfile.ZipFile:
         """Zip at ``chain``: a file under the root, then zips nested inside it."""
@@ -225,10 +232,23 @@ class ArchiveReader:
             return cached
         if len(chain) == 1:
             handle = zipfile.ZipFile(self.root / chain[0], mode="r")
+            self._spans[chain] = (self.root / chain[0], 0)
         else:
             parent = self.open_zip(chain[:-1])
             info = parent.getinfo(chain[-1])
-            if info.compress_type == zipfile.ZIP_STORED:
+            span = self._spans.get(chain[:-1])
+            if info.compress_type == zipfile.ZIP_STORED and span is not None and not info.flag_bits & 0x1:
+                # A stored zip inside a real file is a byte range of that file.
+                # Read it through a plain file window: ZipExtFile re-reads the
+                # member from its start on every backward seek, which made each
+                # WAV read rescan a multi-GB category zip.
+                path, base = span
+                start = _member_data_start(path, base + info.header_offset)
+                window = io.BufferedReader(_FileWindow(path, start, info.file_size), buffer_size=1 << 16)
+                self._windows.append(window)
+                handle = zipfile.ZipFile(window, mode="r")
+                self._spans[chain] = (path, start)
+            elif info.compress_type == zipfile.ZIP_STORED:
                 handle = zipfile.ZipFile(parent.open(info), mode="r")  # seekable without inflating
             elif info.file_size <= _MAX_IN_MEMORY_ZIP_BYTES:
                 handle = zipfile.ZipFile(io.BytesIO(parent.read(info)), mode="r")
@@ -241,6 +261,55 @@ class ArchiveReader:
         if len(ref.chain) == 1:
             return (self.root / ref.chain[0]).read_bytes()
         return self.open_zip(ref.chain[:-1]).read(ref.chain[-1])
+
+
+class _FileWindow(io.RawIOBase):
+    """Read-only, seekable view of ``length`` bytes of a file starting at ``start``."""
+
+    def __init__(self, path: Path, start: int, length: int) -> None:
+        super().__init__()
+        self._file = open(path, "rb")  # noqa: SIM115 - closed with the window
+        self._start, self._length, self._position = start, length, 0
+
+    def readable(self) -> bool:
+        return True
+
+    def seekable(self) -> bool:
+        return True
+
+    def tell(self) -> int:
+        return self._position
+
+    def seek(self, offset: int, whence: int = io.SEEK_SET) -> int:
+        base = {io.SEEK_SET: 0, io.SEEK_CUR: self._position, io.SEEK_END: self._length}[whence]
+        self._position = max(0, base + offset)
+        return self._position
+
+    def readinto(self, buffer: Any) -> int:
+        count = max(0, min(len(buffer), self._length - self._position))
+        if count == 0:
+            return 0
+        self._file.seek(self._start + self._position)
+        data = self._file.read(count)
+        buffer[: len(data)] = data
+        self._position += len(data)
+        return len(data)
+
+    def close(self) -> None:
+        self._file.close()
+        super().close()
+
+
+def _member_data_start(path: Path, header_at: int) -> int:
+    """Absolute file offset of a member's data, given its local header's absolute offset."""
+    with open(path, "rb") as handle:
+        handle.seek(header_at)
+        header = handle.read(30)
+    if len(header) != 30 or header[:4] != b"PK":
+        raise AcousticRoomsError("bad local zip header for a nested archive")
+    name_length = int.from_bytes(header[26:28], "little")
+    extra_length = int.from_bytes(header[28:30], "little")
+    return header_at + 30 + name_length + extra_length
 
 
 def _is_lfs_pointer(size: int, head: bytes) -> bool:
