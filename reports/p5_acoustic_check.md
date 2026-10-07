@@ -1,5 +1,26 @@
 # P5 acoustic check
 
+## Locked settings recheck — 2026-10-07
+
+Processor `p5.2` supersedes the provisional settings below. Clean 16 kHz,
+80 ms windows now use peak normalization while preserving emission origin.
+Training defaults: gain ±6 dB, SNR 20–40 dB, low-pass 4–7.9 kHz, horizontal
+pose standard deviation 5 cm, and timing jitter ±0.2 ms. Jitter uses fractional
+linear interpolation with zero-filled boundaries, never circular wrapping.
+Validation/test and clean cached audio are unchanged by augmentation. The
+7.9 kHz cap stays below the 8 kHz Nyquist limit.
+
+The complete suite passed **95 tests in 14.35 seconds**, including 24 P5 tests.
+New checks cover fractional shifts in both directions, edge loss without wrap,
+recorded timing shifts, jitter disabling, invalid jitter/Nyquist settings,
+normalization cache invalidation and config/default agreement. Existing checks
+continue to cover clean timing, reproducibility, nested K and evaluation isolation.
+The real two-room gate passed again: eight WAVs processed, seven scans validated,
+and unchanged usable-pair counts. Current local results are in
+`artifacts/p5_check/summary.json`. Full-dataset K availability remains a P6 gate.
+
+## Original integration evidence (p5.1)
+
 Date: 2026-10-06. Base: `600f553` (GitHub main, P4 merge).
 Branch: `module-5-acoustic-pipeline`. Processor: `p5.1`.
 

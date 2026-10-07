@@ -5,7 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
 import numpy as np
 from scipy.signal import butter, sosfilt
@@ -13,16 +13,17 @@ from scipy.signal import butter, sosfilt
 from echospace.geometry.frames import GridFrame
 
 from .bundles import AcousticBundle, poses_in_observed_free
-from .rir import AcousticError
+from .rir import AcousticError, array_sha256
 
 
 @dataclass(frozen=True)
 class AugmentConfig:
-    gain_db: tuple[float, float] = (-3.0, 3.0)
-    snr_db: tuple[float, float] | None = (25.0, 40.0)
-    lowpass_hz: tuple[float, float] | None = (3000.0, 7000.0)
-    pose_std_m: float = 0.02
+    gain_db: tuple[float, float] = (-6.0, 6.0)
+    snr_db: tuple[float, float] | None = (20.0, 40.0)
+    lowpass_hz: tuple[float, float] | None = (4000.0, 7900.0)
+    pose_std_m: float = 0.05
     pose_attempts: int = 8
+    timing_jitter_ms: float = 0.2
 
     def __post_init__(self) -> None:
         if self.gain_db is None:
@@ -35,6 +36,18 @@ class AugmentConfig:
             raise AcousticError("lowpass cutoff must be positive")
         if not np.isfinite(self.pose_std_m) or self.pose_std_m < 0 or type(self.pose_attempts) is not int or self.pose_attempts < 1:
             raise AcousticError("invalid pose augmentation settings")
+        if not np.isfinite(self.timing_jitter_ms) or self.timing_jitter_ms < 0:
+            raise AcousticError("timing jitter must be finite and nonnegative")
+
+
+def _shift_zero_filled(waveform: np.ndarray, shift_samples: float) -> np.ndarray:
+    """Fractional linear shift: positive delays audio, boundaries are zero.
+
+    No circular wrap or direct-arrival alignment is performed. Linear
+    interpolation may attenuate high frequencies and edge content is lost.
+    """
+    times = np.arange(len(waveform), dtype=np.float64)
+    return np.interp(times - shift_samples, times, waveform, left=0.0, right=0.0)
 
 
 def augment_bundle(
@@ -80,6 +93,9 @@ def augment_bundle(
             rms = float(np.sqrt(np.mean(waveform**2)))
             noise *= rms / (10 ** (snr / 20) * np.sqrt(np.mean(noise**2)))
             waveform += noise
+        shift_ms = float(rng.uniform(-config.timing_jitter_ms, config.timing_jitter_ms))
+        shift_samples = shift_ms * sample_rate_hz / 1000
+        waveform = _shift_zero_filled(waveform, shift_samples)
         result.waveforms[i] = waveform.astype(np.float32)
         if not np.isfinite(result.waveforms[i]).all():
             raise AcousticError("augmentation overflows float32")
@@ -95,7 +111,11 @@ def augment_bundle(
                     break
         provenance[i]["augmentation"] = {
             "split": "train", "seed": seed, "sample_key": sample_key,
+            "augmentation_version": "p5.2", "config": asdict(config),
             "gain_db": gain_db, "snr_db": snr, "causal_lowpass_hz": cutoff,
+            "timing_shift_ms": shift_ms, "timing_shift_samples": shift_samples,
+            "timing_shift_method": "linear interpolation, zero-filled boundaries; positive delays",
+            "output_sha256": array_sha256(result.waveforms[i]),
             "filter_order": 2 if cutoff else None,
             "pose_delta_scene_m": (result.positions_scene_m[i] - original).tolist(),
             "pose_jitter_accepted": accepted,

@@ -5,6 +5,7 @@ from __future__ import annotations
 import io
 import json
 from dataclasses import replace
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -80,8 +81,8 @@ def test_preserves_emission_delay_and_reflection_spacing_at_16khz():
 
 
 def test_preserve_gain_and_optional_explicit_peak_normalization():
-    first = preprocess_wav(impulse_bytes(), CONFIG, TIMING)
-    twice = preprocess_wav(impulse_bytes(2), CONFIG, TIMING)
+    first = preprocess_wav(impulse_bytes(), replace(CONFIG, normalization="preserve"), TIMING)
+    twice = preprocess_wav(impulse_bytes(2), replace(CONFIG, normalization="preserve"), TIMING)
     assert np.allclose(twice.waveform, 2 * first.waveform)
     normalized = preprocess_wav(impulse_bytes(), replace(CONFIG, normalization="peak"), TIMING)
     assert abs(normalized.waveform).max() == pytest.approx(1)
@@ -97,14 +98,15 @@ def test_short_waveform_is_right_padded_and_pcm_is_scaled():
     assert result.metadata["right_padding_samples"] == 1200
     unsigned = np.full(80, 128, dtype=np.uint8)
     unsigned[10] = 192
-    assert preprocess_wav(wav(unsigned, 16000), CONFIG, TIMING).waveform[10] == 0.5
+    assert preprocess_wav(wav(unsigned, 16000), replace(CONFIG, normalization="preserve"), TIMING).waveform[10] == 0.5
 
 
 def test_downsampling_suppresses_above_nyquist_tone():
     fs = 32000
     time = np.arange(fs // 10) / fs
-    low = preprocess_wav(wav(np.sin(2 * np.pi * 1000 * time).astype(np.float32), fs), CONFIG, TIMING)
-    high = preprocess_wav(wav(np.sin(2 * np.pi * 12000 * time).astype(np.float32), fs), CONFIG, TIMING)
+    config = replace(CONFIG, normalization="preserve")
+    low = preprocess_wav(wav(np.sin(2 * np.pi * 1000 * time).astype(np.float32), fs), config, TIMING)
+    high = preprocess_wav(wav(np.sin(2 * np.pi * 12000 * time).astype(np.float32), fs), config, TIMING)
     assert np.linalg.norm(high.waveform[100:-100]) < 0.01 * np.linalg.norm(low.waveform[100:-100])
 
 
@@ -136,10 +138,71 @@ def test_cache_round_trip_config_invalidation_and_corruption(tmp_path):
     assert np.array_equal(clean.waveform, again.waveform) and clean.metadata == again.metadata
     changed = cache.get(impulse_bytes(), replace(CONFIG, window_ms=40), TIMING)
     assert changed.metadata["cache_key"] != clean.metadata["cache_key"]
+    preserved = cache.get(impulse_bytes(), replace(CONFIG, normalization="preserve"), TIMING)
+    assert preserved.metadata["cache_key"] != clean.metadata["cache_key"]
     path = tmp_path / f"{clean.metadata['cache_key']}.npz"
     path.write_bytes(b"corrupt")
     with pytest.raises(AcousticError, match="corrupt"):
         cache.get(impulse_bytes(), CONFIG, TIMING)
+
+
+def test_locked_config_matches_defaults_and_normalizes_without_realigning():
+    from dataclasses import asdict
+    from echospace.acoustics.rir import PROCESSOR_VERSION
+
+    settings = json.loads((Path(__file__).resolve().parents[1] / "configs/p5_acoustics.json").read_text())
+    assert settings["processor_version"] == PROCESSOR_VERSION == "p5.2"
+    assert RirConfig(**settings["preprocessing"]) == RirConfig()
+    assert AugmentConfig(**settings["augmentation"]) == AugmentConfig(**json.loads(json.dumps(asdict(AugmentConfig()))))
+    result = preprocess_wav(impulse_bytes(2), RirConfig(), TIMING)
+    assert np.max(np.abs(result.waveform)) == pytest.approx(1)
+    assert np.argmax(np.abs(result.waveform[310:330])) + 310 == 320
+    assert result.metadata["window_start_native_sample"] == 0
+
+
+@pytest.mark.parametrize("shift", [-2.0, -0.5, 0.0, 0.5, 2.0])
+def test_timing_shift_is_fractional_zero_filled_and_never_wraps(shift):
+    from echospace.acoustics.augmentation import _shift_zero_filled
+
+    waveform = np.zeros(20)
+    waveform[0] = 2
+    waveform[10] = 1
+    waveform[-1] = 3
+    shifted = _shift_zero_filled(waveform, shift)
+    assert shifted[10 + int(np.floor(shift))] > 0
+    if shift > 0:
+        assert not shifted[:int(np.ceil(shift))].any()
+    elif shift < 0:
+        assert not shifted[len(waveform) - int(np.ceil(-shift)):].any()
+    else:
+        assert np.array_equal(shifted, waveform)
+
+
+def test_training_timing_jitter_matches_recorded_shift_and_preserves_clean_timing():
+    clean = bundle(2)
+    config = AugmentConfig(gain_db=(0, 0), snr_db=None, lowpass_hz=None, pose_std_m=0)
+    result = augment_bundle(clean, GRID, FREE, split="train", seed=123, sample_key="timing", config=config)
+    times = np.arange(1280)
+    for i, metadata in enumerate(result.provenance):
+        aug = metadata["augmentation"]
+        assert -0.2 <= aug["timing_shift_ms"] <= 0.2
+        assert aug["timing_shift_samples"] == pytest.approx(aug["timing_shift_ms"] * 16)
+        expected = np.interp(times - aug["timing_shift_samples"], times, clean.waveforms[i], left=0, right=0)
+        assert np.allclose(result.waveforms[i], expected)
+        assert metadata["window_start_native_sample"] == clean.provenance[i]["window_start_native_sample"] == 0
+        assert "augmentation" not in clean.provenance[i]
+    no_jitter = augment_bundle(clean, GRID, FREE, split="train", seed=123, sample_key="timing",
+                               config=replace(config, timing_jitter_ms=0))
+    assert np.array_equal(no_jitter.waveforms, clean.waveforms)
+
+
+def test_augmentation_rejects_nyquist_cutoff_and_invalid_timing_jitter():
+    with pytest.raises(AcousticError, match="Nyquist"):
+        augment_bundle(bundle(1), GRID, FREE, split="train", seed=0, sample_key="x",
+                       config=AugmentConfig(lowpass_hz=(4000, 8000)))
+    for jitter in (-0.2, float("nan"), float("inf")):
+        with pytest.raises(AcousticError, match="timing jitter"):
+            AugmentConfig(timing_jitter_ms=jitter)
 
 
 def test_k_bundles_are_nested_and_order_independent():

@@ -7,7 +7,7 @@ usable-pair requirement. No training dataset or model was produced here.
 
 ## Defaults and timing
 
-`configs/p5_acoustics.json` records processor `p5.1`: mono float32, 16 kHz,
+`configs/p5_acoustics.json` records processor `p5.2`: mono float32, 16 kHz,
 80 ms / 1,280 samples. Rational polyphase resampling applies an anti-alias
 filter before cropping; shorter signals are right-padded with zeros.
 
@@ -21,11 +21,12 @@ supports explicit, independently evidenced direct-onset alignment or declared
 relative-onset alignment; neither is enabled in the D0 integration path.
 
 Signed PCM is scaled by its representable magnitude; unsigned 8-bit PCM is
-centered at 128. Floating WAV amplitudes are preserved. There is no default
-peak normalization, level equalization, inversion of `IR_norm`, or clipping.
+centered at 128. Floating WAV amplitudes are preserved. The locked default peak-normalizes each cropped clean window. There is no
+level equalization, inversion of `IR_norm`, or clipping.
 `IR_norm` is retained as uninterpreted provenance because its meaning remains
-unverified. Optional peak normalization is explicit in `RirConfig` and changes
-the cache key. These initial settings still need the P0/P6 study freeze.
+unverified. Peak normalization is explicit in `RirConfig` and changes the cache key.
+`normalization="preserve"` remains an explicit alternative, not the study
+default. P5 settings were locked on 2026-10-07; P6 still defines splits and K.
 
 ## Identity and eligibility
 
@@ -51,7 +52,7 @@ from echospace.acoustics import (
     RirCache, RirConfig, load_audited_candidates, process_candidate, build_bundle,
 )
 
-config = RirConfig()  # emission timing, preserved amplitude
+config = RirConfig()  # emission timing, peak-normalized amplitude
 candidates = load_audited_candidates(reader, room_entry, audit_record)
 cache = RirCache(cache_directory)
 bundle = build_bundle(
@@ -92,11 +93,19 @@ audio is cached. Changing processing settings or evidence produces a new key.
 
 `augment_bundle` requires an assigned `train`, `val` or `test` split. It returns
 a copy and leaves clean input unchanged. Validation/test copies are unchanged.
-Training applies reproducible per-pair gain (−3 to +3 dB), causal second-order
-low-pass filtering (3–7 kHz), and white noise (25–40 dB SNR), followed by small
-horizontal pose jitter (0.02 m standard deviation). These are configurable
-initial choices, not a claim that every perturbation models real equipment.
-The causal filter introduces phase delay; it does not realign emission time.
+Training applies reproducible per-pair gain (−6 to +6 dB), causal second-order
+low-pass filtering (4–7.9 kHz), and white noise (20–40 dB SNR), followed by small
+horizontal pose jitter (0.05 m standard deviation). These settings are locked study defaults, with overrides recorded in provenance.
+They are not a claim that every perturbation models real equipment. The 7.9 kHz
+upper cutoff stays below the 8 kHz Nyquist limit at 16 kHz.
+The causal filter introduces phase delay. Training-only timing jitter then
+shifts audio uniformly within ±0.2 ms (±3.2 samples at 16 kHz), using fractional
+linear interpolation and zero-filled boundaries. Positive shifts delay audio;
+there is no circular wrap. Edge content may be discarded and interpolation may
+attenuate high frequencies. Clean cached audio keeps its emission origin.
+Augmentation records version, full settings, shift and output checksum; the
+base output checksum refers to clean audio. No post-augmentation normalization
+is applied, so gain augmentation remains meaningful.
 
 Pose proposals must keep both positions in observed free space; after eight
 failed attempts the original poses remain. Heights and invalid padded rows

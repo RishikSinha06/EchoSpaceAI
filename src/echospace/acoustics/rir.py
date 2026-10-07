@@ -12,7 +12,7 @@ import numpy as np
 from scipy.io import wavfile
 from scipy.signal import resample_poly
 
-PROCESSOR_VERSION = "p5.1"
+PROCESSOR_VERSION = "p5.2"
 
 
 class AcousticError(ValueError):
@@ -24,7 +24,7 @@ class RirConfig:
     sample_rate_hz: int = 16000
     window_ms: float = 80.0
     alignment: str = "emission"
-    normalization: str = "preserve"
+    normalization: str = "peak"
 
     def __post_init__(self) -> None:
         if type(self.sample_rate_hz) is not int or self.sample_rate_hz <= 0:
@@ -79,8 +79,9 @@ def array_sha256(array: np.ndarray) -> str:
 def preprocess_wav(wav_bytes: bytes, config: RirConfig, timing: TimingEvidence) -> ProcessedRir:
     """Decode mono PCM/float WAV, anti-alias resample, then crop/right-pad.
 
-    PCM scaling is a format conversion, not peak normalization. No measured
-    gain or absolute emission delay is removed by the default configuration.
+    PCM scaling is a format conversion, not peak normalization. No absolute
+    emission delay is removed. Peak normalization is explicit in the
+    locked default configuration; ``preserve`` retains measured amplitudes.
     """
     try:
         native_rate, samples = wavfile.read(io.BytesIO(wav_bytes))

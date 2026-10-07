@@ -24,6 +24,7 @@ from echospace.acoustics import (  # noqa: E402
     load_audited_candidates, process_candidate,
 )
 from echospace.contract_v0 import validate_sample  # noqa: E402
+from echospace.acoustics.rir import PROCESSOR_VERSION  # noqa: E402
 from echospace.geometry.frames import ACOUSTICROOMS_SOURCE_TO_SCENE  # noqa: E402
 from echospace.io.adapters import acousticrooms as ar  # noqa: E402
 from echospace.scans import RoomGeometry, ScanNotApplicable, ScanNotFeasible, build_scan_sample  # noqa: E402
@@ -53,6 +54,8 @@ def figure(path: Path, sample, bundle) -> None:
 
 
 def run(samples_root: Path, audit_path: Path, output: Path, cache_path: Path, settings: dict) -> dict:
+    if settings.get("processor_version") != PROCESSOR_VERSION:
+        raise ValueError("configuration processor_version differs from the installed processor")
     config = RirConfig(**settings["preprocessing"])
     augmentation = AugmentConfig(**settings["augmentation"])
     audits = {entry["room_id"]: entry for entry in

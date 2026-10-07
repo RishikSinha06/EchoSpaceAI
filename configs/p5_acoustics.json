@@ -1,18 +1,19 @@
 {
-  "processor_version": "p5.1",
+  "processor_version": "p5.2",
   "preprocessing": {
     "sample_rate_hz": 16000,
     "window_ms": 80.0,
     "alignment": "emission",
-    "normalization": "preserve"
+    "normalization": "peak"
   },
   "bundle_sizes": [1, 2, 4, 8],
   "augmentation": {
-    "gain_db": [-3.0, 3.0],
-    "snr_db": [25.0, 40.0],
-    "lowpass_hz": [3000.0, 7000.0],
-    "pose_std_m": 0.02,
-    "pose_attempts": 8
+    "gain_db": [-6.0, 6.0],
+    "snr_db": [20.0, 40.0],
+    "lowpass_hz": [4000.0, 7900.0],
+    "pose_std_m": 0.05,
+    "pose_attempts": 8,
+    "timing_jitter_ms": 0.2
   },
-  "notes": "Initial P5 settings; P0/P6 still freeze the study condition. No augmentation is cached."
+  "notes": "Locked P5 settings agreed 2026-10-07. Low-pass capped at 7.9 kHz below the 8 kHz Nyquist limit. Clean emission timing is preserved; timing jitter is training-only. No augmentation is cached. P6 still defines splits and usable-K conditions."
 }
