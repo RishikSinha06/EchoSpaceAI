@@ -171,9 +171,11 @@ class EchoSpaceDataset:
         valid[k:] = 0
         uvh = to_grid_metres(grid, positions.reshape(-1, 3)).reshape(-1, 2, 3)
         uvh[valid == 0] = 0
-        return self._item(arrays, waveforms, valid, uvh, k, record["coverage"], record["coverage_bin"],
+        item = self._item(arrays, waveforms, valid, uvh, k, record["coverage"], record["coverage_bin"],
                           record["occlusion_type"], record["room_id"], record["room_group"], record["sample_id"],
                           record["grid"], 0, False)
+        item["k_requested"] = k
+        return item
 
     # --- training ---------------------------------------------------------
     def _train_item(self, index: int) -> dict[str, Any]:
@@ -181,7 +183,7 @@ class EchoSpaceDataset:
         cache = self.room(room_id)
         key = f"train|seed={self.seed}|epoch={self.epoch}|room={room_id}|slot={slot}"
         rng = np.random.default_rng(int.from_bytes(hashlib.sha256(key.encode()).digest()[:8], "little"))
-        k = int(rng.integers(self.k_range[0], self.k_range[1] + 1))
+        k = k_requested = int(rng.integers(self.k_range[0], self.k_range[1] + 1))
         choices = self.feasible[room_id]
         best: tuple[Any, np.ndarray] | None = None
         for _ in range(self.max_redraws):
@@ -223,8 +225,10 @@ class EchoSpaceDataset:
             size = scan.grid.width * scan.grid.cell_size_m
             arrays, flat = spatial_transform(arrays, uvh[:k].reshape(-1, 3), quarter_turns, flip, size)
             uvh[:k] = flat.reshape(-1, 2, 3)
-        return self._item(arrays, waveforms, valid, uvh, k, scan.coverage, scan.coverage_bin, scan.occlusion_type,
+        item = self._item(arrays, waveforms, valid, uvh, k, scan.coverage, scan.coverage_bin, scan.occlusion_type,
                           room_id, cache.room_group, key, scan.grid.manifest_grid(), quarter_turns, flip)
+        item["k_requested"] = k_requested
+        return item
 
     @staticmethod
     def _item(arrays: dict[str, np.ndarray], waveforms: np.ndarray, valid: np.ndarray, uvh: np.ndarray, k: int,
