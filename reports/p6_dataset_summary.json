@@ -1,0 +1,163 @@
+{
+ "eval_samples": 4642,
+ "eval_samples_checked": 4642,
+ "rooms_with_masks": 249,
+ "rooms_cached": 257,
+ "masks_by_type_and_bin": {
+  "viewpoint": {
+   "high": 744,
+   "mid": 291,
+   "low": 98
+  },
+  "missing_wall": {
+   "high": 660,
+   "low": 269,
+   "mid": 701
+  },
+  "doorway": {
+   "low": 589,
+   "mid": 602,
+   "high": 61
+  },
+  "l_wing": {
+   "high": 232,
+   "low": 152,
+   "mid": 243
+  }
+ },
+ "eligible_pairs_per_mask": {
+  "min": 8,
+  "median": 240.0,
+  "max": 5625
+ },
+ "eval_scans_short_of_8_pairs": {
+  "short": 129,
+  "scans": 4766
+ },
+ "type_bin_combinations": {
+  "applicable": 2544,
+  "no_scan": 937,
+  "with_masks": 1605,
+  "not_applicable": 540,
+  "scans_but_short_of_pairs": 2
+ },
+ "folds": [
+  {
+   "fold": 0,
+   "test_rooms": 51,
+   "val_rooms": 27,
+   "train_rooms": 171,
+   "test_groups": 30,
+   "val_groups": 18,
+   "train_groups": 99,
+   "test_nonconvex_rooms": 14,
+   "test_masks": 898
+  },
+  {
+   "fold": 1,
+   "test_rooms": 49,
+   "val_rooms": 31,
+   "train_rooms": 169,
+   "test_groups": 30,
+   "val_groups": 18,
+   "train_groups": 99,
+   "test_nonconvex_rooms": 20,
+   "test_masks": 991
+  },
+  {
+   "fold": 2,
+   "test_rooms": 48,
+   "val_rooms": 32,
+   "train_rooms": 169,
+   "test_groups": 29,
+   "val_groups": 18,
+   "train_groups": 100,
+   "test_nonconvex_rooms": 16,
+   "test_masks": 920
+  },
+  {
+   "fold": 3,
+   "test_rooms": 49,
+   "val_rooms": 31,
+   "train_rooms": 169,
+   "test_groups": 29,
+   "val_groups": 18,
+   "train_groups": 100,
+   "test_nonconvex_rooms": 16,
+   "test_masks": 886
+  },
+  {
+   "fold": 4,
+   "test_rooms": 52,
+   "val_rooms": 32,
+   "train_rooms": 165,
+   "test_groups": 29,
+   "val_groups": 18,
+   "train_groups": 100,
+   "test_nonconvex_rooms": 16,
+   "test_masks": 947
+  }
+ ],
+ "excluded_rooms_without_masks": [
+  "Auditorium_idx_0",
+  "Auditorium_idx_1",
+  "Cafe_idx_0",
+  "Cafe_idx_1",
+  "Office_idx_14",
+  "Office_idx_15",
+  "Office_idx_6",
+  "Office_idx_7"
+ ],
+ "d0_group_crossings": 0,
+ "train_probe": {
+  "fold": 0,
+  "items": 200,
+  "train_rooms": 171,
+  "train_len": 2736,
+  "k_reduced": 0,
+  "k_reduced_examples": [],
+  "k_delivered": {
+   "3": 23,
+   "5": 28,
+   "1": 28,
+   "4": 21,
+   "7": 27,
+   "2": 25,
+   "8": 23,
+   "6": 25
+  },
+  "types": {
+   "doorway": 57,
+   "viewpoint": 45,
+   "missing_wall": 84,
+   "l_wing": 14
+  },
+  "bins": {
+   "mid": 87,
+   "high": 72,
+   "low": 41
+  },
+  "seconds_per_item": 0.431
+ },
+ "figures": {
+  "p6_train_samples_1.png": 13129,
+  "p6_train_samples_2.png": 13507,
+  "p6_train_samples_3.png": 13816,
+  "p6_train_samples_4.png": 14091,
+  "p6_train_samples_5.png": 14691,
+  "p6_test_samples.png": 13752,
+  "p6_eval_mask_histogram.png": 15550
+ },
+ "figures_over_limit": {},
+ "versions": {
+  "python": "3.11.9",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "trimesh": "4.12.2",
+  "shapely": "2.1.2",
+  "rtree": "1.4.1",
+  "matplotlib": "3.10.9",
+  "code_revision": "31ccab3"
+ },
+ "seconds": 103
+}
