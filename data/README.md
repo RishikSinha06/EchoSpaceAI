@@ -17,3 +17,13 @@ Put local source archives in `raw/`, prepared samples in `processed/`, and tempo
 
 Never commit `raw/`, `cache/`, `*.zip`, `*.npz`, checkpoints or `runs/`. The only
 `.wav` and `.obj` files allowed in Git are under `samples/`.
+
+## P6 dataset (module 6)
+
+- `processed/rooms/<room_id>.npz`: per-room geometry and every processed RIR
+  (ignored; rebuild with `scripts/build_room_cache.py`).
+- `processed/eval_samples/`: the fixed evaluation samples as contract v0.1.0
+  `manifest.jsonl` + NPZ (ignored; `scripts/make_eval_masks.py`).
+- `splits/folds.json` and `splits/eval_masks.json` are committed: the folds
+  and the checksummed list of fixed evaluation samples. Do not edit them by
+  hand; their checksums will refuse it.

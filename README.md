@@ -41,6 +41,9 @@ geometry targets, not partial scans or training samples.
 P4's simulated partial scans and observation-only grid frame are described in
 [docs/p4_scan_handoff.md](docs/p4_scan_handoff.md).
 
+P6's room caches, room-group folds, fixed test masks and dataset class are
+described in [docs/p6_dataset_handoff.md](docs/p6_dataset_handoff.md).
+
 P5's audited RIR preprocessing, nested acoustic bundles and training-only
 augmentation are described in [docs/p5_acoustic_handoff.md](docs/p5_acoustic_handoff.md).
 Run `python scripts/check_acoustics.py` for the tiny real-sample integration gate.
