@@ -1,0 +1,72 @@
+{
+ "results": {
+  "A": {
+   "status": "complete",
+   "parameters": 388706,
+   "best_epoch": 12,
+   "K=1": 0.6858,
+   "K=8": 0.6858
+  },
+  "P": {
+   "status": "complete",
+   "parameters": 480210,
+   "best_epoch": 12,
+   "K=1": 0.6854,
+   "K=8": 0.6854
+  },
+  "S": {
+   "status": "complete",
+   "parameters": 484306,
+   "best_epoch": 39,
+   "K=1": 0.923,
+   "K=8": 0.9389
+  },
+  "C": {
+   "status": "complete",
+   "parameters": 454674,
+   "best_epoch": 39,
+   "K=1": 0.9337,
+   "K=8": 0.9656
+  },
+  "D": {
+   "status": "complete",
+   "parameters": 480210,
+   "best_epoch": 40,
+   "K=1": 0.7444,
+   "K=8": 0.7794
+  }
+ },
+ "mean_shape_occupancy_iou": 0.6867,
+ "checks": {
+  "fusion_uses_audio": true,
+  "S_beats_mean_shape": true,
+  "P_does_not_beat_A": true,
+  "all_complete": true
+ },
+ "passed": true,
+ "margins": {
+  "fusion": 0.05,
+  "learning": 0.05,
+  "leak_tolerance": 0.02
+ },
+ "epochs": 40,
+ "model": {
+  "width": 64,
+  "channels": [
+   16,
+   32,
+   64,
+   64
+  ],
+  "audio_channels": [
+   16,
+   32,
+   64,
+   64
+  ],
+  "fusion_layers": 2,
+  "heads": 4,
+  "feedforward": 128,
+  "dropout": 0.0
+ }
+}

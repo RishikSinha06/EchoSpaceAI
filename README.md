@@ -44,6 +44,9 @@ P4's simulated partial scans and observation-only grid frame are described in
 P6's room caches, room-group folds, fixed test masks and dataset class are
 described in [docs/p6_dataset_handoff.md](docs/p6_dataset_handoff.md).
 
+P8's EchoFusion model, audio freezes and training runner are described in
+[docs/p8_echofusion_handoff.md](docs/p8_echofusion_handoff.md).
+
 P7's B0/A/P baselines, frozen-sample training foundation and checkpoint lifecycle
 are described in [docs/p7_baselines_handoff.md](docs/p7_baselines_handoff.md).
 

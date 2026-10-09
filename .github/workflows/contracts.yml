@@ -65,3 +65,19 @@ jobs:
         run: python -m pytest tests/test_baselines.py tests/test_data_pipeline.py::test_p7_fixed_freeze_uses_fold_rooms_and_verifies_p6_content -q
       - name: Run B0/A/P frozen synthetic held-out gate
         run: python scripts/check_baselines.py
+
+  echofusion-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install CPU PyTorch and model/test/audit extras
+        run: |
+          python -m pip install 'torch>=2.5,<3' --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e '.[test,audit,model]'
+      - name: Check EchoFusion guarantees, audio freezes, random K and the runner
+        run: python -m pytest tests/test_echofusion.py -q
