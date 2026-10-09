@@ -60,7 +60,7 @@ class FusionTrainConfig:
     def __post_init__(self) -> None:
         if min(self.epochs, self.batch_size, self.patience, self.threads) < 1 or self.seed < 0 or self.workers < 0:
             raise ValueError("epochs, batch size, patience, threads must be positive; seed and workers nonnegative")
-        if not (0 < self.learning_rate and self.weight_decay >= 0 and 0 <= self.warmup_epochs < self.epochs + 1):
+        if not (0 < self.learning_rate and self.weight_decay >= 0 and self.warmup_epochs >= 0):
             raise ValueError("invalid optimiser or warm-up settings")
         if not 1 <= self.k_range[0] <= self.k_range[1] <= 8 or not all(1 <= k <= 8 for k in (*self.eval_k, self.selection_k)):
             raise ValueError("K values must lie in 1..8")
