@@ -1,0 +1,137 @@
+{
+  "gate": "PASS",
+  "scope": "complete P6 fold-0 fixed-mask baseline foundation; one seed, K=8, no augmentation",
+  "fold": 0,
+  "frozen_checksum": "63a2cd68d43f3490cee38dc20631d88039be9ccd01b9331045c47aeda57cec11",
+  "source": {
+    "kind": "P6_fixed_masks",
+    "fold": 0,
+    "k": 8,
+    "training_augmentation": "none",
+    "folds_sha256": "b6e8d8ed28fc533abf2a72710e898d8cbd52861f00b41e0927edd98a185bed84",
+    "eval_spec_checksum": "8cfcc7781a5824481f3019f9668b1dbcf7a8ff123fd22e9fbfd0d8cc3b80f186",
+    "note": "all fold-assigned room masks; train rooms only for optimization; no room-cache scan redraw"
+  },
+  "training_config": {
+    "seed": 0,
+    "epochs": 100,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "patience": 10,
+    "min_delta": 0.0001,
+    "bce_weight": 1.0,
+    "dice_weight": 1.0,
+    "amp": true,
+    "device": "cuda",
+    "threads": 2
+  },
+  "split_counts": {
+    "train": 3256,
+    "val": 488,
+    "test": 898
+  },
+  "variants": {
+    "B0": {
+      "parameter_count": 0,
+      "best_epoch": null,
+      "epochs_completed": 0,
+      "stop_reason": "parameter_free_baseline",
+      "checkpoint_sha256": null,
+      "prediction_counts": {
+        "val": 488,
+        "test": 898
+      },
+      "validation": {
+        "loss": 2.7925946614781365,
+        "occupancy_iou": 0.1728556336315929,
+        "boundary_iou": 0.031984780739504295,
+        "samples": 488
+      },
+      "test": {
+        "loss": 2.7548302964272104,
+        "occupancy_iou": 0.16842689536063868,
+        "boundary_iou": 0.0332531969255886,
+        "samples": 898
+      },
+      "maximum_replay_error": 0.0
+    },
+    "A": {
+      "parameter_count": 488722,
+      "best_epoch": 8,
+      "epochs_completed": 18,
+      "stop_reason": "early_stopping",
+      "checkpoint_sha256": "797ca45d0acf2dc3311fba28bc6bb4e34832075b744ae9398473214c87c2ff83",
+      "prediction_counts": {
+        "val": 488,
+        "test": 898
+      },
+      "validation": {
+        "loss": 0.5367484366307493,
+        "occupancy_iou": 0.677607786460001,
+        "boundary_iou": 0.3077741896764177,
+        "samples": 488
+      },
+      "test": {
+        "loss": 0.5634830477243011,
+        "occupancy_iou": 0.660022722055227,
+        "boundary_iou": 0.314966548790114,
+        "samples": 898
+      },
+      "maximum_replay_error": 1.9669532775878906e-06
+    },
+    "P": {
+      "parameter_count": 510898,
+      "best_epoch": 7,
+      "epochs_completed": 17,
+      "stop_reason": "early_stopping",
+      "checkpoint_sha256": "e46577ae97ea224b4a773b95d25834c80f40bbee7a6b47c51d1e6de5685af144",
+      "prediction_counts": {
+        "val": 488,
+        "test": 898
+      },
+      "validation": {
+        "loss": 0.5378449136605028,
+        "occupancy_iou": 0.6732779062185131,
+        "boundary_iou": 0.3116307482123375,
+        "samples": 488
+      },
+      "test": {
+        "loss": 0.5625073411947901,
+        "occupancy_iou": 0.6585351775643024,
+        "boundary_iou": 0.321829217114799,
+        "samples": 898
+      },
+      "maximum_replay_error": 1.9073486328125e-06
+    }
+  },
+  "notes": [
+    "not five-fold research results; metrics are sample-averaged on valid unobserved cells",
+    "test targets did not select checkpoints; source and prediction bindings verified",
+    "CPU replay tolerance 1e-4 permits CUDA/CPU float32 numerical differences"
+  ],
+  "archive": {
+    "archive_name": "eval_samples.zip",
+    "archive_bytes": 870007107,
+    "archive_sha256": "65e92e2ee25eb6b6f8d7b9ed5a256e02304fa01e83eff6c6e1f29244782d07b6",
+    "frozen_checksum": "63a2cd68d43f3490cee38dc20631d88039be9ccd01b9331045c47aeda57cec11"
+  },
+  "verification": {
+    "python_tests_passed": 114,
+    "python_tests_seconds": 182.26,
+    "visual_review_samples": 20,
+    "visual_review_seed": 0,
+    "visual_review_heads": [
+      "occupancy",
+      "boundary"
+    ],
+    "replay_test_indices": "first, middle, last per trained model"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "numpy": "1.26.4",
+    "torch": "2.5.1+cu121",
+    "cuda": "12.1",
+    "gpu": "RTX 4060 Laptop GPU"
+  }
+}

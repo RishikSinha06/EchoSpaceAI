@@ -5,6 +5,10 @@ Dataset inspection, preprocessing, training, evaluation, and export CLIs go here
 `check_baselines.py` runs B0/A/P on a common synthetic freeze with disjoint
 train/val/test rooms; `train_baselines.py freeze` materializes P6 items and
 `train_baselines.py run` trains/runs the same baselines on that immutable set.
+The freeze option `--training-source fixed-masks` uses the verified P6 mask
+archive for all fold-assigned splits, without requiring room caches or applying
+training augmentation. `check_real_baselines.py` verifies completed full-fold
+runs, exported prediction contracts/checksums and selected-checkpoint replay.
 Install existing extras plus the optional model dependency:
 
 ```powershell
@@ -109,6 +113,11 @@ Configuration: `configs/p5_acoustics.json`. Outputs: ignored
 paths. See `docs/p5_acoustic_handoff.md` for eligibility and gate limits.
 
 ## P6 dataset pipeline
+
+For the completed P7 fixed-mask baseline run and reproducible verification,
+see `reports/p7_real_baseline_check.md`. `check_real_baselines.py` validates
+all exported predictions; `review_baseline_predictions.py` renders 20 test
+examples selected with seed 0, independently of their scores.
 
 Run after the D0 audit (`audit_data.py`, `audit_duplicates.py`). See
 `docs/p6_dataset_handoff.md` for the dataset API.

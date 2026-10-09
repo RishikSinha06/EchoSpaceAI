@@ -1,5 +1,9 @@
 # P7 baseline foundation check
 
+Current status (2026-10-09): **real fold-0 foundation gate PASS**; see
+[the real-data report](p7_real_baseline_check.md). The account below preserves
+the initial synthetic gate and its then-pending real-data check.
+
 Date: 2026-10-07. Base: `d87557d` (P6 merge).
 Branch: `module-7-models`.
 

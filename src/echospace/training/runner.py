@@ -148,7 +148,7 @@ def evaluate(model, dataset, config, device, output_dir=None, checkpoint_sha256=
     return {key: value / count for key, value in sums.items()} | {"samples": count}, exported
 
 
-def run_baseline(variant, frozen_manifest, output_dir, config=TrainConfig(), spatial=SpatialConfig(), wall=WallConfig()):
+def run_baseline(variant, frozen_manifest, output_dir, config=TrainConfig(), spatial=SpatialConfig(), wall=WallConfig(), progress=None):
     root = Path(output_dir)
     if root.exists() and any(root.iterdir()):
         raise ValueError("run destination must be empty; never overwrite a recorded run")
@@ -228,6 +228,8 @@ def run_baseline(variant, frozen_manifest, output_dir, config=TrainConfig(), spa
                 if improved:
                     save_checkpoint(root / "best.pt", payload)
                 atomic_json(root / "run.json", manifest)
+                if progress is not None:
+                    progress(row)
                 if bad >= config.patience:
                     break
             model, best_payload = load_checkpoint(root / "best.pt", checksum)

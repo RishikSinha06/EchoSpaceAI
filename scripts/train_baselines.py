@@ -8,7 +8,7 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
 from echospace.models import SpatialConfig, WallConfig
-from echospace.training.frozen import freeze_p6
+from echospace.training.frozen import freeze_fixed_p6, freeze_p6
 from echospace.training.runner import TrainConfig, run_baseline
 
 
@@ -26,6 +26,8 @@ def main():
     freeze.add_argument("--samples-per-room", type=int, default=16)
     freeze.add_argument("--limit-per-split", type=int)
     freeze.add_argument("--k-eval", type=int, default=8)
+    freeze.add_argument("--training-source", choices=("room-caches", "fixed-masks"), default="room-caches",
+                        help="fixed-masks uses fold-assigned P6 masks for all splits, without augmentation")
     train = sub.add_parser("run", help="run all selected baselines against an existing freeze")
     train.add_argument("--frozen", type=Path, required=True)
     train.add_argument("--out-dir", type=Path, required=True)
@@ -36,8 +38,13 @@ def main():
     args = parser.parse_args()
     if args.command == "freeze":
         try:
-            path = freeze_p6(args.out_dir, args.room_cache_dir, args.eval_dir, args.folds, args.eval_spec,
-                             args.fold, args.seed, args.samples_per_room, args.limit_per_split, args.k_eval)
+            if args.training_source == "fixed-masks":
+                if args.limit_per_split is not None:
+                    parser.error("fixed-masks uses the full fold; sample limits are not supported")
+                path = freeze_fixed_p6(args.out_dir, args.eval_dir, args.folds, args.eval_spec, args.fold, args.k_eval)
+            else:
+                path = freeze_p6(args.out_dir, args.room_cache_dir, args.eval_dir, args.folds, args.eval_spec,
+                                 args.fold, args.seed, args.samples_per_room, args.limit_per_split, args.k_eval)
         except (ValueError, FileNotFoundError) as exc:
             parser.error(str(exc))
         print(path)
@@ -51,7 +58,8 @@ def main():
                 config[key] = getattr(args, key)
         for variant in args.variants or settings["variants"]:
             result = run_baseline(variant, args.frozen, args.out_dir / variant, TrainConfig(**config),
-                                  SpatialConfig(**settings["spatial"]), WallConfig(**settings["wall"]))
+                                  SpatialConfig(**settings["spatial"]), WallConfig(**settings["wall"]),
+                                  progress=lambda row: print(json.dumps(row), flush=True))
             print(json.dumps({"variant": variant, "status": result["status"], "test": result["test_metrics"]}))
 
 

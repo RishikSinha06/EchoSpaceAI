@@ -247,3 +247,43 @@ def test_spatial_transform_moves_positions_with_the_grids() -> None:
             for u, v, h in new:
                 assert moved["observed_free"][int(np.floor(v / 0.2)), int(np.floor(u / 0.2))] == 1
                 assert h == pytest.approx(1.2)
+
+
+def test_p7_fixed_freeze_uses_fold_rooms_and_verifies_p6_content(eval_setup):
+    pytest.importorskip("torch")
+    from echospace.training.frozen import FrozenDataset, freeze_fixed_p6
+    tmp, spec, folds = eval_setup
+    # Four synthetic groups are too small for stratified rounding to guarantee
+    # an inner validation group. Make one explicit without changing test folds.
+    from echospace.data.splits import folds_checksum
+    folds = json.loads(json.dumps(folds))
+    f = folds["folds"][0]
+    validation_group = f["train_groups"].pop()
+    f["val_groups"] = [validation_group]
+    f["val_rooms"] = [r for r, info in folds["rooms"].items() if info["room_group"] == validation_group]
+    f["train_rooms"] = [r for r in f["train_rooms"] if r not in f["val_rooms"]]
+    folds["checksum"] = folds_checksum(folds)
+    spec_path = tmp / "p7_spec.json"
+    spec_path.write_text(json.dumps(spec), encoding="utf-8")
+    folds_path = tmp / "p7_folds.json"
+    save_folds(folds, folds_path)
+    frozen = freeze_fixed_p6(tmp / "p7_fixed", tmp / "eval", folds_path, spec_path, fold=0, k=2)
+    counts = 0
+    for split in ("train", "val", "test"):
+        dataset = FrozenDataset(frozen, split)
+        counts += len(dataset)
+        assert {e["metadata"]["room_id"] for e in dataset.entries} <= set(folds["folds"][0][f"{split}_rooms"])
+        sample = dataset[0]
+        assert sample["rir_valid"].tolist() == [1, 1, 0, 0, 0, 0, 0, 0]
+        assert not sample["src_pos"][2:].any() and not sample["mic_pos"][2:].any()
+    assert counts == len(spec["samples"])
+    assert dataset.manifest["source"]["kind"] == "P6_fixed_masks"
+    assert dataset.manifest["source"]["training_augmentation"] == "none"
+    manifest = {r["sample_id"]: r for r in map(json.loads, (tmp / "eval/manifest.jsonl").read_text().splitlines())}
+    entry = spec["samples"][0]
+    path = tmp / "eval" / manifest[entry["sample_id"]]["sample_path"]
+    arrays = load_npz(path)
+    arrays["rir_waveforms"][0, 0] += 0.1
+    np.savez_compressed(path, **arrays)
+    with pytest.raises(EvalMaskError, match="content differs"):
+        freeze_fixed_p6(tmp / "p7_edited", tmp / "eval", folds_path, spec_path)

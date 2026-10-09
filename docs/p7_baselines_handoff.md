@@ -54,6 +54,13 @@ the same immutable freeze, without redrawing masks each epoch. This foundation
 design deliberately trades online variation for an auditable baseline comparison;
 P8 can add synchronized epoch-specific freezes under a separately recorded study.
 
+`--training-source fixed-masks` is the alternative when the supplied P6 archive
+contains only fixed masks. It verifies the committed sample checksums and uses
+every mask in each fold-assigned train/val/test room set. Training receives only
+training-room masks, with no P5 or spatial augmentation; K is fixed explicitly
+(8 by default). No room caches are required. This setting is recorded as
+`P6_fixed_masks`, and must not be described as online P6 training draws.
+
 Manifest and sample content checksums are verified on every load. Duplicate IDs,
 room/group split crossings, invalid poses, inconsistent masks and different grid
 settings are refused. A destination must be empty; create a new version instead
@@ -118,6 +125,11 @@ python scripts/check_baselines.py --device cuda --out-dir artifacts/p7_check_cud
 # On the machine with P6 generated artifacts: freeze once, reuse for all models.
 python scripts/train_baselines.py freeze --out-dir data/cache/p7_fold0 --fold 0
 python scripts/train_baselines.py run --frozen data/cache/p7_fold0/manifest.json --out-dir artifacts/p7_fold0 --device cuda
+
+# With eval_samples.zip only: full fold-0 masks, no room caches or augmentation.
+python scripts/train_baselines.py freeze --training-source fixed-masks --out-dir data/cache/p7_fold0_fixed --fold 0
+python scripts/train_baselines.py run --frozen data/cache/p7_fold0_fixed/manifest.json --out-dir artifacts/p7_fold0_fixed --device cuda
+python scripts/check_real_baselines.py
 ```
 
 Use `--room-cache-dir` and `--eval-dir` when P6 binaries are stored elsewhere;
@@ -135,11 +147,19 @@ freeze. CPU and CUDA AMP both passed locally. Tests additionally exercise
 early stopping, checkpoint reload, deterministic reruns, masked gradients,
 position padding/order and independence from changed held-out targets.
 
-The complete AcousticRooms P7 gate still requires the generated P6 room caches
-and fixed evaluation NPZs, which are absent from this checkout. Committed fold
-metadata and your friend's P6 report do not substitute for these binaries.
-Do not claim full held-out baseline results or expand fusion until B0/A/P run
-on the common real P6 freeze and their predictions are reviewed. P3 boundary
+The initial synthetic gate on 2026-10-07 lacked P6 binaries. On 2026-10-09 the
+provided `eval_samples.zip` supplied all 4,642 fixed masks. The real foundation
+run uses complete fold 0 through `--training-source fixed-masks`: 3,256 train,
+488 validation and 898 test masks, K=8, no augmentation, seed 0. This does not
+require room caches and does not claim online P6 training draws or five-fold
+research results. Its completed-run checker verifies every held-out prediction
+against the P6 contract and sample/checkpoint checksums, plus CPU checkpoint
+replay on three deterministic test indices per trained model.
+
+Review real held-out predictions with `python scripts/review_baseline_predictions.py`;
+the default picks 20 test samples uniformly with seed 0, independent of metrics.
+The real gate report records run completion and visual review. P3 boundary
 conventions remain those bound to P6; this module did not regenerate targets.
 
-See `reports/p7_baseline_check.md` for local evidence and explicit gate status.
+See `reports/p7_real_baseline_check.md` for the completed real-data gate and
+`reports/p7_baseline_check.md` for the initial synthetic evidence.

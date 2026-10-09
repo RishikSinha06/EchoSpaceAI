@@ -162,3 +162,47 @@ def freeze_p6(destination, room_cache_dir, eval_dir, folds_path, eval_spec_path,
     source.update(p5_processor_version=PROCESSOR_VERSION, rir_config=asdict(RirConfig()),
                   training_augmentation=asdict(AugmentConfig()))
     return freeze_samples(destination, {s: items(d) for s, d in datasets.items()}, source)
+
+
+def freeze_fixed_p6(destination, eval_dir, folds_path, eval_spec_path, fold=0, k=8):
+    """Use verified P6 fixed masks on all three fold-assigned room sets.
+
+    Training sees only training-room masks. No scan redraw, waveform augmentation
+    or spatial augmentation is applied. This explicit alternative needs no room
+    caches and still keeps held-out rooms/groups isolated.
+    """
+    from echospace.data import load_eval_spec, load_folds
+    from echospace.data.dataset import EchoSpaceDataset, grid_from_record, to_grid_metres
+    from echospace.data.evalmasks import read_eval_sample, read_manifest
+    if not 1 <= k <= 8:
+        raise ValueError("K must be within 1..8")
+    folds, spec = load_folds(folds_path), load_eval_spec(eval_spec_path)
+    manifest = read_manifest(eval_dir)
+    expected_ids = {e["sample_id"] for e in spec["samples"]}
+    if set(manifest) != expected_ids:
+        raise ValueError("evaluation manifest IDs differ from the committed spec")
+    def items(split):
+        wanted = set(folds["folds"][fold][f"{split}_rooms"])
+        for entry in spec["samples"]:
+            if entry["room_id"] not in wanted:
+                continue
+            record = manifest[entry["sample_id"]]
+            sample = read_eval_sample(eval_dir, record, entry["sha256"])
+            arrays = sample.arrays
+            grid = grid_from_record(record["grid"])
+            valid = arrays["rir_valid"].astype(np.uint8).copy()
+            valid[k:] = 0
+            positions = arrays["rir_positions_scene_m"].astype(np.float64)
+            uvh = to_grid_metres(grid, positions.reshape(-1, 3)).reshape(-1, 2, 3)
+            uvh[valid == 0] = 0
+            waveforms = arrays["rir_waveforms"].astype(np.float32).copy()
+            waveforms[k:] = 0
+            item = EchoSpaceDataset._item(arrays, waveforms, valid, uvh, k, record["coverage"],
+                                          record["coverage_bin"], record["occlusion_type"], record["room_id"],
+                                          record["room_group"], record["sample_id"], record["grid"], 0, False)
+            yield item
+    source = {"kind": "P6_fixed_masks", "fold": fold, "k": k, "training_augmentation": "none",
+              "folds_sha256": hashlib.sha256(Path(folds_path).read_bytes()).hexdigest(),
+              "eval_spec_checksum": spec["checksum"],
+              "note": "all fold-assigned room masks; train rooms only for optimization; no room-cache scan redraw"}
+    return freeze_samples(destination, {s: items(s) for s in ("train", "val", "test")}, source)
