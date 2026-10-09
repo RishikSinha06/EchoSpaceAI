@@ -1,0 +1,13 @@
+{
+  "format": "p8.config.1",
+  "variants": ["A", "P", "S", "C", "D"],
+  "model": {"width": 128, "channels": [32, 64, 128, 128], "audio_channels": [32, 64, 128, 128],
+            "fusion_layers": 3, "heads": 4, "feedforward": 256, "fourier_bands": 8, "dropout": 0.1,
+            "height_scale_m": 3.0, "rir_samples": 1280, "time_channel": true},
+  "training": {"seed": 0, "epochs": 100, "batch_size": 32, "learning_rate": 0.0003, "weight_decay": 0.0001,
+               "warmup_epochs": 5, "patience": 15, "min_delta": 0.0001, "bce_weight": 1.0, "dice_weight": 1.0,
+               "k_range": [1, 8], "selection_k": 8, "eval_k": [1, 2, 4, 8], "amp": true, "device": "cpu",
+               "threads": 4, "workers": 0},
+  "freeze": {"training_source": "online", "draw_epochs": 10, "samples_per_room": 20},
+  "notes": "Plan Stages 2-3 defaults. time_channel is a documented deviation (the plan's conv + global average pool encoder cannot see echo arrival time). Hyperparameters are not yet tuned (plan: Optuna on fold-0 inner validation); 3 seeds per configuration per fold for the study."
+}
