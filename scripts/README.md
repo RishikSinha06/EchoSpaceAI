@@ -131,3 +131,13 @@ python scripts/check_dataset.py         # gate: reports/p6_dataset_check.md, rep
 
 `make_eval_masks.py` and `make_splits.py` refuse to overwrite their committed
 JSON without `--replace`.
+
+## P8 EchoFusion
+
+See `docs/p8_echofusion_handoff.md`.
+
+```powershell
+python scripts/check_echofusion.py                    # synthetic gate (~1 h CPU)
+python scripts/train_echofusion.py freeze --out-dir data/cache/p8_fold0 --fold 0 --workers 6
+python scripts/train_echofusion.py run --frozen data/cache/p8_fold0/manifest.json --out-dir artifacts/p8_fold0_seed0 --device cuda
+```
