@@ -47,6 +47,9 @@ described in [docs/p6_dataset_handoff.md](docs/p6_dataset_handoff.md).
 P8's EchoFusion model, audio freezes and training runner are described in
 [docs/p8_echofusion_handoff.md](docs/p8_echofusion_handoff.md).
 
+P9's small training demonstration and held-out model comparisons are described
+in [docs/p9_demo_handoff.md](docs/p9_demo_handoff.md).
+
 P7's B0/A/P baselines, frozen-sample training foundation and checkpoint lifecycle
 are described in [docs/p7_baselines_handoff.md](docs/p7_baselines_handoff.md).
 

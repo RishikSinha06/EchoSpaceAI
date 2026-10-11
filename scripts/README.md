@@ -114,11 +114,6 @@ paths. See `docs/p5_acoustic_handoff.md` for eligibility and gate limits.
 
 ## P6 dataset pipeline
 
-For the completed P7 fixed-mask baseline run and reproducible verification,
-see `reports/p7_real_baseline_check.md`. `check_real_baselines.py` validates
-all exported predictions; `review_baseline_predictions.py` renders 20 test
-examples selected with seed 0, independently of their scores.
-
 Run after the D0 audit (`audit_data.py`, `audit_duplicates.py`). See
 `docs/p6_dataset_handoff.md` for the dataset API.
 
@@ -132,6 +127,13 @@ python scripts/check_dataset.py         # gate: reports/p6_dataset_check.md, rep
 `make_eval_masks.py` and `make_splits.py` refuse to overwrite their committed
 JSON without `--replace`.
 
+## P7 baseline verification
+
+For the completed P7 fixed-mask baseline run and reproducible verification,
+see `reports/p7_real_baseline_check.md`. `check_real_baselines.py` validates
+all exported predictions; `review_baseline_predictions.py` renders 20 test
+examples selected with seed 0, independently of their scores.
+
 ## P8 EchoFusion
 
 See `docs/p8_echofusion_handoff.md`.
@@ -141,3 +143,12 @@ python scripts/check_echofusion.py                    # synthetic gate (~1 h CPU
 python scripts/train_echofusion.py freeze --out-dir data/cache/p8_fold0 --fold 0 --workers 6
 python scripts/train_echofusion.py run --frozen data/cache/p8_fold0/manifest.json --out-dir artifacts/p8_fold0_seed0 --device cuda
 ```
+
+## P9 small training demonstration
+
+`python scripts/train_demo.py freeze` selects the configured 20/5/5 room groups
+from the original P6 partitions and freezes verified masks with audio.
+`python scripts/train_demo.py run` trains A/P/S/C/D on the same subset.
+`python scripts/report_demo.py` replays checkpoints, exports held-out predictions
+and creates `artifacts/p9_demo/demonstration/index.html`. See
+`docs/p9_demo_handoff.md` for scope, settings and output provenance.

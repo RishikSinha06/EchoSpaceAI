@@ -1,0 +1,549 @@
+{
+  "format": "p9.demo.1",
+  "scope": "one fold, one seed, small fixed-mask subset; not the 75-run study",
+  "gate": "PASS",
+  "gate_meaning": "data integrity, completed training, checkpoint replay and prediction contract; not acoustic gain",
+  "frozen_checksum": "cd97bb2f499c377698940eb45a46863eb85b12db3ec8847dd2056e38c418ea84",
+  "source": {
+    "kind": "P9_demo_fixed_masks",
+    "demonstration_only": true,
+    "fold": 0,
+    "selection_seed": 0,
+    "selection": {
+      "train": {
+        "groups": [
+          7,
+          13,
+          17,
+          18,
+          19,
+          21,
+          27,
+          31,
+          38,
+          42,
+          50,
+          63,
+          83,
+          85,
+          95,
+          96,
+          97,
+          104,
+          119,
+          139
+        ],
+        "rooms": [
+          "Apartments_idx_13",
+          "Apartments_idx_18",
+          "Apartments_idx_19",
+          "Apartments_idx_21",
+          "Apartments_idx_23",
+          "Apartments_idx_29",
+          "Apartments_idx_33",
+          "Apartments_idx_46",
+          "Apartments_idx_52",
+          "Apartments_idx_53",
+          "Apartments_idx_57",
+          "Apartments_idx_58",
+          "Apartments_idx_7",
+          "Bathrooms_idx_1",
+          "Bathrooms_idx_21",
+          "Bathrooms_idx_9",
+          "Bedrooms_idx_2",
+          "Bedrooms_idx_22",
+          "ListeningRoom_idx_1",
+          "LivingRoomsWithHallway_idx_1",
+          "LivingRoomsWithHallway_idx_11",
+          "LivingRoomsWithHallway_idx_12",
+          "LivingRoomsWithHallway_idx_13",
+          "LivingRoomsWithHallway_idx_21",
+          "LivingRoomsWithHallway_idx_31",
+          "LivingRoomsWithHallway_idx_32",
+          "LivingRoomsWithHallway_idx_33",
+          "MeetingRoom_idx_0",
+          "MeetingRoom_idx_15",
+          "MeetingRoom_idx_20",
+          "MeetingRoom_idx_35",
+          "Restaurants_idx_28",
+          "Restaurants_idx_8"
+        ]
+      },
+      "val": {
+        "groups": [
+          33,
+          58,
+          102,
+          115,
+          149
+        ],
+        "rooms": [
+          "Apartments_idx_35",
+          "Bathrooms_idx_18",
+          "LivingRoomsWithHallway_idx_18",
+          "LivingRoomsWithHallway_idx_38",
+          "MeetingRoom_idx_11",
+          "MeetingRoom_idx_31",
+          "Restaurants_idx_18",
+          "Restaurants_idx_38"
+        ]
+      },
+      "test": {
+        "groups": [
+          8,
+          22,
+          86,
+          114,
+          137
+        ],
+        "rooms": [
+          "Apartments_idx_24",
+          "Apartments_idx_47",
+          "Apartments_idx_8",
+          "LivingRoomsWithHallway_idx_2",
+          "LivingRoomsWithHallway_idx_22",
+          "MeetingRoom_idx_10",
+          "MeetingRoom_idx_30",
+          "Restaurants_idx_26",
+          "Restaurants_idx_6"
+        ]
+      }
+    },
+    "selection_method": "seeded SHA256 rank of original split group IDs; all selected-group masks",
+    "folds_sha256": "b6e8d8ed28fc533abf2a72710e898d8cbd52861f00b41e0927edd98a185bed84",
+    "eval_spec_checksum": "8cfcc7781a5824481f3019f9668b1dbcf7a8ff123fd22e9fbfd0d8cc3b80f186",
+    "training_augmentation": "none",
+    "train_epochs": 1,
+    "available_k": 8,
+    "selection_checksum": "36ecc4cb32010ddbac479cde46d702ea86c44a5881d2c18017fe7430fa139e05"
+  },
+  "splits": {
+    "train": {
+      "samples": 735,
+      "rooms": 33,
+      "groups": 20
+    },
+    "val": {
+      "samples": 148,
+      "rooms": 8,
+      "groups": 5
+    },
+    "test": {
+      "samples": 171,
+      "rooms": 9,
+      "groups": 5
+    }
+  },
+  "test_available_pairs": {
+    "8": 171
+  },
+  "prediction_count": 3420,
+  "paired_D_minus_A": {
+    "K=1": {
+      "mean_room_delta": -0.019804646755447394,
+      "group_bootstrap_95_percentile_interval": [
+        -0.07007827908611441,
+        0.0208447835346063
+      ],
+      "groups": 5,
+      "bootstrap_seed": 0,
+      "repeats": 2000,
+      "scope": "exploratory demo only; few groups and one training seed do not establish acoustic gain"
+    },
+    "K=2": {
+      "mean_room_delta": -0.01804655211860175,
+      "group_bootstrap_95_percentile_interval": [
+        -0.07160466055420858,
+        0.02672412947253891
+      ],
+      "groups": 5,
+      "bootstrap_seed": 0,
+      "repeats": 2000,
+      "scope": "exploratory demo only; few groups and one training seed do not establish acoustic gain"
+    },
+    "K=4": {
+      "mean_room_delta": -0.014158663064039238,
+      "group_bootstrap_95_percentile_interval": [
+        -0.07007757307575993,
+        0.03215721559821946
+      ],
+      "groups": 5,
+      "bootstrap_seed": 0,
+      "repeats": 2000,
+      "scope": "exploratory demo only; few groups and one training seed do not establish acoustic gain"
+    },
+    "K=8": {
+      "mean_room_delta": -0.014921641751503472,
+      "group_bootstrap_95_percentile_interval": [
+        -0.07382496786636077,
+        0.032995342233233034
+      ],
+      "groups": 5,
+      "bootstrap_seed": 0,
+      "repeats": 2000,
+      "scope": "exploratory demo only; few groups and one training seed do not establish acoustic gain"
+    }
+  },
+  "S_learning_check": {
+    "S_sample_iou_K8": 0.19572359916062382,
+    "mean_shape_sample_iou": 0.2708595199564918,
+    "scope": "diagnostic only; do not retune on this test comparison",
+    "passed": false
+  },
+  "mean_shape_sample_weighted": {
+    "occupancy_iou": 0.2708595199564918,
+    "boundary_iou": 0.06432748538011696,
+    "samples": 171
+  },
+  "visual_selection": {
+    "seed": 0,
+    "method": "uniform without replacement, independent of scores",
+    "sample_ids": [
+      "Apartments_idx_24__doorway__low__1000002",
+      "Apartments_idx_24__l_wing__low__1000001",
+      "Apartments_idx_24__missing_wall__high__1000000",
+      "Apartments_idx_47__doorway__low__1000003",
+      "Apartments_idx_47__viewpoint__mid__1000001",
+      "Apartments_idx_8__doorway__mid__1000002",
+      "LivingRoomsWithHallway_idx_22__missing_wall__low__1000000",
+      "LivingRoomsWithHallway_idx_2__l_wing__low__1000002",
+      "MeetingRoom_idx_30__missing_wall__high__1000002",
+      "MeetingRoom_idx_30__missing_wall__mid__1000001"
+    ]
+  },
+  "tests": {
+    "passed": 129,
+    "seconds": 90.77
+  },
+  "visual_review": {
+    "samples": 10,
+    "heads": [
+      "occupancy",
+      "boundary"
+    ],
+    "pages": 10,
+    "learning_curves_reviewed": true
+  },
+  "variants": {
+    "A": {
+      "best_epoch": 9,
+      "epochs_completed": 19,
+      "stop_reason": "early_stopping",
+      "parameters": 1674818,
+      "checkpoint_sha256": "b0d7e612b02baae5e012a37649cfae1c9e9e392d1ccda2dabe0f7fbdf9d3d24a",
+      "maximum_score_replay_error": 0.0,
+      "test_sample_weighted": {
+        "K=1": {
+          "loss": 0.7768174946656701,
+          "occupancy_iou": 0.6052819330092759,
+          "boundary_iou": 0.18572594966107642,
+          "samples": 171
+        },
+        "K=2": {
+          "loss": 0.7768174946656701,
+          "occupancy_iou": 0.6052819330092759,
+          "boundary_iou": 0.18572594966107642,
+          "samples": 171
+        },
+        "K=4": {
+          "loss": 0.7768174946656701,
+          "occupancy_iou": 0.6052819330092759,
+          "boundary_iou": 0.18572594966107642,
+          "samples": 171
+        },
+        "K=8": {
+          "loss": 0.7768174946656701,
+          "occupancy_iou": 0.6052819330092759,
+          "boundary_iou": 0.18572594966107642,
+          "samples": 171
+        }
+      },
+      "test_room_weighted": {
+        "K=1": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6500256953811457,
+          "boundary_iou": 0.20646887936887523,
+          "loss": 0.7675364139291658
+        },
+        "K=2": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6500256953811457,
+          "boundary_iou": 0.20646887936887523,
+          "loss": 0.7675364139291658
+        },
+        "K=4": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6500256953811457,
+          "boundary_iou": 0.20646887936887523,
+          "loss": 0.7675364139291658
+        },
+        "K=8": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6500256953811457,
+          "boundary_iou": 0.20646887936887523,
+          "loss": 0.7675364139291658
+        }
+      }
+    },
+    "P": {
+      "best_epoch": 10,
+      "epochs_completed": 20,
+      "stop_reason": "early_stopping",
+      "parameters": 2091298,
+      "checkpoint_sha256": "a39af39df29c205606091a39b24ca0a8656447f608bc879bc65c20c3f819dcc8",
+      "maximum_score_replay_error": 0.0,
+      "test_sample_weighted": {
+        "K=1": {
+          "loss": 0.7871530488220572,
+          "occupancy_iou": 0.5744308031093307,
+          "boundary_iou": 0.2160330195175974,
+          "samples": 171
+        },
+        "K=2": {
+          "loss": 0.7878680201301798,
+          "occupancy_iou": 0.5714669980500874,
+          "boundary_iou": 0.21702061828814054,
+          "samples": 171
+        },
+        "K=4": {
+          "loss": 0.7895029525310673,
+          "occupancy_iou": 0.5681575139363607,
+          "boundary_iou": 0.21556697393718519,
+          "samples": 171
+        },
+        "K=8": {
+          "loss": 0.7887930563318799,
+          "occupancy_iou": 0.5670700268438685,
+          "boundary_iou": 0.2130053371016742,
+          "samples": 171
+        }
+      },
+      "test_room_weighted": {
+        "K=1": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6297288692935381,
+          "boundary_iou": 0.2585466799380831,
+          "loss": 0.7754326702713977
+        },
+        "K=2": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6286457763302803,
+          "boundary_iou": 0.25880262968546347,
+          "loss": 0.7756692906144033
+        },
+        "K=4": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6253939930400652,
+          "boundary_iou": 0.2579445284078412,
+          "loss": 0.7769588503343711
+        },
+        "K=8": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6248181293553219,
+          "boundary_iou": 0.2552179306640199,
+          "loss": 0.7758675919376855
+        }
+      }
+    },
+    "S": {
+      "best_epoch": 14,
+      "epochs_completed": 24,
+      "stop_reason": "early_stopping",
+      "parameters": 2099490,
+      "checkpoint_sha256": "503a45ae7543113d66ee810f1e86b03b7ad3192ddbb10c0914e7dff27df2136b",
+      "maximum_score_replay_error": 0.0,
+      "test_sample_weighted": {
+        "K=1": {
+          "loss": 0.9492423297368993,
+          "occupancy_iou": 0.2209576682040566,
+          "boundary_iou": 0.06432748538011696,
+          "samples": 171
+        },
+        "K=2": {
+          "loss": 0.9651327188949139,
+          "occupancy_iou": 0.20080658706308108,
+          "boundary_iou": 0.06432748538011696,
+          "samples": 171
+        },
+        "K=4": {
+          "loss": 0.9639895143564682,
+          "occupancy_iou": 0.2081087032953898,
+          "boundary_iou": 0.06432748538011696,
+          "samples": 171
+        },
+        "K=8": {
+          "loss": 0.9717471752947534,
+          "occupancy_iou": 0.19572359916062382,
+          "boundary_iou": 0.05847953216374269,
+          "samples": 171
+        }
+      },
+      "test_room_weighted": {
+        "K=1": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.22236238997240487,
+          "boundary_iou": 0.09148148148148148,
+          "loss": 0.9475824692493183
+        },
+        "K=2": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.19857577697606518,
+          "boundary_iou": 0.09148148148148148,
+          "loss": 0.9649451790534201
+        },
+        "K=4": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.2033242607319506,
+          "boundary_iou": 0.09148148148148148,
+          "loss": 0.9657805283027598
+        },
+        "K=8": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.1863802508585945,
+          "boundary_iou": 0.08222222222222222,
+          "loss": 0.9751697263906615
+        }
+      }
+    },
+    "C": {
+      "best_epoch": 13,
+      "epochs_completed": 23,
+      "stop_reason": "early_stopping",
+      "parameters": 1924514,
+      "checkpoint_sha256": "15e886af395e69ea61ee42deed1e3aa932b8a8532222c248da2d86e56831fa3f",
+      "maximum_score_replay_error": 0.0,
+      "test_sample_weighted": {
+        "K=1": {
+          "loss": 0.7309501129284239,
+          "occupancy_iou": 0.5625092272172895,
+          "boundary_iou": 0.21132232501492862,
+          "samples": 171
+        },
+        "K=2": {
+          "loss": 0.7308840389140168,
+          "occupancy_iou": 0.5623907875596431,
+          "boundary_iou": 0.21182780725914135,
+          "samples": 171
+        },
+        "K=4": {
+          "loss": 0.7309525696157712,
+          "occupancy_iou": 0.5623635241859838,
+          "boundary_iou": 0.21082913736153763,
+          "samples": 171
+        },
+        "K=8": {
+          "loss": 0.7303924644202516,
+          "occupancy_iou": 0.5632515706514057,
+          "boundary_iou": 0.21037061242332236,
+          "samples": 171
+        }
+      },
+      "test_room_weighted": {
+        "K=1": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6048753129576386,
+          "boundary_iou": 0.24050723307622457,
+          "loss": 0.7139085275136624
+        },
+        "K=2": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6053243759185168,
+          "boundary_iou": 0.24041930828191738,
+          "loss": 0.7135359940001522
+        },
+        "K=4": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.605622297434737,
+          "boundary_iou": 0.23965076700682772,
+          "loss": 0.7133137373299845
+        },
+        "K=8": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6063766924237725,
+          "boundary_iou": 0.23932242828552008,
+          "loss": 0.7127707159695416
+        }
+      }
+    },
+    "D": {
+      "best_epoch": 11,
+      "epochs_completed": 21,
+      "stop_reason": "early_stopping",
+      "parameters": 2091298,
+      "checkpoint_sha256": "a63b7e6b1462038f6c337841080941165610ca8eb12918c90690fdf42299e399",
+      "maximum_score_replay_error": 0.0,
+      "test_sample_weighted": {
+        "K=1": {
+          "loss": 0.7681700890524346,
+          "occupancy_iou": 0.5786236015676754,
+          "boundary_iou": 0.20761745157297593,
+          "samples": 171
+        },
+        "K=2": {
+          "loss": 0.7664726937723438,
+          "occupancy_iou": 0.5797409593013295,
+          "boundary_iou": 0.20886476625475967,
+          "samples": 171
+        },
+        "K=4": {
+          "loss": 0.7653998157434296,
+          "occupancy_iou": 0.5837225216871117,
+          "boundary_iou": 0.2092966043461136,
+          "samples": 171
+        },
+        "K=8": {
+          "loss": 0.764935058459901,
+          "occupancy_iou": 0.5825465826960335,
+          "boundary_iou": 0.21035607725556132,
+          "samples": 171
+        }
+      },
+      "test_room_weighted": {
+        "K=1": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6302210486256983,
+          "boundary_iou": 0.24307741043429068,
+          "loss": 0.754384354548332
+        },
+        "K=2": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6319791432625439,
+          "boundary_iou": 0.24477673546292808,
+          "loss": 0.7523379736392745
+        },
+        "K=4": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6358670323171065,
+          "boundary_iou": 0.24501918988231638,
+          "loss": 0.7510484321393155
+        },
+        "K=8": {
+          "rooms": 9,
+          "samples": 171,
+          "occupancy_iou": 0.6351040536296422,
+          "boundary_iou": 0.24593032153816344,
+          "loss": 0.7505827631468915
+        }
+      }
+    }
+  }
+}

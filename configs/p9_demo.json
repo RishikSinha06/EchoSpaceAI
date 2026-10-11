@@ -1,0 +1,14 @@
+{
+  "format": "p8.config.1",
+  "variants": ["A", "P", "S", "C", "D"],
+  "model": {"width": 128, "channels": [32, 64, 128, 128], "audio_channels": [32, 64, 128, 128],
+            "fusion_layers": 3, "heads": 4, "feedforward": 256, "fourier_bands": 8, "dropout": 0.1,
+            "height_scale_m": 3.0, "rir_samples": 1280, "time_channel": true},
+  "training": {"seed": 0, "epochs": 40, "batch_size": 16, "learning_rate": 0.0003, "weight_decay": 0.0001,
+               "warmup_epochs": 3, "patience": 10, "min_delta": 0.0001, "bce_weight": 1.0, "dice_weight": 1.0,
+               "k_range": [1, 8], "selection_k": 8, "eval_k": [1, 2, 4, 8], "amp": true, "device": "cuda",
+               "threads": 2, "workers": 0},
+  "freeze": {"training_source": "fixed-masks", "draw_epochs": 1, "samples_per_room": 20},
+  "demo": {"fold": 0, "selection_seed": 0, "groups": {"train": 20, "val": 5, "test": 5}},
+  "notes": "Small P9 demonstration, not the 75-run study. P8 full architecture; reduced 40-epoch budget, 3-epoch warm-up and patience 10. Fixed masks, no augmentation. Groups selected without reading targets; test scores do not select runs."
+}

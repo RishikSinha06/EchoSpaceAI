@@ -80,4 +80,4 @@ jobs:
           python -m pip install 'torch>=2.5,<3' --index-url https://download.pytorch.org/whl/cpu
           python -m pip install -e '.[test,audit,model]'
       - name: Check EchoFusion guarantees, audio freezes, random K and the runner
-        run: python -m pytest tests/test_echofusion.py -q
+        run: python -m pytest tests/test_echofusion.py tests/test_demo.py -q
