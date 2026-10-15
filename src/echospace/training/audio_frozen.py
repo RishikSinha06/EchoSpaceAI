@@ -71,7 +71,7 @@ def validate_audio_item(arrays: dict[str, np.ndarray], metadata: dict[str, Any])
         raise ValueError("valid rows must be a non-empty prefix (P5 nested ranking)")
 
 
-def write_freeze(directory: str | Path, splits: dict[str, Iterable[dict[str, Any]]], source: dict[str, Any]) -> Path:
+def write_freeze(directory: str | Path, splits: dict[str, Iterable[dict[str, Any]]], source: dict[str, Any], progress=None) -> Path:
     """Materialise split iterables of P6-style items. Refuses non-empty destinations."""
     root = Path(directory)
     if root.exists() and any(root.iterdir()):
@@ -100,8 +100,12 @@ def write_freeze(directory: str | Path, splits: dict[str, Iterable[dict[str, Any
             entries.append({"split": split, "epoch": epoch, "path": name, "metadata": metadata,
                             "sha256": sample_sha(metadata, arrays)})
             count += 1
+            if progress and count % 256 == 0:
+                progress({"stage": "freezing", "split": split, "samples": count})
         if count == 0:
             raise ValueError(f"frozen {split} split is empty")
+        if progress:
+            progress({"stage": "frozen_split_complete", "split": split, "samples": count})
     manifest = {"format": FORMAT, "source": source, "samples": entries,
                 "train_epochs": len({e["epoch"] for e in entries if e["split"] == "train"})}
     manifest["checksum"] = json_sha(manifest)
@@ -139,7 +143,7 @@ def _online_worker(args: tuple[str, dict[str, Any], dict[str, Any], int, int, in
     from echospace.data import EchoSpaceDataset
 
     dataset = EchoSpaceDataset(room_cache_dir, folds, fold, "train", eval_spec=spec, seed=seed,
-                               samples_per_room=folds["_samples_per_room"], k_range=(8, 8))
+                             samples_per_room=folds["_samples_per_room"], k_range=(8, 8), max_cached_rooms=2)
     dataset.set_epoch(epoch)
     items = []
     for index in indices:
@@ -172,7 +176,7 @@ def online_items(room_cache_dir: str | Path, folds: dict[str, Any], spec: dict[s
 def freeze_p8(destination: str | Path, *, eval_dir: str | Path, folds_path: str | Path, eval_spec_path: str | Path,
               fold: int = 0, training_source: str = "online", room_cache_dir: str | Path | None = None,
               seed: int = 0, epochs: int = 10, samples_per_room: int = 20, workers: int = 1,
-              limit_train: int | None = None) -> Path:
+              limit_train: int | None = None, progress=None, provenance: dict | None = None) -> Path:
     from dataclasses import asdict
 
     from echospace.acoustics import AugmentConfig, RirConfig
@@ -202,7 +206,9 @@ def freeze_p8(destination: str | Path, *, eval_dir: str | Path, folds_path: str 
     splits = {"train": train,
               "val": fixed_items(eval_dir, folds, spec, fold, "val"),
               "test": fixed_items(eval_dir, folds, spec, fold, "test")}
-    return write_freeze(destination, splits, source)
+    if provenance is not None:
+        source["preflight"] = provenance
+    return write_freeze(destination, splits, source, progress=progress)
 
 
 # --- dataset -------------------------------------------------------------------------
@@ -211,7 +217,7 @@ class FrozenAudioDataset(Dataset):
     """Tensors for one split. ``k``: fixed K (eval); ``random_k``: uniform K range per sample and epoch (train)."""
 
     def __init__(self, manifest_path: str | Path, split: str, *, k: int | None = None,
-                 random_k: tuple[int, int] | None = None, seed: int = 0, verify: bool = True) -> None:
+                 random_k: tuple[int, int] | None = None, seed: int = 0, verify: bool = True, packed_dir=None) -> None:
         self.path = Path(manifest_path)
         self.manifest = json.loads(self.path.read_text(encoding="utf-8"))
         body = {key: value for key, value in self.manifest.items() if key != "checksum"}
@@ -232,6 +238,13 @@ class FrozenAudioDataset(Dataset):
             raise ValueError(f"empty frozen {split}")
         self.epochs = sorted({e["epoch"] for e in self.all_entries})
         self.set_epoch(0)
+        self._packed = None
+        self._packed_rows = {entry["path"]: i for i, entry in enumerate(self.manifest["samples"])}
+        if len(self._packed_rows) != len(self.manifest["samples"]):
+            raise ValueError("duplicate frozen sample paths")
+        if packed_dir is not None:
+            from .packed import open_packed
+            self._packed = open_packed(packed_dir, self.checksum, len(self.manifest["samples"]))
 
     @property
     def checksum(self) -> str:
@@ -259,8 +272,12 @@ class FrozenAudioDataset(Dataset):
         path = (self.path.parent / entry["path"]).resolve()
         if not path.is_relative_to(self.path.parent.resolve()):
             raise ValueError("sample path escapes the frozen directory")
-        with np.load(path, allow_pickle=False) as data:
-            arrays = {key: data[key].copy() for key in ARRAY_KEYS}
+        if self._packed is None:
+            with np.load(path, allow_pickle=False) as data:
+                arrays = {key: data[key].copy() for key in ARRAY_KEYS}
+        else:
+            row = self._packed_rows[entry["path"]]
+            arrays = {key: np.array(self._packed[key][row], copy=True) for key in ARRAY_KEYS}
         if self.verify and sample_sha(entry["metadata"], arrays) != entry["sha256"]:
             raise ValueError(f"frozen sample checksum mismatch: {entry['path']}")
         k = self.k_for(index, int(arrays["rir_valid"].sum()))

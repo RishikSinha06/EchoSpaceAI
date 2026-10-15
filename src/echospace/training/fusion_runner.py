@@ -15,6 +15,7 @@ learning gate for S) is computed from training targets only.
 from __future__ import annotations
 
 import hashlib
+import json
 import math
 import platform
 import subprocess
@@ -59,6 +60,7 @@ class FusionTrainConfig:
     evaluate_test: bool = True  # disable during tuning; evaluate only after settings are locked
     room_weighted_selection: bool = False
     selection_metric: str = "occupancy_iou"
+    packed_dir: str | None = None
 
     def __post_init__(self) -> None:
         if self.selection_metric not in ("occupancy_iou", "mean_head_iou"):
@@ -169,17 +171,22 @@ def _source_hashes() -> dict[str, str]:
 
 def run_fusion(variant: str, frozen_manifest: str | Path, output_dir: str | Path,
                config: FusionTrainConfig = FusionTrainConfig(), model_config: dict | None = None,
-               progress: Callable[[dict], None] | None = None) -> dict[str, Any]:
+               progress: Callable[[dict], None] | None = None, resume: bool = False) -> dict[str, Any]:
     root = Path(output_dir)
-    if root.exists() and any(root.iterdir()):
+    previous = None
+    if root.exists() and any(root.iterdir()) and not resume:
         raise ValueError("run destination must be empty; never overwrite a recorded run")
+    if resume:
+        previous = json.loads((root / "run.json").read_text(encoding="utf-8"))
+        if previous["status"] == "complete":
+            raise ValueError("run already complete; no resume is necessary")
     seed_everything(config.seed)
     torch.set_num_threads(config.threads)
     device = torch.device(config.device)
     if device.type == "cuda" and not torch.cuda.is_available():
         raise ValueError("CUDA requested but unavailable")
-    train = FrozenAudioDataset(frozen_manifest, "train", random_k=config.k_range, seed=config.seed)
-    val = FrozenAudioDataset(frozen_manifest, "val", k=config.selection_k)
+    train = FrozenAudioDataset(frozen_manifest, "train", random_k=config.k_range, seed=config.seed, packed_dir=config.packed_dir)
+    val = FrozenAudioDataset(frozen_manifest, "val", k=config.selection_k, packed_dir=config.packed_dir)
     checksum = train.checksum
     root.mkdir(parents=True, exist_ok=True)
     model = build(variant, model_config).to(device)
@@ -201,7 +208,15 @@ def run_fusion(variant: str, frozen_manifest: str | Path, output_dir: str | Path
         "selection": f"inner-validation {config.selection_metric}; room weighted={config.room_weighted_selection}; unobserved cells at K={config.selection_k}",
         "smoke_run": config.max_train_batches is not None, "history": [],
     }
-    atomic_json(root / "run.json", manifest)
+    if previous is not None:
+        for key in ("variant", "model", "config", "frozen_checksum", "source_files_sha256", "versions"):
+            if json.dumps(previous[key], sort_keys=True) != json.dumps(manifest[key], sort_keys=True):
+                raise ValueError(f"resume {key} differs from the recorded run")
+        manifest = previous
+        manifest["status"] = "running"
+        manifest.pop("error", None)
+    else:
+        atomic_json(root / "run.json", manifest)
     try:
         steps = len(train) // config.batch_size + (len(train) % config.batch_size > 0)
         if config.max_train_batches is not None:
@@ -210,7 +225,29 @@ def run_fusion(variant: str, frozen_manifest: str | Path, output_dir: str | Path
         scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, schedule(config, steps))
         scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
         best, best_epoch, bad = -math.inf, 0, 0
-        for epoch in range(1, config.epochs + 1):
+        start_epoch = 0
+        if previous is not None:
+            payload = torch.load(root / "last.pt", map_location="cpu", weights_only=True)
+            if payload.get("format") != CHECKPOINT_FORMAT or payload["frozen_checksum"] != checksum:
+                raise ValueError("resume checkpoint identity mismatch")
+            model.load_state_dict(payload["state_dict"], strict=True)
+            optimizer.load_state_dict(payload["optimizer"])
+            scheduler.load_state_dict(payload["scheduler"])
+            scaler.load_state_dict(payload["scaler"])
+            start_epoch, best_epoch, best, bad = payload["epoch"], payload["best_epoch"], payload["best_validation_iou"], payload["bad_epochs"]
+            manifest["history"] = payload["history"]
+            if len(manifest["history"]) != start_epoch:
+                raise ValueError("resume history does not match checkpoint epoch")
+            if start_epoch == best_epoch:
+                save_checkpoint(root / "best.pt", payload)
+            elif not (root / "best.pt").exists():
+                raise ValueError("resume best checkpoint is missing")
+            torch.set_rng_state(payload["torch_rng_state"])
+            if device.type == "cuda":
+                torch.cuda.set_rng_state_all(payload["cuda_rng_state"])
+            manifest.setdefault("resumed_from_epochs", []).append(start_epoch)
+            atomic_json(root / "run.json", manifest)
+        for epoch in range(start_epoch + 1, config.epochs + 1) if bad < config.patience else ():
             train.set_epoch(epoch - 1)
             generator = torch.Generator().manual_seed(config.seed * 1000 + epoch)
             loader = DataLoader(train, batch_size=config.batch_size, shuffle=True, generator=generator,
@@ -257,7 +294,9 @@ def run_fusion(variant: str, frozen_manifest: str | Path, output_dir: str | Path
                        "scheduler": scheduler.state_dict(), "scaler": scaler.state_dict(), "config": asdict(config),
                        "frozen_checksum": checksum, "best_epoch": best_epoch, "best_validation_iou": best,
                        "best_validation_score": best,
-                       "bad_epochs": bad, "torch_rng_state": torch.get_rng_state()}
+                       "bad_epochs": bad, "torch_rng_state": torch.get_rng_state(),
+                       "cuda_rng_state": torch.cuda.get_rng_state_all() if device.type == "cuda" else [],
+                       "history": list(manifest["history"])}
             save_checkpoint(root / "last.pt", payload)
             if improved:
                 save_checkpoint(root / "best.pt", payload)

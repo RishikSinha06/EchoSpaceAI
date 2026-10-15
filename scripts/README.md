@@ -158,3 +158,8 @@ For small-data training iterations, run `scripts/tune_small.py freeze`,
 predeclared trials and two seed confirmations use validation-only selection;
 the holdout is scored after selection is locked. See
 `docs/p9_iterations_handoff.md`.
+
+For full-fold augmented A/P/D training, use `python scripts/train_full_fold.py
+preflight`, then `python scripts/train_full_fold.py all --resume`. Preparation,
+training, locked final scoring and probability exports run sequentially. See
+`docs/p9_full_training_handoff.md` for progress files and resume behavior.

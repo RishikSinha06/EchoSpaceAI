@@ -1,0 +1,8 @@
+{
+  "format": "p9.full.1",
+  "variants": ["A", "P", "D"],
+  "model": {"width": 128, "channels": [32, 64, 128, 128], "audio_channels": [32, 64, 128, 128], "fusion_layers": 3, "heads": 4, "feedforward": 256, "fourier_bands": 8, "dropout": 0.1, "height_scale_m": 3.0, "rir_samples": 1280, "time_channel": true},
+  "training": {"seed": 0, "epochs": 100, "batch_size": 32, "learning_rate": 0.0003, "weight_decay": 0.0001, "warmup_epochs": 5, "patience": 15, "min_delta": 0.0001, "bce_weight": 1.0, "dice_weight": 1.0, "k_range": [1, 8], "selection_k": 8, "eval_k": [1, 2, 4, 8], "amp": true, "device": "cuda", "threads": 2, "workers": 0, "evaluate_test": false, "room_weighted_selection": true, "selection_metric": "mean_head_iou", "packed_dir": "data/cache/p9_full_fold0_packed"},
+  "freeze": {"fold": 0, "seed": 0, "training_source": "online", "epochs": 10, "samples_per_room": 20, "workers": 2},
+  "notes": "Authorized A/P/D proper larger-data round: full fold-0 room partitions, fresh simulated scans and locked P5 plus spatial training augmentation. Ten deterministic training draw sets cycle during optimization. Same model backbone and training settings; balanced occupancy/boundary room-averaged validation selection. All three fits lock before final test scoring. Original fold-0 test pool was evaluated previously; exploratory one-fold, one-seed comparison, not the full 75-run study."
+}

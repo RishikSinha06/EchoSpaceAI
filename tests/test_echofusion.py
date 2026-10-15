@@ -196,3 +196,42 @@ def test_tuning_defers_test_reads_and_selects_both_heads(frozen: Path, tmp_path:
     for row in run['history']:
         v = row['validation']
         assert row['selection_score'] == pytest.approx((v['room_occupancy_iou']+v['room_boundary_iou'])/2)
+
+
+def test_packed_audio_matches_original_across_k_epochs_and_detects_edits(frozen: Path, tmp_path: Path):
+    from echospace.training.packed import pack_freeze
+    packed = tmp_path/'packed'
+    pack_freeze(frozen, packed)
+    original = FrozenAudioDataset(frozen, 'train', random_k=(1,8), seed=7)
+    cached = FrozenAudioDataset(frozen, 'train', random_k=(1,8), seed=7, packed_dir=packed)
+    for epoch in (0,1,5):
+        original.set_epoch(epoch); cached.set_epoch(epoch)
+        for i in range(len(original)):
+            a,b = original[i],cached[i]
+            assert all(torch.equal(a[k], b[k]) for k in a)
+    broken = np.load(packed/'rir.npy', mmap_mode='r+')
+    broken[0,0,0] += np.float16(0.5)
+    broken.flush()
+    with pytest.raises(ValueError, match='checksum'):
+        FrozenAudioDataset(frozen, 'train', k=8, packed_dir=packed)
+    with pytest.raises(ValueError, match='checksum'):
+        cached[0]
+
+
+@pytest.mark.parametrize('device', ['cpu','cuda'])
+def test_resume_matches_uninterrupted_training(frozen: Path, tmp_path: Path, device):
+    if device=='cuda' and not torch.cuda.is_available():
+        pytest.skip('CUDA is unavailable')
+    config = FusionTrainConfig(epochs=3, batch_size=4, warmup_epochs=1, threads=2, evaluate_test=False, device=device)
+    model_config = dict(SMALL, dropout=0.1)
+    whole = run_fusion('A', frozen, tmp_path/'whole', config, model_config)
+    def interrupt(row):
+        if row['epoch']==1:
+            raise RuntimeError('simulated interruption')
+    with pytest.raises(RuntimeError, match='simulated'):
+        run_fusion('A', frozen, tmp_path/'resumed', config, model_config, progress=interrupt)
+    resumed = run_fusion('A', frozen, tmp_path/'resumed', config, model_config, resume=True)
+    assert resumed['history']==whole['history']
+    first,_=load_fusion_checkpoint(tmp_path/'whole'/'best.pt')
+    second,_=load_fusion_checkpoint(tmp_path/'resumed'/'best.pt')
+    assert all(torch.equal(value,second.state_dict()[key]) for key,value in first.state_dict().items())

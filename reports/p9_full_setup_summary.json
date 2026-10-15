@@ -1,0 +1,33 @@
+{
+  "preflight_gate": "PASS",
+  "rooms": 249,
+  "cached_pairs": 271599,
+  "splits": {
+    "train": {
+      "rooms": 171,
+      "groups": 99
+    },
+    "val": {
+      "rooms": 27,
+      "groups": 18
+    },
+    "test": {
+      "rooms": 51,
+      "groups": 30
+    }
+  },
+  "training_samples_per_draw": 3420,
+  "planned_draw_sets": 10,
+  "planned_augmented_training_samples": 34200,
+  "preflight_sha256": "7438b286bede2f490e171b0c89c37adc30201c2e341185a4f728c23338acbbf5",
+  "tests": {
+    "passed": 133,
+    "seconds": 96.66
+  },
+  "integration_gate": {
+    "status": "PASS",
+    "contract_predictions": 12,
+    "scope": "tiny verified real subset, technical check only"
+  },
+  "full_round_status": "preflight_complete; training results pending"
+}
