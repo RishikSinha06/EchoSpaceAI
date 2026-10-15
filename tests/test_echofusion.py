@@ -179,3 +179,20 @@ def test_run_selects_on_validation_and_scores_test_at_each_k(frozen: Path, tmp_p
         run_fusion("D", frozen, tmp_path / "D", config, SMALL)
     trivial = mean_shape_baseline(FrozenAudioDataset(frozen, "train", k=8), FrozenAudioDataset(frozen, "test", k=8))
     assert 0.0 <= trivial["occupancy_iou"] <= 1.0
+
+
+def test_tuning_defers_test_reads_and_selects_both_heads(frozen: Path, tmp_path: Path, monkeypatch) -> None:
+    import echospace.training.fusion_runner as runner
+    original = runner.FrozenAudioDataset
+    def guarded(path, split, **kwargs):
+        assert split != 'test', 'tuning must never construct a test dataset'
+        return original(path, split, **kwargs)
+    monkeypatch.setattr(runner, 'FrozenAudioDataset', guarded)
+    config = FusionTrainConfig(epochs=2, batch_size=4, warmup_epochs=1, threads=2,
+                              evaluate_test=False, room_weighted_selection=True, selection_metric='mean_head_iou')
+    run = run_fusion('A', frozen, tmp_path/'tuning', config, SMALL)
+    assert run['test_evaluation_deferred'] and run['test_metrics'] == {}
+    assert not list((tmp_path/'tuning').glob('test_rows*'))
+    for row in run['history']:
+        v = row['validation']
+        assert row['selection_score'] == pytest.approx((v['room_occupancy_iou']+v['room_boundary_iou'])/2)

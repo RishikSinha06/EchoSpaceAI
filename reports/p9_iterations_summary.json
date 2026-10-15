@@ -1,0 +1,364 @@
+{
+  "format": "p9.iteration_report.1",
+  "gate": "PASS",
+  "winner": "A_reference",
+  "deploy_seed": 0,
+  "frozen_checksum": "7744fb4cfb9f206cb8fae261c67565031b61b687bc1e6e1ad0413fb860c765c1",
+  "source": {
+    "kind": "P9_validation_search_fixed_masks",
+    "selection": {
+      "train": {
+        "groups": [
+          7,
+          13,
+          17,
+          18,
+          19,
+          21,
+          27,
+          31,
+          38,
+          42,
+          50,
+          63,
+          83,
+          85,
+          95,
+          96,
+          97,
+          104,
+          119,
+          139
+        ],
+        "rooms": [
+          "Apartments_idx_13",
+          "Apartments_idx_18",
+          "Apartments_idx_19",
+          "Apartments_idx_21",
+          "Apartments_idx_23",
+          "Apartments_idx_29",
+          "Apartments_idx_33",
+          "Apartments_idx_46",
+          "Apartments_idx_52",
+          "Apartments_idx_53",
+          "Apartments_idx_57",
+          "Apartments_idx_58",
+          "Apartments_idx_7",
+          "Bathrooms_idx_1",
+          "Bathrooms_idx_21",
+          "Bathrooms_idx_9",
+          "Bedrooms_idx_2",
+          "Bedrooms_idx_22",
+          "ListeningRoom_idx_1",
+          "LivingRoomsWithHallway_idx_1",
+          "LivingRoomsWithHallway_idx_11",
+          "LivingRoomsWithHallway_idx_12",
+          "LivingRoomsWithHallway_idx_13",
+          "LivingRoomsWithHallway_idx_21",
+          "LivingRoomsWithHallway_idx_31",
+          "LivingRoomsWithHallway_idx_32",
+          "LivingRoomsWithHallway_idx_33",
+          "MeetingRoom_idx_0",
+          "MeetingRoom_idx_15",
+          "MeetingRoom_idx_20",
+          "MeetingRoom_idx_35",
+          "Restaurants_idx_28",
+          "Restaurants_idx_8"
+        ]
+      },
+      "val": {
+        "groups": [
+          33,
+          58,
+          102,
+          115,
+          149
+        ],
+        "rooms": [
+          "Apartments_idx_35",
+          "Bathrooms_idx_18",
+          "LivingRoomsWithHallway_idx_18",
+          "LivingRoomsWithHallway_idx_38",
+          "MeetingRoom_idx_11",
+          "MeetingRoom_idx_31",
+          "Restaurants_idx_18",
+          "Restaurants_idx_38"
+        ]
+      },
+      "test": {
+        "groups": [
+          10,
+          60,
+          88,
+          109,
+          143
+        ],
+        "rooms": [
+          "Apartments_idx_10",
+          "Apartments_idx_49",
+          "Bathrooms_idx_29",
+          "LivingRoomsWithHallway_idx_24",
+          "LivingRoomsWithHallway_idx_4",
+          "MeetingRoom_idx_25",
+          "MeetingRoom_idx_5",
+          "Restaurants_idx_12",
+          "Restaurants_idx_32"
+        ]
+      }
+    },
+    "selection_checksum": "dc0702fe0ce87362c0830123395f97a8ed48bcf1a2d6f62f3afc62ab07664ff2",
+    "fold": 0,
+    "training_augmentation": "none",
+    "folds_sha256": "b6e8d8ed28fc533abf2a72710e898d8cbd52861f00b41e0927edd98a185bed84",
+    "eval_spec_checksum": "8cfcc7781a5824481f3019f9668b1dbcf7a8ff123fd22e9fbfd0d8cc3b80f186",
+    "excluded_previous_P9_test_groups": [
+      8,
+      22,
+      86,
+      114,
+      137
+    ],
+    "holdout_scope": "new to this tuning round; broader fold-0 test pool previously evaluated in P7"
+  },
+  "validation_trials": [
+    {
+      "trial": "A_reference",
+      "seed": 0,
+      "path": "artifacts\\p9_iterations\\A_reference\\seed0",
+      "best_epoch": 9,
+      "epochs_completed": 19,
+      "score": 0.48173528574965585,
+      "validation": {
+        "loss": 0.77166109793895,
+        "occupancy_iou": 0.6531879773011079,
+        "boundary_iou": 0.259825041165223,
+        "samples": 148,
+        "room_occupancy_iou": 0.68087389317757,
+        "room_boundary_iou": 0.28259667832174173
+      },
+      "checkpoint_sha256": "0861687e82716a01b58e30d1ca76e6951108763808bbb5c819a187ab24f22862",
+      "parameters": 1674818
+    },
+    {
+      "trial": "A_compact",
+      "seed": 0,
+      "path": "artifacts\\p9_iterations\\A_compact\\seed0",
+      "best_epoch": 26,
+      "epochs_completed": 36,
+      "score": 0.4392473525068185,
+      "validation": {
+        "loss": 0.7536250771702947,
+        "occupancy_iou": 0.6128018353436444,
+        "boundary_iou": 0.20604674075100873,
+        "samples": 148,
+        "room_occupancy_iou": 0.6502605120373208,
+        "room_boundary_iou": 0.22823419297631622
+      },
+      "checkpoint_sha256": "09940c86c0e58adb477626e2b743c6a2034cb2bc783987dd853906c603441f57",
+      "parameters": 355234
+    },
+    {
+      "trial": "A_regularized",
+      "seed": 0,
+      "path": "artifacts\\p9_iterations\\A_regularized\\seed0",
+      "best_epoch": 11,
+      "epochs_completed": 21,
+      "score": 0.4407078242264064,
+      "validation": {
+        "loss": 0.9175825183456009,
+        "occupancy_iou": 0.6414159214174425,
+        "boundary_iou": 0.17781504908123533,
+        "samples": 148,
+        "room_occupancy_iou": 0.6818481473270348,
+        "room_boundary_iou": 0.19956750112577806
+      },
+      "checkpoint_sha256": "bbea08cc6479bcb3c8603409b936f5207f4802c9d422a9afe517ded3b3f7f535",
+      "parameters": 355234
+    },
+    {
+      "trial": "A_slow_long",
+      "seed": 0,
+      "path": "artifacts\\p9_iterations\\A_slow_long\\seed0",
+      "best_epoch": 23,
+      "epochs_completed": 38,
+      "score": 0.4172861992548478,
+      "validation": {
+        "loss": 0.8940361931517318,
+        "occupancy_iou": 0.5964582288587416,
+        "boundary_iou": 0.19881961716187968,
+        "samples": 148,
+        "room_occupancy_iou": 0.6225868577262748,
+        "room_boundary_iou": 0.21198554078342086
+      },
+      "checkpoint_sha256": "a5c8722fa858bcf20bf92da7c079eee5442b0a6a3695051b65d655b2eee9b3c2",
+      "parameters": 355234
+    },
+    {
+      "trial": "C_compact",
+      "seed": 0,
+      "path": "artifacts\\p9_iterations\\C_compact\\seed0",
+      "best_epoch": 22,
+      "epochs_completed": 32,
+      "score": 0.4591283625093652,
+      "validation": {
+        "loss": 0.8004852823308997,
+        "occupancy_iou": 0.6221071836110708,
+        "boundary_iou": 0.23363840177252487,
+        "samples": 148,
+        "room_occupancy_iou": 0.6545455283091649,
+        "room_boundary_iou": 0.26371119670956544
+      },
+      "checkpoint_sha256": "08ba7203446559e0a3e812fc6bcd259f77ffe39499ef8baddae5cc76682e43d0",
+      "parameters": 421202
+    },
+    {
+      "trial": "D_compact",
+      "seed": 0,
+      "path": "artifacts\\p9_iterations\\D_compact\\seed0",
+      "best_epoch": 18,
+      "epochs_completed": 28,
+      "score": 0.46539096557798826,
+      "validation": {
+        "loss": 0.7919312796077213,
+        "occupancy_iou": 0.6291966083887461,
+        "boundary_iou": 0.233835705228754,
+        "samples": 148,
+        "room_occupancy_iou": 0.6690377769269555,
+        "room_boundary_iou": 0.261744154229021
+      },
+      "checkpoint_sha256": "26449c926a4146cd315688c21ed7321018efa58db5ddd8e31e44093b38e2a14d",
+      "parameters": 429842
+    },
+    {
+      "trial": "A_reference",
+      "seed": 1,
+      "path": "artifacts\\p9_iterations\\A_reference\\seed1",
+      "best_epoch": 12,
+      "epochs_completed": 22,
+      "score": 0.478764556932608,
+      "validation": {
+        "loss": 0.7314788586384541,
+        "occupancy_iou": 0.6434914002547393,
+        "boundary_iou": 0.25428335247813044,
+        "samples": 148,
+        "room_occupancy_iou": 0.6798551366605046,
+        "room_boundary_iou": 0.27767397720471143
+      },
+      "checkpoint_sha256": "b25aefb5c539f8c0ad3fe5a23c47282f3b0351044d66d08b464db79acda880a4",
+      "parameters": 1674818
+    },
+    {
+      "trial": "D_compact",
+      "seed": 1,
+      "path": "artifacts\\p9_iterations\\D_compact\\seed1",
+      "best_epoch": 14,
+      "epochs_completed": 24,
+      "score": 0.4372602854478975,
+      "validation": {
+        "loss": 0.8381758058393324,
+        "occupancy_iou": 0.6062657510912096,
+        "boundary_iou": 0.21417403784958092,
+        "samples": 148,
+        "room_occupancy_iou": 0.638099716646451,
+        "room_boundary_iou": 0.236420854249344
+      },
+      "checkpoint_sha256": "8a47254bdf62eb836408c3755b1d5773d4b5085219d6bced87c2949aebc81b04",
+      "parameters": 429842
+    }
+  ],
+  "confirmation_mean_scores": {
+    "A_reference": 0.4802499213411319,
+    "D_compact": 0.45132562551294286
+  },
+  "test": {
+    "A_reference_seed0": {
+      "sample_weighted": {
+        "loss": 0.7528609023697075,
+        "occupancy_iou": 0.6256799999324755,
+        "boundary_iou": 0.2304253550781601,
+        "samples": 174
+      },
+      "room_weighted": {
+        "rooms": 9,
+        "samples": 174,
+        "occupancy_iou": 0.6644672553206112,
+        "boundary_iou": 0.2665798786994459,
+        "loss": 0.7495018495005883
+      },
+      "mean_head_iou": 0.46552356701002856,
+      "checkpoint_sha256": "0861687e82716a01b58e30d1ca76e6951108763808bbb5c819a187ab24f22862",
+      "cpu_replay_max_probability_error": 3.2782554626464844e-06
+    },
+    "A_reference_seed1": {
+      "sample_weighted": {
+        "loss": 0.7093448200445066,
+        "occupancy_iou": 0.5938925304632078,
+        "boundary_iou": 0.20830279383166084,
+        "samples": 174
+      },
+      "room_weighted": {
+        "rooms": 9,
+        "samples": 174,
+        "occupancy_iou": 0.638677905422566,
+        "boundary_iou": 0.23782861009170253,
+        "loss": 0.7000971519229345
+      },
+      "mean_head_iou": 0.43825325775713425,
+      "checkpoint_sha256": "b25aefb5c539f8c0ad3fe5a23c47282f3b0351044d66d08b464db79acda880a4",
+      "cpu_replay_max_probability_error": 6.22868537902832e-06
+    }
+  },
+  "prediction_count": 348,
+  "deployment": {
+    "checkpoint_path": "artifacts\\p9_iterations\\A_reference\\seed0/best.pt",
+    "checkpoint_sha256": "0861687e82716a01b58e30d1ca76e6951108763808bbb5c819a187ab24f22862",
+    "model": {
+      "version": "p8.model.1",
+      "family": "EchoFusion",
+      "variant": "A",
+      "config": {
+        "width": 128,
+        "channels": [
+          32,
+          64,
+          128,
+          128
+        ],
+        "audio_channels": [
+          32,
+          64,
+          128,
+          128
+        ],
+        "fusion_layers": 3,
+        "heads": 4,
+        "feedforward": 256,
+        "fourier_bands": 8,
+        "dropout": 0.1,
+        "height_scale_m": 3.0,
+        "rir_samples": 1280,
+        "time_channel": true
+      }
+    },
+    "seed": 0,
+    "selection": "locked two-seed mean validation objective; no holdout-based selection"
+  },
+  "scope": "new to this tuning round; broader fold-0 test pool previously evaluated in P7",
+  "study_sha256_before_holdout": "d126214e867b11ec3ef2c00725381b4e78fc49ae1d0f40d68888dc655e879b5d",
+  "visual_sample_ids": [
+    "Apartments_idx_10__l_wing__high__1000001",
+    "Apartments_idx_49__viewpoint__high__1000000",
+    "Bathrooms_idx_29__doorway__mid__1000001",
+    "LivingRoomsWithHallway_idx_24__viewpoint__high__1000000",
+    "LivingRoomsWithHallway_idx_4__missing_wall__low__1000000",
+    "MeetingRoom_idx_5__missing_wall__mid__1000001"
+  ],
+  "visual_comparison_labels": [
+    "A_reference_seed0",
+    "A_reference_seed1"
+  ],
+  "tests": {
+    "passed": 130,
+    "seconds": 211.62
+  }
+}

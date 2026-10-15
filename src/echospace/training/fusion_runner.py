@@ -56,8 +56,13 @@ class FusionTrainConfig:
     threads: int = 2
     workers: int = 0
     max_train_batches: int | None = None  # smoke runs only; recorded in the run manifest
+    evaluate_test: bool = True  # disable during tuning; evaluate only after settings are locked
+    room_weighted_selection: bool = False
+    selection_metric: str = "occupancy_iou"
 
     def __post_init__(self) -> None:
+        if self.selection_metric not in ("occupancy_iou", "mean_head_iou"):
+            raise ValueError("unknown validation selection metric")
         if min(self.epochs, self.batch_size, self.patience, self.threads) < 1 or self.seed < 0 or self.workers < 0:
             raise ValueError("epochs, batch size, patience, threads must be positive; seed and workers nonnegative")
         if not (0 < self.learning_rate and self.weight_decay >= 0 and self.warmup_epochs >= 0):
@@ -193,7 +198,7 @@ def run_fusion(variant: str, frozen_manifest: str | Path, output_dir: str | Path
                      "cuda": torch.version.cuda},
         "device": str(device), "device_name": torch.cuda.get_device_name(device) if device.type == "cuda" else platform.processor(),
         "loss_domain": "valid_cells=1 AND observed_cells=0; per-sample BCE+Dice, mean of two heads (P7 loss)",
-        "selection": f"inner-validation occupancy IoU on unobserved cells at K={config.selection_k}",
+        "selection": f"inner-validation {config.selection_metric}; room weighted={config.room_weighted_selection}; unobserved cells at K={config.selection_k}",
         "smoke_run": config.max_train_batches is not None, "history": [],
     }
     atomic_json(root / "run.json", manifest)
@@ -230,20 +235,28 @@ def run_fusion(variant: str, frozen_manifest: str | Path, output_dir: str | Path
                 scheduler.step()
                 total += float(loss.detach()) * len(batch["k"])
                 seen += len(batch["k"])
-            validation, _ = evaluate(model, val, config, device)
-            score = validation["occupancy_iou"]
+            validation, rows = evaluate(model, val, config, device, keep_rows=config.room_weighted_selection)
+            if config.room_weighted_selection:
+                from .demo import room_metrics
+                balanced = room_metrics(rows)
+                validation.update(room_occupancy_iou=balanced["occupancy_iou"], room_boundary_iou=balanced["boundary_iou"])
+            prefix = "room_" if config.room_weighted_selection else ""
+            score = validation[prefix + "occupancy_iou"]
+            if config.selection_metric == "mean_head_iou":
+                score = (score + validation[prefix + "boundary_iou"]) / 2
             improved = score > best + config.min_delta
             if improved:
                 best, best_epoch, bad = score, epoch, 0
             else:
                 bad += 1
             row = {"epoch": epoch, "train_loss": total / max(1, seen), "learning_rate": scheduler.get_last_lr()[0],
-                   "validation": validation, "improved": improved}
+                   "validation": validation, "selection_score": score, "improved": improved}
             manifest["history"].append(row)
             payload = {"format": CHECKPOINT_FORMAT, "epoch": epoch, "model": model.specification(),
                        "state_dict": model.state_dict(), "optimizer": optimizer.state_dict(),
                        "scheduler": scheduler.state_dict(), "scaler": scaler.state_dict(), "config": asdict(config),
                        "frozen_checksum": checksum, "best_epoch": best_epoch, "best_validation_iou": best,
+                       "best_validation_score": best,
                        "bad_epochs": bad, "torch_rng_state": torch.get_rng_state()}
             save_checkpoint(root / "last.pt", payload)
             if improved:
@@ -256,17 +269,19 @@ def run_fusion(variant: str, frozen_manifest: str | Path, output_dir: str | Path
         model, chosen = load_fusion_checkpoint(root / "best.pt", checksum)
         model.to(device)
         manifest.update(best_epoch=chosen["epoch"], best_validation_iou=chosen["best_validation_iou"],
+                        best_validation_score=chosen.get("best_validation_score", chosen["best_validation_iou"]),
                         checkpoint_sha256=hashlib.sha256((root / "best.pt").read_bytes()).hexdigest(),
                         stop_reason="early_stopping" if bad >= config.patience else "epoch_limit")
         # Held-out data are first read here, after every selection decision.
         results: dict[str, Any] = {}
-        for k in config.eval_k:
+        for k in config.eval_k if config.evaluate_test else ():
             test = FrozenAudioDataset(frozen_manifest, "test", k=k)
             metrics, rows = evaluate(model, test, config, device, keep_rows=True)
             results[f"K={k}"] = metrics
             atomic_json(root / f"test_rows_K{k}.json", {"variant": variant, "k": k, "frozen_checksum": checksum,
                                                          "checkpoint_sha256": manifest["checkpoint_sha256"], "rows": rows})
         manifest["test_metrics"] = results
+        manifest["test_evaluation_deferred"] = not config.evaluate_test
         manifest["status"] = "complete"
         atomic_json(root / "run.json", manifest)
         return manifest

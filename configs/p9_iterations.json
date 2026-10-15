@@ -1,0 +1,16 @@
+{
+  "format": "p9.iterations.1",
+  "base_config": "configs/p9_demo.json",
+  "selection": {"metric": "equal-room mean of occupancy and boundary IoU at K=8", "confirmation_seeds": [0, 1], "deploy_seed": 0},
+  "trials": [
+    {"id": "A_reference", "variant": "A", "model": {}, "training": {}},
+    {"id": "A_compact", "variant": "A", "compact": true, "model": {}, "training": {}},
+    {"id": "A_regularized", "variant": "A", "compact": true, "model": {"dropout": 0.2}, "training": {"weight_decay": 0.001}},
+    {"id": "A_slow_long", "variant": "A", "compact": true, "model": {"dropout": 0.2}, "training": {"weight_decay": 0.001, "learning_rate": 0.00015, "epochs": 70, "patience": 15}},
+    {"id": "C_compact", "variant": "C", "compact": true, "model": {"dropout": 0.2}, "training": {"weight_decay": 0.001}},
+    {"id": "D_compact", "variant": "D", "compact": true, "model": {"dropout": 0.2}, "training": {"weight_decay": 0.001}}
+  ],
+  "compact_model": {"width": 64, "channels": [16, 32, 64, 64], "audio_channels": [16, 32, 64, 64], "fusion_layers": 1, "feedforward": 128},
+  "holdout": {"fold": 0, "groups": 5, "seed": 13, "exclude_previous_demo_test": true},
+  "notes": "Six preset trials plus seed-1 confirmation of top two, no trial test evaluation. Same 20/5 training/validation groups as P9. New holdout groups for this tuning round; original fold-0 test pool was evaluated in P7, so final results remain exploratory. No architecture or threshold choices based on holdout results."
+}

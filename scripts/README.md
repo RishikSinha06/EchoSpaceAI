@@ -152,3 +152,9 @@ from the original P6 partitions and freezes verified masks with audio.
 `python scripts/report_demo.py` replays checkpoints, exports held-out predictions
 and creates `artifacts/p9_demo/demonstration/index.html`. See
 `docs/p9_demo_handoff.md` for scope, settings and output provenance.
+
+For small-data training iterations, run `scripts/tune_small.py freeze`,
+`scripts/tune_small.py search`, then `scripts/report_iterations.py`. Six
+predeclared trials and two seed confirmations use validation-only selection;
+the holdout is scored after selection is locked. See
+`docs/p9_iterations_handoff.md`.
