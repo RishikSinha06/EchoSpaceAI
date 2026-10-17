@@ -1,0 +1,172 @@
+{
+ "description": "Shared fixture: Python (src/echospace/inference/export.py) and the browser (apps/web/src/grid.js) must produce these exact numbers for this echospace.grid.v2 document.",
+ "document": {
+  "format": "echospace.grid.v2",
+  "name": "agreement",
+  "cell_size_m": 0.2,
+  "width": 6,
+  "height": 5,
+  "origin_scene_m": [
+   1.0,
+   1.1,
+   -2.0
+  ],
+  "axis_u_scene": [
+   0.8660254037844387,
+   0.0,
+   0.49999999999999994
+  ],
+  "axis_v_scene": [
+   -0.49999999999999994,
+   0.0,
+   0.8660254037844387
+  ],
+  "wall_height_m": 2.5,
+  "wall_height_assumed": true,
+  "interior": [
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   [
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   [
+    0,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  ],
+  "observed": [
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   [
+    1,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  ],
+  "observed_wall": [
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  ]
+ },
+ "document_sha256": "b621494aba61c72dece928840769d8750a0d5bd03c057a7df8c0916527456013",
+ "expected": {
+  "floor_triangles": 22,
+  "observed_wall_triangles": 6,
+  "inferred_wall_triangles": 22,
+  "area_m2": 0.44,
+  "observed_wall_m": 0.6,
+  "inferred_wall_m": 2.2,
+  "bounds_min": [
+   0.77321,
+   0.0,
+   -1.72679
+  ],
+  "bounds_max": [
+   1.76603,
+   2.5,
+   -0.90718
+  ]
+ }
+}
