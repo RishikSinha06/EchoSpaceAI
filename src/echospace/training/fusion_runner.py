@@ -27,7 +27,8 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 
-from echospace.models.echofusion import EchoFusion, build
+from echospace.models.echofusion import EchoFusion
+from echospace.models.factory import build, from_specification
 
 from .audio_frozen import FrozenAudioDataset
 from .losses import masked_bce_dice, masked_loss_per_sample
@@ -158,7 +159,7 @@ def load_fusion_checkpoint(path: str | Path, expected_frozen_checksum: str | Non
         raise ValueError("unknown checkpoint format")
     if expected_frozen_checksum is not None and payload["frozen_checksum"] != expected_frozen_checksum:
         raise ValueError("checkpoint belongs to another frozen dataset")
-    model = build(payload["model"]["variant"], payload["model"]["config"])
+    model = from_specification(payload["model"])
     model.load_state_dict(payload["state_dict"], strict=True)
     return model, payload
 
@@ -192,7 +193,8 @@ def run_fusion(variant: str, frozen_manifest: str | Path, output_dir: str | Path
     model = build(variant, model_config).to(device)
     use_amp = bool(config.amp and device.type == "cuda")
     try:
-        revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=Path(__file__).resolve().parents[3],
+        repository = Path(__file__).resolve().parents[3]
+        revision = subprocess.check_output(["git", "-c", f"safe.directory={repository.as_posix()}", "rev-parse", "HEAD"], cwd=repository,
                                            stderr=subprocess.DEVNULL).decode().strip()
     except (OSError, subprocess.CalledProcessError):
         revision = "unavailable"

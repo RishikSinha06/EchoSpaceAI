@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-17",
+  "status": "implementation and launch gates passed; full study pending",
+  "models": [
+    "EchoFusion",
+    "WallFusion"
+  ],
+  "full_python_suite": {
+    "passed": 144,
+    "seconds": 104.46
+  },
+  "physical_resume_tests": "CPU and CUDA exact interrupted/uninterrupted equality; masking, pair-order, timing, interpolation and preparation recovery passed",
+  "real_data_integration": {
+    "fits": 7,
+    "epochs_per_fit": 1,
+    "max_train_batches": 1,
+    "test_scored": false,
+    "scope": "technical gate only; not model performance"
+  },
+  "accepted_cache_rooms": 249,
+  "scheduled_fits": {
+    "pilot": 21,
+    "full_models": 30,
+    "controls": 45,
+    "ablations": 6,
+    "total": 102
+  },
+  "production_ready": false,
+  "pending": [
+    "full study results",
+    "independent measured rooms supplied later",
+    "calibration and robustness",
+    "end-to-end inference/runtime release gates"
+  ]
+}

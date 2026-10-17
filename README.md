@@ -1,5 +1,9 @@
 # EchoSpace AI
 
+The local five-fold EchoFusion/WallFusion comparison is documented in
+[docs/dual_architecture_training_handoff.md](docs/dual_architecture_training_handoff.md).
+It is an internal training study; independent measured-room production validation is pending.
+
 Research workspace for acoustic-assisted completion of partially observed single-room floor plans.
 
 ## What works now

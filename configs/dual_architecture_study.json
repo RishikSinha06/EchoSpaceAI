@@ -1,0 +1,23 @@
+{
+  "format": "dual.study.1",
+  "authorization": {"scope": "full study with controls", "compute": "local CUDA only; no paid services", "independent_measured_rooms": "pending user capture"},
+  "folds": [0, 1, 2, 3, 4],
+  "seeds": [0, 1, 2],
+  "preparation": {"seed": 0, "epochs": 10, "samples_per_room": 20, "workers": 2},
+  "pilot": {"groups": {"train": 20, "val": 5, "test": 1}, "draws": 2, "epochs": 40, "patience": 10},
+  "training": {"epochs": 100, "batch_size": 8, "learning_rate": 0.0003, "weight_decay": 0.0001, "warmup_epochs": 5, "patience": 15, "min_delta": 0.0001, "bce_weight": 1.0, "dice_weight": 1.0, "k_range": [1, 8], "selection_k": 8, "eval_k": [1, 2, 4, 8], "amp": true, "device": "cuda", "threads": 2, "workers": 0, "evaluate_test": false, "room_weighted_selection": true, "selection_metric": "mean_head_iou"},
+  "backbone": {"width": 128, "channels": [32, 64, 128, 128], "audio_channels": [32, 64, 128, 128], "fusion_layers": 3, "heads": 4, "feedforward": 256, "fourier_bands": 8, "dropout": 0.1, "height_scale_m": 3.0, "rir_samples": 1280, "time_channel": true},
+  "wall": {"temporal_channels": 16, "temporal_tokens": 40, "wall_resolution": 32, "wall_orientations": 32, "wall_chunk": 128, "speed_of_sound_m_s": 343.0, "sample_rate_hz": 16000, "delay_tolerance_ms": 0.5, "physics_enabled": true, "multiscale_enabled": true},
+  "models": [
+    {"name": "echo_A", "family": "EchoFusion", "variant": "A"},
+    {"name": "echo_P", "family": "EchoFusion", "variant": "P"},
+    {"name": "echo_D", "family": "EchoFusion", "variant": "D"},
+    {"name": "wall_P", "family": "WallFusion", "variant": "P"},
+    {"name": "wall_D", "family": "WallFusion", "variant": "D"}
+  ],
+  "ablations": [
+    {"name": "wall_temporal_only", "family": "WallFusion", "variant": "D", "overrides": {"physics_enabled": false}},
+    {"name": "wall_single_scale", "family": "WallFusion", "variant": "D", "overrides": {"multiscale_enabled": false}}
+  ],
+  "notes": "75 full core fits (30 full-model fits plus 45 controls), 6 fold-0 full ablation fits, 21 pilot fits. Fixed architecture settings; no automated test-based architecture/loss tuning. Same immutable samples, batch size and optimization recipe across families. Original explored dataset supplies internal cross-validation only. New model is experimental, not certified novel or production validated."
+}
