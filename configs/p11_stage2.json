@@ -1,0 +1,15 @@
+{
+  "format": "p11.stage2.1",
+  "source_study": "artifacts/dual_study_20261017",
+  "source_config": "configs/dual_architecture_study.json",
+  "variants": ["C", "S"],
+  "folds": [0, 1, 2, 3, 4],
+  "seeds": [0, 1, 2],
+  "evaluation_k": [1, 2, 4, 8],
+  "stage_order": ["freeze_stage1", "train_C_S", "lock_C_S", "grouped_reporting", "retrained_window_sweep", "robustness", "calibration", "external_real_rooms"],
+  "diagnostic_only": {"window_ms": [40, 60, 80], "noise_snr_db": 20, "gain_db": [-6, 6], "timing_shift_samples": [-3, 3], "pose_max_abs_error_m": 0.05},
+  "threshold": 0.5,
+  "threshold_note": "Existing frozen value; validation-selected temperature does not change the threshold. Original protocol deviation remains disclosed.",
+  "compute": "local only; do not start concurrent GPU studies",
+  "external_datasets": "not enabled; every candidate requires its own audit"
+}

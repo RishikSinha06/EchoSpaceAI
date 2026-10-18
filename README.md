@@ -87,3 +87,8 @@ The browser currently lists meshes but does not display RIRs or source/receiver
 markers. Some `simulation_info` JSON names disagree with their folders; the
 audited folder key must be used when joining positions. AcousticRooms OBJ files
 use Z as the vertical axis. The browser rotates them into its Y-up frame.
+
+Conditional Stage II diagnostics, acoustic controls, calibration and gated C/S
+continuation are documented in [docs/p11_stage2_handoff.md](docs/p11_stage2_handoff.md).
+This tooling does not imply the ongoing study or independent real-room validation
+is complete.
