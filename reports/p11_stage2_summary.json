@@ -1,0 +1,2611 @@
+{
+  "format": "p11.report.1",
+  "gate": "PASS_IMPLEMENTATION_AND_ORIGINAL_P9_DIAGNOSTICS",
+  "stage2_research_complete": false,
+  "production_ready": false,
+  "scope": "exploratory original P9 fold0 seed0; previously exposed test population",
+  "scored_conditions": 22,
+  "sample_predictions": 19756,
+  "independent_units": {
+    "rooms": 51,
+    "physical_room_groups": 30,
+    "training_seeds": 1,
+    "folds": 1
+  },
+  "identity": {
+    "frozen_checksum": "6d4231aa85fa39f84de064116d9c9b03f6725a69dabfbedbd1cf0147b4c91b28",
+    "selection_sha256": "a8170e7b63547913d47bdc47f39461966f289b99ab9ee0a4ecef3b47607b59c1",
+    "checkpoint_sha256": [
+      "3dae169e5fca1403c275332fee18d16b38766a39c178b914d3805ee37088bd20",
+      "0526fb15e766332419c23d85a15f4a87be10e8f258c4aea8b549c2e489cf6275",
+      "7482ee9a6c9df9d728fc566f4d5dee12ceb4994d5eb4f2689b1df5e5cadad55e"
+    ]
+  },
+  "plan_sha256": "91209063605e89dae25a8f45b1faeb404c08889935505841d47db4f8a46fa0fe",
+  "source_hashes": {
+    "src\\echospace\\__init__.py": "06e51cf09c8048283444f45d98871b006ad4ce7827fa56a9bbd4499e3011dddd",
+    "src\\echospace\\acoustics\\__init__.py": "e4e51cbc6cf86c4be0fbabb21ffc801cbe5081f8019d12799ae3147048cc20b0",
+    "src\\echospace\\acoustics\\augmentation.py": "e2421a6047c3262022e3dfa35f788aac6ce1d3ad01e14c36fae74595d91dab38",
+    "src\\echospace\\acoustics\\bundles.py": "cb37b06824fa2c2fd73d2054549af33a16e64eb226b081a80be328c72c51fb29",
+    "src\\echospace\\acoustics\\cache.py": "655ad8150f27c03e84fa27161feeff11458ec2702a8957648fdd0b4f9246027c",
+    "src\\echospace\\acoustics\\rir.py": "712cea4be9053155fd2bd086a746d82fc2465ff589e361ea6e4922a1ae682982",
+    "src\\echospace\\contract_v0.py": "44b0a3deb9bb044a81f52a7fae5534f86b10cb81ec0c7aa81722a9f2a6b7edd2",
+    "src\\echospace\\data\\__init__.py": "328d7f0d6855c211f65c3a105be7bed66b51e55d1918809d6c8cdd7599ea66ae",
+    "src\\echospace\\data\\dataset.py": "2233c34a5a21787d4a791037674c97501e712cf08ebbe7d4da4cbee094c35a3f",
+    "src\\echospace\\data\\evalmasks.py": "d4a64dff8a6ab8b7e410fde011f288d1a0f75efc20c478286698defaadb199c6",
+    "src\\echospace\\data\\roomcache.py": "57e736156357d9588f2d52327b50956b8085b8994910d9ce10e9d0e02a9b6676",
+    "src\\echospace\\data\\splits.py": "f15ce2b272864340347bee16264f09d19eb397d4bd97ae84fbb9453e6acea906",
+    "src\\echospace\\evaluation\\__init__.py": "0f2c7bc7982607e42e7e7cb256c249e0fd8abe553b8fac68d9da10d050f16295",
+    "src\\echospace\\evaluation\\controls.py": "6733cbeb55e00720c22ae6956d9404a31298355f67fb7611a0818efee10f383f",
+    "src\\echospace\\evaluation\\engine.py": "fc75fc8d864b37ad944859cd1c3903930635b5a0e0236c617271db1fa5afafc9",
+    "src\\echospace\\evaluation\\protocol.py": "49cd2663ba9951b1e464bc62892eec1342a235f929c0c0932546c5ce6ecb516e",
+    "src\\echospace\\evaluation\\stats.py": "6b2949eeb0cad3785995cc0cd781c2020afce097b862b3d4bfc0039487bf33da",
+    "src\\echospace\\geometry\\__init__.py": "8f5f9051975aac07db2afcf993fb1d50b219bcebc8d39052e16c96cac250374b",
+    "src\\echospace\\geometry\\frames.py": "4c42153128d4ee4171447f1741912530309d2e6f51cdb2fc90a9b1f69bf545e5",
+    "src\\echospace\\geometry\\raster.py": "7917fa2727925bebf1d4286567afd2d512f08759e9d12b28740dcf0e4d3bfd78",
+    "src\\echospace\\inference\\__init__.py": "25bc5b967248b74f5b4aa06561d7cb7b94fa2a96ca4f6fd7cb69d24061d2a7cf",
+    "src\\echospace\\inference\\api.py": "5c31099d6770eb62c84b6361e0b1f8dfe98a2cdb070bde96d6d0fb5fc2b08452",
+    "src\\echospace\\inference\\export.py": "5cb8140661138a947e8a1ee166cc8c37b9013662c661a718871e78cb1142439b",
+    "src\\echospace\\inference\\predict.py": "e5ee6e4a6c3e2ea415ac35996432dbfdacf5f60cd4ae2cb4af269d3f2e2a747e",
+    "src\\echospace\\inference\\registry.py": "af4b916027f616f65ea71526433393fb1e7bf25a8179550363d517946eb31acb",
+    "src\\echospace\\inference\\samples.py": "57ea8f972fa0768b8dc68d316307193ec59cc4659bc25afb07b02193cf6bdcbf",
+    "src\\echospace\\io\\__init__.py": "4a29f31667f876c1c981a26407a4e5df4e4a6f1fd33147629d322f3007b1899c",
+    "src\\echospace\\io\\adapters\\__init__.py": "38272e0a5362c6c40e550436b7f3a3b3fec3eb19c3a3982617f9c2507dc42448",
+    "src\\echospace\\io\\adapters\\acousticrooms.py": "2e6138b8e5ba6cc49065acb9279823f220477c6b7c15eaf232ca5f32bc808da3",
+    "src\\echospace\\io\\audit.py": "9c030fe194fdbf39d2db562cbbe50f2f7bf42b06a9b786335b4a2e1f204229be",
+    "src\\echospace\\io\\audit_geometry.py": "5081269c425d4b99beb0cfcb985637ebf418df65746bb56cd8cae81c28edca80",
+    "src\\echospace\\models\\__init__.py": "61713ddf1d2d810c3ba4ebdc009622fd9eb0cf7ce0125df6ea380ff0c2050073",
+    "src\\echospace\\models\\baselines.py": "dae9fe1f72adf1f42d0e84c09cce0e9670973d16739b6c183f9681942c1815e0",
+    "src\\echospace\\models\\echofusion.py": "de47a3dbeaf968c73edf70a71e0aea1293cef918d9a2f17bae394ed2b1ef3417",
+    "src\\echospace\\models\\factory.py": "b196d58bcf56d15682ed5656ab79653212f1b15f512f8f73b6f254b2bb04b255",
+    "src\\echospace\\models\\spatial.py": "08d63b0520941c181d840186c9d4e8fe008f597c907018c2e55ba6c84f3b7683",
+    "src\\echospace\\models\\wallfusion.py": "e00379bbedcc1032596008e0b41b39b3c2bc72863e14c94ff83ed4a6179fd6f6",
+    "src\\echospace\\scans\\__init__.py": "e48e33676d6f67e5ceca7b635457ba9d96f3e2e0e9cc7e9867360cac6f906441",
+    "src\\echospace\\scans\\frame.py": "86e28951fda544d3591126f0584a5f4c7c0a888ab5f14b76ebee0bddf7729ec7",
+    "src\\echospace\\scans\\occlusion.py": "d4409144d7f69af569ead7884b7b8704e59f93290018064cb6fe0ef6efb4b40d",
+    "src\\echospace\\scans\\raycast.py": "777cfe429059c65147c2fe38477390310c9466618145ef9bacf7aa87f2e9abaa",
+    "src\\echospace\\scans\\room.py": "b91366572ea7298b2569f25b2fb2975232b62f4a3cf161c287bd71bbc1d500ef",
+    "src\\echospace\\scans\\sample.py": "39c1ea11802984b272112091a3069cab87c045e98f0acd38042aa5b47eaa5061",
+    "src\\echospace\\training\\__init__.py": "175397b9dc0e24c74bbbfd8edb843561a6fb0c909f6b41caf148f8893083730a",
+    "src\\echospace\\training\\audio_frozen.py": "d7ee1ffd448cce6f82e42c42dc45d47be3425a9076e416e68c386fcb881a7d35",
+    "src\\echospace\\training\\demo.py": "bc41ee42e363d669f052ccdff48eead366e149a6375181dc5ffcab18582d131e",
+    "src\\echospace\\training\\frozen.py": "2fc81a7c0d14c828ac969dc86e32595a7c1ba6302721b3adbf0da86ce4d46e5f",
+    "src\\echospace\\training\\fusion_runner.py": "3acd0b10a12a3fe96c9303f2c1d3545f9cc6d65b6ce4dc6614efb39c6f8535f5",
+    "src\\echospace\\training\\losses.py": "72e19046ba82c26903b301ec8ce672c977823c52e8c604e3b24d1b101d9ad964",
+    "src\\echospace\\training\\packed.py": "15d79b03d6515d1ba94b4efba4a64cab070a97d7bbdf135872ea51dba761dbe3",
+    "src\\echospace\\training\\quality.py": "05a6634dc5441478622cbbde4b7c8fda1f80fabe753ed558784807f988c6fa0d",
+    "src\\echospace\\training\\runner.py": "b0a2c83397ed45ad1b167a722a79d1b81d3c54c695f0137afd24e849fddcb433",
+    "src\\echospace\\training\\study_data.py": "553c9c7e4d3f32cb97099bad54375d2b6d4d878435c49b87c4b91a9a9cfac64d",
+    "src\\echospace\\training\\synthetic_audio.py": "f8e391e5920cb064856da123e84c5dbe79fea8d71faaf01aae774131c80b5f59",
+    "scripts\\evaluate_stage2.py": "bd8a34b32d3a1cc6d4b82fda350c2ef5e7a3931e9011d605569353ceba919fcf"
+  },
+  "summaries": {
+    "A/correct/K1": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7281791409519108,
+        "boundary_iou": 0.41557055414094235,
+        "boundary_f1_20cm": 0.6870521886593731,
+        "boundary_chamfer_m": 1.0675995246741525,
+        "occupancy_brier": 0.014395983521224861,
+        "boundary_brier": 0.008293541252953248,
+        "occupancy_calibrated_brier": 0.013202287043302055,
+        "boundary_calibrated_brier": 0.00749991609475045
+      }
+    },
+    "A/correct/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7281791409519108,
+        "boundary_iou": 0.41557055414094235,
+        "boundary_f1_20cm": 0.6870521886593731,
+        "boundary_chamfer_m": 1.0675995246741525,
+        "occupancy_brier": 0.014395983521224861,
+        "boundary_brier": 0.008293541252953248,
+        "occupancy_calibrated_brier": 0.013202287043302055,
+        "boundary_calibrated_brier": 0.00749991609475045
+      }
+    },
+    "A/correct/K4": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7281791409519108,
+        "boundary_iou": 0.41557055414094235,
+        "boundary_f1_20cm": 0.6870521886593731,
+        "boundary_chamfer_m": 1.0675995246741525,
+        "occupancy_brier": 0.014395983521224861,
+        "boundary_brier": 0.008293541252953248,
+        "occupancy_calibrated_brier": 0.013202287043302055,
+        "boundary_calibrated_brier": 0.00749991609475045
+      }
+    },
+    "A/correct/K8": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7281791409519108,
+        "boundary_iou": 0.41557055414094235,
+        "boundary_f1_20cm": 0.6870521886593731,
+        "boundary_chamfer_m": 1.0675995246741525,
+        "occupancy_brier": 0.014395983521224861,
+        "boundary_brier": 0.008293541252953248,
+        "occupancy_calibrated_brier": 0.013202287043302055,
+        "boundary_calibrated_brier": 0.00749991609475045
+      }
+    },
+    "P/correct/K1": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7307410884531026,
+        "boundary_iou": 0.40442104121028716,
+        "boundary_f1_20cm": 0.6814362294628995,
+        "boundary_chamfer_m": 1.148916741860636,
+        "occupancy_brier": 0.013864679565398047,
+        "boundary_brier": 0.009061745086605356,
+        "occupancy_calibrated_brier": 0.012802339552895774,
+        "boundary_calibrated_brier": 0.00820249052775042
+      }
+    },
+    "P/correct/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.732222234360015,
+        "boundary_iou": 0.40474125826176094,
+        "boundary_f1_20cm": 0.6818412215002609,
+        "boundary_chamfer_m": 1.1459177378743444,
+        "occupancy_brier": 0.013788764593902113,
+        "boundary_brier": 0.009039901408011784,
+        "occupancy_calibrated_brier": 0.01275226312331483,
+        "boundary_calibrated_brier": 0.008187096018504378
+      }
+    },
+    "P/correct/K4": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7344607261541862,
+        "boundary_iou": 0.4054973523128064,
+        "boundary_f1_20cm": 0.6840775594569624,
+        "boundary_chamfer_m": 1.1263250914963472,
+        "occupancy_brier": 0.013684328623137733,
+        "boundary_brier": 0.009039697860918518,
+        "occupancy_calibrated_brier": 0.012658156835546166,
+        "boundary_calibrated_brier": 0.008184352106050377
+      }
+    },
+    "P/correct/K8": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7368728662747297,
+        "boundary_iou": 0.40641654046567527,
+        "boundary_f1_20cm": 0.684425977510224,
+        "boundary_chamfer_m": 1.1261894115070439,
+        "occupancy_brier": 0.013681844207732729,
+        "boundary_brier": 0.009039538348399408,
+        "occupancy_calibrated_brier": 0.012642826589071942,
+        "boundary_calibrated_brier": 0.00818200508179059
+      }
+    },
+    "D/correct/K1": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7515178016937523,
+        "boundary_iou": 0.4377691433236372,
+        "boundary_f1_20cm": 0.7067427426818749,
+        "boundary_chamfer_m": 0.932576925357545,
+        "occupancy_brier": 0.013760247161518904,
+        "boundary_brier": 0.008090553618001482,
+        "occupancy_calibrated_brier": 0.012490811090295801,
+        "boundary_calibrated_brier": 0.0072911422976767795
+      }
+    },
+    "D/correct/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.752108417770929,
+        "boundary_iou": 0.43923361854128745,
+        "boundary_f1_20cm": 0.7074885408834461,
+        "boundary_chamfer_m": 0.930823117840197,
+        "occupancy_brier": 0.013681414200724907,
+        "boundary_brier": 0.008065876117796035,
+        "occupancy_calibrated_brier": 0.012431765994364867,
+        "boundary_calibrated_brier": 0.007271150742140992
+      }
+    },
+    "D/zero/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7542489488251646,
+        "boundary_iou": 0.43898790425269313,
+        "boundary_f1_20cm": 0.7073401585842825,
+        "boundary_chamfer_m": 0.931467909798884,
+        "occupancy_brier": 0.013728264828211049,
+        "boundary_brier": 0.008071786566883614,
+        "occupancy_calibrated_brier": 0.012474034533796887,
+        "boundary_calibrated_brier": 0.007278658011724556
+      }
+    },
+    "D/swapped/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7520552352045263,
+        "boundary_iou": 0.43900976059929414,
+        "boundary_f1_20cm": 0.7076164834089225,
+        "boundary_chamfer_m": 0.9307591966485528,
+        "occupancy_brier": 0.013684028391122868,
+        "boundary_brier": 0.008067933578821152,
+        "occupancy_calibrated_brier": 0.01243252325186587,
+        "boundary_calibrated_brier": 0.007273018088998457
+      }
+    },
+    "D/noise20/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7520665272313201,
+        "boundary_iou": 0.4392461760070337,
+        "boundary_f1_20cm": 0.7074822942794335,
+        "boundary_chamfer_m": 0.9308280255291898,
+        "occupancy_brier": 0.013681362713997171,
+        "boundary_brier": 0.008065913272481346,
+        "occupancy_calibrated_brier": 0.012431716942797336,
+        "boundary_calibrated_brier": 0.0072711660985833515
+      }
+    },
+    "D/gain_minus6/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7521188944771566,
+        "boundary_iou": 0.43925633036467276,
+        "boundary_f1_20cm": 0.7076826148675043,
+        "boundary_chamfer_m": 0.9307278018990545,
+        "occupancy_brier": 0.013712757150004813,
+        "boundary_brier": 0.008069816580573033,
+        "occupancy_calibrated_brier": 0.012459605972359941,
+        "boundary_calibrated_brier": 0.007276224180960786
+      }
+    },
+    "D/gain_plus6/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7521398468766514,
+        "boundary_iou": 0.4391640344659809,
+        "boundary_f1_20cm": 0.7071508079790191,
+        "boundary_chamfer_m": 0.9313307855042854,
+        "occupancy_brier": 0.01364067855674775,
+        "boundary_brier": 0.008061212171288495,
+        "occupancy_calibrated_brier": 0.012394775427715953,
+        "boundary_calibrated_brier": 0.007264172399421224
+      }
+    },
+    "D/delay_plus3/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.752125126144966,
+        "boundary_iou": 0.43925243722420854,
+        "boundary_f1_20cm": 0.7075205957328604,
+        "boundary_chamfer_m": 0.9307635759442147,
+        "occupancy_brier": 0.013680617744012677,
+        "boundary_brier": 0.00806599333699503,
+        "occupancy_calibrated_brier": 0.01243100603942128,
+        "boundary_calibrated_brier": 0.007271217729837351
+      }
+    },
+    "D/delay_minus3/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7521100263025751,
+        "boundary_iou": 0.4392435256480182,
+        "boundary_f1_20cm": 0.7074981975805241,
+        "boundary_chamfer_m": 0.9307682301015523,
+        "occupancy_brier": 0.01368072517130924,
+        "boundary_brier": 0.008065881453278089,
+        "occupancy_calibrated_brier": 0.012430987155434493,
+        "boundary_calibrated_brier": 0.007271123769252392
+      }
+    },
+    "D/window40/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7520016176613037,
+        "boundary_iou": 0.4392577321055084,
+        "boundary_f1_20cm": 0.7073455260574564,
+        "boundary_chamfer_m": 0.9309280840487554,
+        "occupancy_brier": 0.013689532664722526,
+        "boundary_brier": 0.008065384616953586,
+        "occupancy_calibrated_brier": 0.012439276351223882,
+        "boundary_calibrated_brier": 0.0072711438131895165
+      }
+    },
+    "D/window60/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7521298751222201,
+        "boundary_iou": 0.4392054181263263,
+        "boundary_f1_20cm": 0.7074466191870283,
+        "boundary_chamfer_m": 0.9308318400205624,
+        "occupancy_brier": 0.013677050536857272,
+        "boundary_brier": 0.008065529672473804,
+        "occupancy_calibrated_brier": 0.012428801551275888,
+        "boundary_calibrated_brier": 0.007270706104756201
+      }
+    },
+    "D/pose5cm/K2": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7494649923465851,
+        "boundary_iou": 0.437580177300502,
+        "boundary_f1_20cm": 0.7045053755783424,
+        "boundary_chamfer_m": 0.9372899936012636,
+        "occupancy_brier": 0.013953422972053075,
+        "boundary_brier": 0.008092666738529987,
+        "occupancy_calibrated_brier": 0.012708394501549342,
+        "boundary_calibrated_brier": 0.0073091950873674615
+      }
+    },
+    "D/correct/K4": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.7499082519711754,
+        "boundary_iou": 0.43803108274000546,
+        "boundary_f1_20cm": 0.7066075238462316,
+        "boundary_chamfer_m": 0.9330640416115835,
+        "occupancy_brier": 0.013618608573443547,
+        "boundary_brier": 0.008061155392666438,
+        "occupancy_calibrated_brier": 0.012391450033583882,
+        "boundary_calibrated_brier": 0.007265373483048967
+      }
+    },
+    "D/correct/K8": {
+      "rooms": 51,
+      "samples": 898,
+      "metrics": {
+        "occupancy_iou": 0.749711864895713,
+        "boundary_iou": 0.43817172868273035,
+        "boundary_f1_20cm": 0.7076566788680474,
+        "boundary_chamfer_m": 0.9335140135310936,
+        "occupancy_brier": 0.013659230002785717,
+        "boundary_brier": 0.008044791399373584,
+        "occupancy_calibrated_brier": 0.012415346177484085,
+        "boundary_calibrated_brier": 0.007254617581492376
+      }
+    }
+  },
+  "paired_effects": {
+    "D_minus_A/K1": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.02333866074184135,
+        "group_bootstrap_95_percentile_interval": [
+          0.008440835309651121,
+          0.039997725872967266
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.019690554022501586,
+        "group_bootstrap_95_percentile_interval": [
+          0.0033054676317135095,
+          0.039913612841886034
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.1350225993166072,
+        "group_bootstrap_95_percentile_interval": [
+          -0.4963244073256475,
+          0.16844659304138843
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_minus_P/K1": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.020776713240649572,
+        "group_bootstrap_95_percentile_interval": [
+          0.00404263168561792,
+          0.03917036453236387
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.0253065132189752,
+        "group_bootstrap_95_percentile_interval": [
+          0.008686723683597727,
+          0.04557865301009287
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.2163398165030907,
+        "group_bootstrap_95_percentile_interval": [
+          -0.5668304793316643,
+          0.0937377488530957
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_minus_A/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.023929276819018,
+        "group_bootstrap_95_percentile_interval": [
+          0.008909824506351272,
+          0.041013718979775474
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.020436352224072907,
+        "group_bootstrap_95_percentile_interval": [
+          0.003927731628343067,
+          0.040184592845492195
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.13677640683395526,
+        "group_bootstrap_95_percentile_interval": [
+          -0.4969907547739742,
+          0.16672804350857476
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_minus_P/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.019886183410913694,
+        "group_bootstrap_95_percentile_interval": [
+          0.0024442367184014206,
+          0.038411227289456375
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.025647319383185072,
+        "group_bootstrap_95_percentile_interval": [
+          0.009113284959411359,
+          0.04545744994262608
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.21509462003414725,
+        "group_bootstrap_95_percentile_interval": [
+          -0.5675191041601225,
+          0.09310184512281018
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_minus_A/K4": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.021729111019264266,
+        "group_bootstrap_95_percentile_interval": [
+          0.007986341148596572,
+          0.03642858950212596
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.01955533518685839,
+        "group_bootstrap_95_percentile_interval": [
+          0.0028698880825739227,
+          0.03960219136294939
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.13453548306256882,
+        "group_bootstrap_95_percentile_interval": [
+          -0.49454694674703203,
+          0.16945134049965263
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_minus_P/K4": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.015447525816988949,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0009610979687261444,
+          0.0320901620251783
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.02252996438926915,
+        "group_bootstrap_95_percentile_interval": [
+          0.005061364861138036,
+          0.04342917091315508
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.1932610498847638,
+        "group_bootstrap_95_percentile_interval": [
+          -0.5428343318922716,
+          0.13209226860043802
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_minus_A/K8": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.021532723943802175,
+        "group_bootstrap_95_percentile_interval": [
+          0.007932725591988097,
+          0.03607485894888374
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.02060449020867426,
+        "group_bootstrap_95_percentile_interval": [
+          0.00400437583119,
+          0.04055483258362968
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.13408551114305875,
+        "group_bootstrap_95_percentile_interval": [
+          -0.494636931240868,
+          0.16917309056844582
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_minus_P/K8": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.01283899862098323,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0030006970687462696,
+          0.029493424286826293
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.023230701357823427,
+        "group_bootstrap_95_percentile_interval": [
+          0.005840148353894412,
+          0.04432158991699902
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.1926753979759501,
+        "group_bootstrap_95_percentile_interval": [
+          -0.5433656609298314,
+          0.13160060912201657
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_zero_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.0021405310542356782,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00048732398359207103,
+          0.0072546948197872605
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": -0.00014838229916344992,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0004509250170274457,
+          0.00014896367416843226
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": 0.0006447919586868581,
+        "group_bootstrap_95_percentile_interval": [
+          -9.756016001602736e-05,
+          0.0013679635829339943
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_swapped_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": -5.318256640246466e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00029235351567263304,
+          0.00021534607225787578
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.00012794252547643095,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00034410207008866083,
+          0.0005744791156868619
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -6.392119164420741e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0008793504360258162,
+          0.0006812958599181928
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_noise20_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": -4.189053960878185e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -9.702152311089304e-05,
+          -1.221883804619293e-06
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": -6.246604012663897e-06,
+        "group_bootstrap_95_percentile_interval": [
+          -9.417476044637309e-05,
+          9.367518894646274e-05
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": 4.907688992676986e-06,
+        "group_bootstrap_95_percentile_interval": [
+          -4.930185100902864e-05,
+          5.444458359059825e-05
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_gain_minus6_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": 1.047670622771129e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0004685136485943177,
+          0.0004408323181039535
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.00019407398405827864,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00014770243182450786,
+          0.0005344677051904677
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -9.531594114284926e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0009394913187575337,
+          0.0006706716495983061
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_gain_plus6_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": 3.142910572246545e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0008363930552361705,
+          0.0009858461725136963
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": -0.00033773290442688146,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0008951929493495217,
+          0.00013506210526835358
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": 0.0005076676640881307,
+        "group_bootstrap_95_percentile_interval": [
+          -8.497167965312229e-05,
+          0.0011786729824949998
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_delay_plus3_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": 1.670837403694475e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -1.642054001564282e-05,
+          5.740709759748171e-05
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 3.205484941442842e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -8.617753464048237e-05,
+          0.00016947802975501722
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -5.9541895982364695e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00014448780129408266,
+          1.7494497841795287e-05
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_delay_minus3_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": 1.6085316462875738e-06,
+        "group_bootstrap_95_percentile_interval": [
+          -6.325549474590214e-05,
+          4.898923449579863e-05
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 9.656697077978236e-06,
+        "group_bootstrap_95_percentile_interval": [
+          -7.005925141454141e-05,
+          0.00011998000864882124
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -5.488773864454141e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00012132749700344132,
+          3.3464067875390814e-06
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_window40_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": -0.0001068001096252532,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00024844134409096787,
+          2.743863597987596e-05
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": -0.00014301482598979244,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0004048343612039148,
+          0.00011379900460879696
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": 0.00010496620855812541,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00023903932120689954,
+          0.00040227267590962115
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_window60_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": 2.1457351291174265e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -8.098004621874061e-05,
+          0.00012453983043985087
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": -4.1921696417710874e-05,
+        "group_bootstrap_95_percentile_interval": [
+          -0.000256044063575062,
+          0.00012879807203180216
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": 8.722180365289495e-06,
+        "group_bootstrap_95_percentile_interval": [
+          -0.00020177285458000606,
+          0.00027600054175632875
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_pose5cm_minus_correct/K2": {
+      "occupancy_iou": {
+        "mean_room_delta": -0.002643425424343662,
+        "group_bootstrap_95_percentile_interval": [
+          -0.005829983715055134,
+          0.0003537418042915088
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": -0.0029831653051037473,
+        "group_bootstrap_95_percentile_interval": [
+          -0.005357139347899635,
+          -0.000774359759336905
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": 0.006466875761066388,
+        "group_bootstrap_95_percentile_interval": [
+          0.0032017181964344808,
+          0.010215828970679833
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    }
+  },
+  "primary_plan_slice": {
+    "A": {
+      "rooms": 49,
+      "samples": 193,
+      "metrics": {
+        "occupancy_iou": 0.7694495234712414,
+        "boundary_iou": 0.4008833789600926,
+        "boundary_f1_20cm": 0.7086089594955959,
+        "boundary_chamfer_m": 0.3064313438835388,
+        "occupancy_brier": 0.012488390513692233,
+        "boundary_brier": 0.008466052108285958,
+        "occupancy_calibrated_brier": 0.011407133176955377,
+        "boundary_calibrated_brier": 0.007578946896427382
+      }
+    },
+    "P": {
+      "rooms": 49,
+      "samples": 193,
+      "metrics": {
+        "occupancy_iou": 0.7759847809507596,
+        "boundary_iou": 0.38963732517149974,
+        "boundary_f1_20cm": 0.6971049099870205,
+        "boundary_chamfer_m": 0.3123317534755947,
+        "occupancy_brier": 0.011813763400844723,
+        "boundary_brier": 0.009229642674247435,
+        "occupancy_calibrated_brier": 0.010911617619487083,
+        "boundary_calibrated_brier": 0.00832053655692842
+      }
+    },
+    "D": {
+      "rooms": 49,
+      "samples": 193,
+      "metrics": {
+        "occupancy_iou": 0.7858579840204446,
+        "boundary_iou": 0.3999843830017219,
+        "boundary_f1_20cm": 0.7061735622061149,
+        "boundary_chamfer_m": 0.3039076838254517,
+        "occupancy_brier": 0.011313398596950458,
+        "boundary_brier": 0.008436002643469644,
+        "occupancy_calibrated_brier": 0.010245749551261143,
+        "boundary_calibrated_brier": 0.007497359089989532
+      }
+    }
+  },
+  "primary_plan_effects": {
+    "D_minus_A": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.01640846054920307,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0022651744921626357,
+          0.037518345796190795
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": -0.002435397289481145,
+        "group_bootstrap_95_percentile_interval": [
+          -0.01991563166320637,
+          0.013968292152149791
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.002523660058087125,
+        "group_bootstrap_95_percentile_interval": [
+          -0.02114911644098058,
+          0.014688415474774043
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    },
+    "D_minus_P": {
+      "occupancy_iou": {
+        "mean_room_delta": 0.00987320306968471,
+        "group_bootstrap_95_percentile_interval": [
+          -0.0016737708620551042,
+          0.02098029075977997
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_f1_20cm": {
+        "mean_room_delta": 0.009068652219094392,
+        "group_bootstrap_95_percentile_interval": [
+          -0.005405717217762943,
+          0.024172205928137715
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "better"
+      },
+      "boundary_chamfer_m": {
+        "mean_room_delta": -0.008424069650143048,
+        "group_bootstrap_95_percentile_interval": [
+          -0.027378149421341022,
+          0.007216213719809769
+        ],
+        "groups": 30,
+        "bootstrap_seed": 0,
+        "repeats": 2000,
+        "scope": "exploratory, equal-room effect; physical-room-group percentile bootstrap; not independent external validation",
+        "positive_meaning": "worse"
+      }
+    }
+  },
+  "calibration": {
+    "A": {
+      "occupancy": {
+        "temperature": 2.0,
+        "objective": "equal-room validation missing-cell Brier",
+        "grid": [
+          0.5,
+          0.75,
+          1.0,
+          1.5,
+          2.0,
+          3.0
+        ],
+        "scores": [
+          0.016587206688193395,
+          0.016111111136281584,
+          0.015647603329111994,
+          0.0148132520065279,
+          0.014266611096922973,
+          0.015240882530223186
+        ],
+        "fit_split": "val",
+        "rooms": 27
+      },
+      "boundary": {
+        "temperature": 2.0,
+        "objective": "equal-room validation missing-cell Brier",
+        "grid": [
+          0.5,
+          0.75,
+          1.0,
+          1.5,
+          2.0,
+          3.0
+        ],
+        "scores": [
+          0.009870980578078328,
+          0.009577099112341968,
+          0.009291141929712199,
+          0.008767839370396076,
+          0.008404830948255528,
+          0.009033308474059778
+        ],
+        "fit_split": "val",
+        "rooms": 27
+      }
+    },
+    "P": {
+      "occupancy": {
+        "temperature": 2.0,
+        "objective": "equal-room validation missing-cell Brier",
+        "grid": [
+          0.5,
+          0.75,
+          1.0,
+          1.5,
+          2.0,
+          3.0
+        ],
+        "scores": [
+          0.016389321465008273,
+          0.015874248511788317,
+          0.015391947816072282,
+          0.01456152004406328,
+          0.014106374570360458,
+          0.015943121558705236
+        ],
+        "fit_split": "val",
+        "rooms": 27
+      },
+      "boundary": {
+        "temperature": 2.0,
+        "objective": "equal-room validation missing-cell Brier",
+        "grid": [
+          0.5,
+          0.75,
+          1.0,
+          1.5,
+          2.0,
+          3.0
+        ],
+        "scores": [
+          0.010776094660711819,
+          0.010413187260472833,
+          0.010069104278879495,
+          0.009465142574740482,
+          0.009093689529692113,
+          0.010226524297720665
+        ],
+        "fit_split": "val",
+        "rooms": 27
+      }
+    },
+    "D": {
+      "occupancy": {
+        "temperature": 2.0,
+        "objective": "equal-room validation missing-cell Brier",
+        "grid": [
+          0.5,
+          0.75,
+          1.0,
+          1.5,
+          2.0,
+          3.0
+        ],
+        "scores": [
+          0.01667752868923604,
+          0.016163429208075928,
+          0.015659933957575974,
+          0.014755035625646541,
+          0.014149727343925854,
+          0.014671161310649194
+        ],
+        "fit_split": "val",
+        "rooms": 27
+      },
+      "boundary": {
+        "temperature": 2.0,
+        "objective": "equal-room validation missing-cell Brier",
+        "grid": [
+          0.5,
+          0.75,
+          1.0,
+          1.5,
+          2.0,
+          3.0
+        ],
+        "scores": [
+          0.009713617953142031,
+          0.00943067328787245,
+          0.009148894600778586,
+          0.00862739345440973,
+          0.008256234389918512,
+          0.008529317390245176
+        ],
+        "fit_split": "val",
+        "rooms": 27
+      }
+    }
+  },
+  "strata": {
+    "A/correct/K1": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.6973740054231077,
+            "boundary_iou": 0.4734754266231124,
+            "boundary_f1_20cm": 0.6705189172126926,
+            "boundary_chamfer_m": 2.4063918740158092,
+            "occupancy_brier": 0.005586113338615605,
+            "boundary_brier": 0.004143545870122856,
+            "occupancy_calibrated_brier": 0.005186092104880139,
+            "boundary_calibrated_brier": 0.003726400236153669
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6637329893361473,
+            "boundary_iou": 0.27621540676381445,
+            "boundary_f1_20cm": 0.612702060018186,
+            "boundary_chamfer_m": 0.4302805746145908,
+            "occupancy_brier": 0.03251686122238051,
+            "boundary_brier": 0.016336745616572754,
+            "occupancy_calibrated_brier": 0.029779405858195086,
+            "boundary_calibrated_brier": 0.0148859852500355
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7609647200623667,
+            "boundary_iou": 0.3937379699552766,
+            "boundary_f1_20cm": 0.709181699639853,
+            "boundary_chamfer_m": 0.3115528465138963,
+            "occupancy_brier": 0.013766967691821065,
+            "boundary_brier": 0.008967277893000416,
+            "occupancy_calibrated_brier": 0.012598704396459359,
+            "boundary_calibrated_brier": 0.008048295039226277
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7212377797397447,
+            "boundary_iou": 0.37162762353675904,
+            "boundary_f1_20cm": 0.7012272984859627,
+            "boundary_chamfer_m": 0.3345977018016202,
+            "occupancy_brier": 0.025243316342158508,
+            "boundary_brier": 0.011762727833897133,
+            "occupancy_calibrated_brier": 0.02331955354517888,
+            "boundary_calibrated_brier": 0.010744581079120633
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.48006868298087674,
+            "boundary_iou": 0.13304106964599086,
+            "boundary_f1_20cm": 0.4412776560946214,
+            "boundary_chamfer_m": 0.6540743725033568,
+            "occupancy_brier": 0.03664902307895458,
+            "boundary_brier": 0.017166931078940125,
+            "occupancy_calibrated_brier": 0.03338494325960903,
+            "boundary_calibrated_brier": 0.015630204468090374
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8179509759812474,
+            "boundary_iou": 0.4589117372031431,
+            "boundary_f1_20cm": 0.749573299459295,
+            "boundary_chamfer_m": 0.2648728866904734,
+            "occupancy_brier": 0.010494156210450392,
+            "boundary_brier": 0.007233419432646974,
+            "occupancy_calibrated_brier": 0.009607094131654009,
+            "boundary_calibrated_brier": 0.006495904514574419
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6196797712264495,
+            "boundary_iou": 0.4702422703732395,
+            "boundary_f1_20cm": 0.6152764803114105,
+            "boundary_chamfer_m": 3.118329555139042,
+            "occupancy_brier": 0.010948599123639817,
+            "boundary_brier": 0.005304711127410564,
+            "occupancy_calibrated_brier": 0.0099895503138842,
+            "boundary_calibrated_brier": 0.00481271035613953
+          }
+        }
+      }
+    },
+    "A/correct/K2": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.6973740054231077,
+            "boundary_iou": 0.4734754266231124,
+            "boundary_f1_20cm": 0.6705189172126926,
+            "boundary_chamfer_m": 2.4063918740158092,
+            "occupancy_brier": 0.005586113338615605,
+            "boundary_brier": 0.004143545870122856,
+            "occupancy_calibrated_brier": 0.005186092104880139,
+            "boundary_calibrated_brier": 0.003726400236153669
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6637329893361473,
+            "boundary_iou": 0.27621540676381445,
+            "boundary_f1_20cm": 0.612702060018186,
+            "boundary_chamfer_m": 0.4302805746145908,
+            "occupancy_brier": 0.03251686122238051,
+            "boundary_brier": 0.016336745616572754,
+            "occupancy_calibrated_brier": 0.029779405858195086,
+            "boundary_calibrated_brier": 0.0148859852500355
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7609647200623667,
+            "boundary_iou": 0.3937379699552766,
+            "boundary_f1_20cm": 0.709181699639853,
+            "boundary_chamfer_m": 0.3115528465138963,
+            "occupancy_brier": 0.013766967691821065,
+            "boundary_brier": 0.008967277893000416,
+            "occupancy_calibrated_brier": 0.012598704396459359,
+            "boundary_calibrated_brier": 0.008048295039226277
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7212377797397447,
+            "boundary_iou": 0.37162762353675904,
+            "boundary_f1_20cm": 0.7012272984859627,
+            "boundary_chamfer_m": 0.3345977018016202,
+            "occupancy_brier": 0.025243316342158508,
+            "boundary_brier": 0.011762727833897133,
+            "occupancy_calibrated_brier": 0.02331955354517888,
+            "boundary_calibrated_brier": 0.010744581079120633
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.48006868298087674,
+            "boundary_iou": 0.13304106964599086,
+            "boundary_f1_20cm": 0.4412776560946214,
+            "boundary_chamfer_m": 0.6540743725033568,
+            "occupancy_brier": 0.03664902307895458,
+            "boundary_brier": 0.017166931078940125,
+            "occupancy_calibrated_brier": 0.03338494325960903,
+            "boundary_calibrated_brier": 0.015630204468090374
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8179509759812474,
+            "boundary_iou": 0.4589117372031431,
+            "boundary_f1_20cm": 0.749573299459295,
+            "boundary_chamfer_m": 0.2648728866904734,
+            "occupancy_brier": 0.010494156210450392,
+            "boundary_brier": 0.007233419432646974,
+            "occupancy_calibrated_brier": 0.009607094131654009,
+            "boundary_calibrated_brier": 0.006495904514574419
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6196797712264495,
+            "boundary_iou": 0.4702422703732395,
+            "boundary_f1_20cm": 0.6152764803114105,
+            "boundary_chamfer_m": 3.118329555139042,
+            "occupancy_brier": 0.010948599123639817,
+            "boundary_brier": 0.005304711127410564,
+            "occupancy_calibrated_brier": 0.0099895503138842,
+            "boundary_calibrated_brier": 0.00481271035613953
+          }
+        }
+      }
+    },
+    "A/correct/K4": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.6973740054231077,
+            "boundary_iou": 0.4734754266231124,
+            "boundary_f1_20cm": 0.6705189172126926,
+            "boundary_chamfer_m": 2.4063918740158092,
+            "occupancy_brier": 0.005586113338615605,
+            "boundary_brier": 0.004143545870122856,
+            "occupancy_calibrated_brier": 0.005186092104880139,
+            "boundary_calibrated_brier": 0.003726400236153669
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6637329893361473,
+            "boundary_iou": 0.27621540676381445,
+            "boundary_f1_20cm": 0.612702060018186,
+            "boundary_chamfer_m": 0.4302805746145908,
+            "occupancy_brier": 0.03251686122238051,
+            "boundary_brier": 0.016336745616572754,
+            "occupancy_calibrated_brier": 0.029779405858195086,
+            "boundary_calibrated_brier": 0.0148859852500355
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7609647200623667,
+            "boundary_iou": 0.3937379699552766,
+            "boundary_f1_20cm": 0.709181699639853,
+            "boundary_chamfer_m": 0.3115528465138963,
+            "occupancy_brier": 0.013766967691821065,
+            "boundary_brier": 0.008967277893000416,
+            "occupancy_calibrated_brier": 0.012598704396459359,
+            "boundary_calibrated_brier": 0.008048295039226277
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7212377797397447,
+            "boundary_iou": 0.37162762353675904,
+            "boundary_f1_20cm": 0.7012272984859627,
+            "boundary_chamfer_m": 0.3345977018016202,
+            "occupancy_brier": 0.025243316342158508,
+            "boundary_brier": 0.011762727833897133,
+            "occupancy_calibrated_brier": 0.02331955354517888,
+            "boundary_calibrated_brier": 0.010744581079120633
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.48006868298087674,
+            "boundary_iou": 0.13304106964599086,
+            "boundary_f1_20cm": 0.4412776560946214,
+            "boundary_chamfer_m": 0.6540743725033568,
+            "occupancy_brier": 0.03664902307895458,
+            "boundary_brier": 0.017166931078940125,
+            "occupancy_calibrated_brier": 0.03338494325960903,
+            "boundary_calibrated_brier": 0.015630204468090374
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8179509759812474,
+            "boundary_iou": 0.4589117372031431,
+            "boundary_f1_20cm": 0.749573299459295,
+            "boundary_chamfer_m": 0.2648728866904734,
+            "occupancy_brier": 0.010494156210450392,
+            "boundary_brier": 0.007233419432646974,
+            "occupancy_calibrated_brier": 0.009607094131654009,
+            "boundary_calibrated_brier": 0.006495904514574419
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6196797712264495,
+            "boundary_iou": 0.4702422703732395,
+            "boundary_f1_20cm": 0.6152764803114105,
+            "boundary_chamfer_m": 3.118329555139042,
+            "occupancy_brier": 0.010948599123639817,
+            "boundary_brier": 0.005304711127410564,
+            "occupancy_calibrated_brier": 0.0099895503138842,
+            "boundary_calibrated_brier": 0.00481271035613953
+          }
+        }
+      }
+    },
+    "A/correct/K8": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.6973740054231077,
+            "boundary_iou": 0.4734754266231124,
+            "boundary_f1_20cm": 0.6705189172126926,
+            "boundary_chamfer_m": 2.4063918740158092,
+            "occupancy_brier": 0.005586113338615605,
+            "boundary_brier": 0.004143545870122856,
+            "occupancy_calibrated_brier": 0.005186092104880139,
+            "boundary_calibrated_brier": 0.003726400236153669
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6637329893361473,
+            "boundary_iou": 0.27621540676381445,
+            "boundary_f1_20cm": 0.612702060018186,
+            "boundary_chamfer_m": 0.4302805746145908,
+            "occupancy_brier": 0.03251686122238051,
+            "boundary_brier": 0.016336745616572754,
+            "occupancy_calibrated_brier": 0.029779405858195086,
+            "boundary_calibrated_brier": 0.0148859852500355
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7609647200623667,
+            "boundary_iou": 0.3937379699552766,
+            "boundary_f1_20cm": 0.709181699639853,
+            "boundary_chamfer_m": 0.3115528465138963,
+            "occupancy_brier": 0.013766967691821065,
+            "boundary_brier": 0.008967277893000416,
+            "occupancy_calibrated_brier": 0.012598704396459359,
+            "boundary_calibrated_brier": 0.008048295039226277
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7212377797397447,
+            "boundary_iou": 0.37162762353675904,
+            "boundary_f1_20cm": 0.7012272984859627,
+            "boundary_chamfer_m": 0.3345977018016202,
+            "occupancy_brier": 0.025243316342158508,
+            "boundary_brier": 0.011762727833897133,
+            "occupancy_calibrated_brier": 0.02331955354517888,
+            "boundary_calibrated_brier": 0.010744581079120633
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.48006868298087674,
+            "boundary_iou": 0.13304106964599086,
+            "boundary_f1_20cm": 0.4412776560946214,
+            "boundary_chamfer_m": 0.6540743725033568,
+            "occupancy_brier": 0.03664902307895458,
+            "boundary_brier": 0.017166931078940125,
+            "occupancy_calibrated_brier": 0.03338494325960903,
+            "boundary_calibrated_brier": 0.015630204468090374
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8179509759812474,
+            "boundary_iou": 0.4589117372031431,
+            "boundary_f1_20cm": 0.749573299459295,
+            "boundary_chamfer_m": 0.2648728866904734,
+            "occupancy_brier": 0.010494156210450392,
+            "boundary_brier": 0.007233419432646974,
+            "occupancy_calibrated_brier": 0.009607094131654009,
+            "boundary_calibrated_brier": 0.006495904514574419
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6196797712264495,
+            "boundary_iou": 0.4702422703732395,
+            "boundary_f1_20cm": 0.6152764803114105,
+            "boundary_chamfer_m": 3.118329555139042,
+            "occupancy_brier": 0.010948599123639817,
+            "boundary_brier": 0.005304711127410564,
+            "occupancy_calibrated_brier": 0.0099895503138842,
+            "boundary_calibrated_brier": 0.00481271035613953
+          }
+        }
+      }
+    },
+    "P/correct/K1": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.6991849115051679,
+            "boundary_iou": 0.465422649691778,
+            "boundary_f1_20cm": 0.670729041736147,
+            "boundary_chamfer_m": 2.6050312612868267,
+            "occupancy_brier": 0.005126393871122332,
+            "boundary_brier": 0.004426272068604182,
+            "occupancy_calibrated_brier": 0.0048008452582228,
+            "boundary_calibrated_brier": 0.004010995069128514
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6675504989305179,
+            "boundary_iou": 0.2686103580177047,
+            "boundary_f1_20cm": 0.6027895880424244,
+            "boundary_chamfer_m": 0.4222884579367953,
+            "occupancy_brier": 0.031953308136417745,
+            "boundary_brier": 0.01780559098467224,
+            "occupancy_calibrated_brier": 0.029415924393252545,
+            "boundary_calibrated_brier": 0.016202472716661677
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7645670766191691,
+            "boundary_iou": 0.3766783817603808,
+            "boundary_f1_20cm": 0.7004215762539365,
+            "boundary_chamfer_m": 0.31396980809123887,
+            "occupancy_brier": 0.013213672815376758,
+            "boundary_brier": 0.009976514452207192,
+            "occupancy_calibrated_brier": 0.01219030645822543,
+            "boundary_calibrated_brier": 0.008957318453027416
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7235693011878647,
+            "boundary_iou": 0.3591889814583445,
+            "boundary_f1_20cm": 0.6950367587164067,
+            "boundary_chamfer_m": 0.32913024660898443,
+            "occupancy_brier": 0.024406213577384334,
+            "boundary_brier": 0.012852475969428272,
+            "occupancy_calibrated_brier": 0.02263598162495257,
+            "boundary_calibrated_brier": 0.011708286734084033
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.48866548955195105,
+            "boundary_iou": 0.13120906814258623,
+            "boundary_f1_20cm": 0.43120962757218145,
+            "boundary_chamfer_m": 0.6458073532713448,
+            "occupancy_brier": 0.03600587298841313,
+            "boundary_brier": 0.018578060427749756,
+            "occupancy_calibrated_brier": 0.03263805090334258,
+            "boundary_calibrated_brier": 0.016891289613700327
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8206430307875416,
+            "boundary_iou": 0.44356862850801676,
+            "boundary_f1_20cm": 0.7441812125841024,
+            "boundary_chamfer_m": 0.2587608477137002,
+            "occupancy_brier": 0.010255422859736246,
+            "boundary_brier": 0.007847476782427353,
+            "occupancy_calibrated_brier": 0.009556076961820668,
+            "boundary_calibrated_brier": 0.007085968670692614
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.620956001968567,
+            "boundary_iou": 0.46645212052043217,
+            "boundary_f1_20cm": 0.610575438338271,
+            "boundary_chamfer_m": 3.4854690172518548,
+            "occupancy_brier": 0.009850734058772405,
+            "boundary_brier": 0.005778774215549732,
+            "occupancy_calibrated_brier": 0.009005453426870692,
+            "boundary_calibrated_brier": 0.0052615701182313
+          }
+        }
+      }
+    },
+    "P/correct/K2": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.702509159384588,
+            "boundary_iou": 0.46554491096756995,
+            "boundary_f1_20cm": 0.671227377585198,
+            "boundary_chamfer_m": 2.5965824236562387,
+            "occupancy_brier": 0.005013496237163873,
+            "boundary_brier": 0.004416905113230388,
+            "occupancy_calibrated_brier": 0.004709071516409259,
+            "boundary_calibrated_brier": 0.003997696372625068
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6655690223450622,
+            "boundary_iou": 0.26657096904203925,
+            "boundary_f1_20cm": 0.5999829493608746,
+            "boundary_chamfer_m": 0.42387418663801446,
+            "occupancy_brier": 0.03214571076211911,
+            "boundary_brier": 0.017790764384351055,
+            "occupancy_calibrated_brier": 0.029588448114875533,
+            "boundary_calibrated_brier": 0.01620000706751436
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7658789675374701,
+            "boundary_iou": 0.37806869567384715,
+            "boundary_f1_20cm": 0.7016074931842623,
+            "boundary_chamfer_m": 0.31218491245582897,
+            "occupancy_brier": 0.013063017912993675,
+            "boundary_brier": 0.009938706723259987,
+            "occupancy_calibrated_brier": 0.01207225471720791,
+            "boundary_calibrated_brier": 0.00893310416777487
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7226943604481044,
+            "boundary_iou": 0.35917457220633975,
+            "boundary_f1_20cm": 0.6940548020076187,
+            "boundary_chamfer_m": 0.33068370375623474,
+            "occupancy_brier": 0.024627170148987465,
+            "boundary_brier": 0.012830553871871634,
+            "occupancy_calibrated_brier": 0.022777043271367405,
+            "boundary_calibrated_brier": 0.011690138477258175
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.4905745155618998,
+            "boundary_iou": 0.13015625833978572,
+            "boundary_f1_20cm": 0.4299126110712066,
+            "boundary_chamfer_m": 0.6480628500612203,
+            "occupancy_brier": 0.035651515332953014,
+            "boundary_brier": 0.018647491723334856,
+            "occupancy_calibrated_brier": 0.03236684214510756,
+            "boundary_calibrated_brier": 0.01693249919175168
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8216575933872291,
+            "boundary_iou": 0.44479638733302534,
+            "boundary_f1_20cm": 0.7448995644275428,
+            "boundary_chamfer_m": 0.2582247644049421,
+            "occupancy_brier": 0.010149729891640568,
+            "boundary_brier": 0.00782181952751569,
+            "occupancy_calibrated_brier": 0.009490489089378346,
+            "boundary_calibrated_brier": 0.007073585802865303
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6242016856118259,
+            "boundary_iou": 0.46584641458682163,
+            "boundary_f1_20cm": 0.6120506274697253,
+            "boundary_chamfer_m": 3.473959113981585,
+            "occupancy_brier": 0.009664603931033933,
+            "boundary_brier": 0.005741348546748369,
+            "occupancy_calibrated_brier": 0.008893207573458019,
+            "boundary_calibrated_brier": 0.0052309929216040165
+          }
+        }
+      }
+    },
+    "P/correct/K4": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.7051422015541555,
+            "boundary_iou": 0.46828136205142573,
+            "boundary_f1_20cm": 0.6750118885534069,
+            "boundary_chamfer_m": 2.5372814650679603,
+            "occupancy_brier": 0.005018555190612523,
+            "boundary_brier": 0.004409138367326828,
+            "occupancy_calibrated_brier": 0.004711534789761735,
+            "boundary_calibrated_brier": 0.003991547059689739
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6682122130873572,
+            "boundary_iou": 0.266668348306,
+            "boundary_f1_20cm": 0.6030041169586025,
+            "boundary_chamfer_m": 0.42239666548895244,
+            "occupancy_brier": 0.03194567341621091,
+            "boundary_brier": 0.01781930480624815,
+            "occupancy_calibrated_brier": 0.029421435963308123,
+            "boundary_calibrated_brier": 0.016214549134519442
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7682507089155466,
+            "boundary_iou": 0.378143031731279,
+            "boundary_f1_20cm": 0.7031814010968815,
+            "boundary_chamfer_m": 0.3107651483068218,
+            "occupancy_brier": 0.012886765303530286,
+            "boundary_brier": 0.009924469971793437,
+            "occupancy_calibrated_brier": 0.011910902883637728,
+            "boundary_calibrated_brier": 0.008919001289690283
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7233889382547295,
+            "boundary_iou": 0.3581781032317644,
+            "boundary_f1_20cm": 0.6948786539744941,
+            "boundary_chamfer_m": 0.3310179924149566,
+            "occupancy_brier": 0.024601817061615502,
+            "boundary_brier": 0.012835942532666803,
+            "occupancy_calibrated_brier": 0.022725198532413345,
+            "boundary_calibrated_brier": 0.011692350153076644
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.49254483420954376,
+            "boundary_iou": 0.13062793978124518,
+            "boundary_f1_20cm": 0.433295843530497,
+            "boundary_chamfer_m": 0.643802603785349,
+            "occupancy_brier": 0.035707877556354524,
+            "boundary_brier": 0.018683440005944654,
+            "occupancy_calibrated_brier": 0.03244627374578737,
+            "boundary_calibrated_brier": 0.016968948530670352
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.822395974415845,
+            "boundary_iou": 0.44426251128048877,
+            "boundary_f1_20cm": 0.7453718008002597,
+            "boundary_chamfer_m": 0.25698063897233825,
+            "occupancy_brier": 0.010073078821724308,
+            "boundary_brier": 0.007820181416378207,
+            "occupancy_calibrated_brier": 0.009410105087055283,
+            "boundary_calibrated_brier": 0.007066250046125374
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6296448662787465,
+            "boundary_iou": 0.4696126165661593,
+            "boundary_f1_20cm": 0.6168756216635467,
+            "boundary_chamfer_m": 3.414611832192153,
+            "occupancy_brier": 0.009487926596217553,
+            "boundary_brier": 0.005725935574823592,
+            "occupancy_calibrated_brier": 0.008740090544924632,
+            "boundary_calibrated_brier": 0.005218189070129364
+          }
+        }
+      }
+    },
+    "P/correct/K8": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.7122425551403556,
+            "boundary_iou": 0.47024359461019083,
+            "boundary_f1_20cm": 0.6770256521164859,
+            "boundary_chamfer_m": 2.536129304608581,
+            "occupancy_brier": 0.005028758458424273,
+            "boundary_brier": 0.004404128181966376,
+            "occupancy_calibrated_brier": 0.00471519022163236,
+            "boundary_calibrated_brier": 0.003986071842418929
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6694885608344221,
+            "boundary_iou": 0.2656111944289039,
+            "boundary_f1_20cm": 0.6020928914941885,
+            "boundary_chamfer_m": 0.4221049989973169,
+            "occupancy_brier": 0.03181368420767338,
+            "boundary_brier": 0.01782042803666446,
+            "occupancy_calibrated_brier": 0.02928047739045526,
+            "boundary_calibrated_brier": 0.016209355677804602
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7672366623331841,
+            "boundary_iou": 0.3792465708615779,
+            "boundary_f1_20cm": 0.7024725568554047,
+            "boundary_chamfer_m": 0.3120584986301019,
+            "occupancy_brier": 0.012959160431461239,
+            "boundary_brier": 0.00992619909688667,
+            "occupancy_calibrated_brier": 0.011963697242347577,
+            "boundary_calibrated_brier": 0.0089178864213304
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7235116579815875,
+            "boundary_iou": 0.35805171970111965,
+            "boundary_f1_20cm": 0.6933953144484498,
+            "boundary_chamfer_m": 0.3323260358542994,
+            "occupancy_brier": 0.024683530410312387,
+            "boundary_brier": 0.012857315379359684,
+            "occupancy_calibrated_brier": 0.022768407982120195,
+            "boundary_calibrated_brier": 0.011708420702643956
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.4927529586158501,
+            "boundary_iou": 0.13047989629682538,
+            "boundary_f1_20cm": 0.43186674519132023,
+            "boundary_chamfer_m": 0.6437228751707179,
+            "occupancy_brier": 0.03568148489395833,
+            "boundary_brier": 0.018621945443983358,
+            "occupancy_calibrated_brier": 0.03242129009017179,
+            "boundary_calibrated_brier": 0.01691385999251781
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8227869236809944,
+            "boundary_iou": 0.4454659731838438,
+            "boundary_f1_20cm": 0.7463208477353835,
+            "boundary_chamfer_m": 0.2569107749848647,
+            "occupancy_brier": 0.010114701791494034,
+            "boundary_brier": 0.007843359750376484,
+            "occupancy_calibrated_brier": 0.009426661207706287,
+            "boundary_calibrated_brier": 0.007082445506080321
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.636742702332839,
+            "boundary_iou": 0.47136704560993975,
+            "boundary_f1_20cm": 0.6193479931922561,
+            "boundary_chamfer_m": 3.412858248768665,
+            "occupancy_brier": 0.009417866717320722,
+            "boundary_brier": 0.0057064567563592196,
+            "occupancy_calibrated_brier": 0.00867277795454263,
+            "boundary_calibrated_brier": 0.005199687660966537
+          }
+        }
+      }
+    },
+    "D/correct/K1": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.7337535285510309,
+            "boundary_iou": 0.5182108233378068,
+            "boundary_f1_20cm": 0.71593851288113,
+            "boundary_chamfer_m": 2.037490871628823,
+            "occupancy_brier": 0.005455179480584301,
+            "boundary_brier": 0.003907705084925821,
+            "occupancy_calibrated_brier": 0.004978471319539879,
+            "boundary_calibrated_brier": 0.0034892128211897484
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6862296999790795,
+            "boundary_iou": 0.29263245168321506,
+            "boundary_f1_20cm": 0.6231408789963576,
+            "boundary_chamfer_m": 0.4123220033648677,
+            "occupancy_brier": 0.03135825336913448,
+            "boundary_brier": 0.015914704235071048,
+            "occupancy_calibrated_brier": 0.028440851583848816,
+            "boundary_calibrated_brier": 0.014520061594770015
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7756027441875958,
+            "boundary_iou": 0.3985505463596328,
+            "boundary_f1_20cm": 0.7137206663335396,
+            "boundary_chamfer_m": 0.3065975046220503,
+            "occupancy_brier": 0.01280644933018489,
+            "boundary_brier": 0.00892855041315049,
+            "occupancy_calibrated_brier": 0.011603245043641089,
+            "boundary_calibrated_brier": 0.007953461583585423
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7366706544295503,
+            "boundary_iou": 0.390126437893244,
+            "boundary_f1_20cm": 0.7158434599753836,
+            "boundary_chamfer_m": 0.3219938024205838,
+            "occupancy_brier": 0.02396115647330571,
+            "boundary_brier": 0.011436105504678464,
+            "occupancy_calibrated_brier": 0.02198419475497412,
+            "boundary_calibrated_brier": 0.010445931992038691
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.5044338447783684,
+            "boundary_iou": 0.15001241233294454,
+            "boundary_f1_20cm": 0.45043766566131943,
+            "boundary_chamfer_m": 0.6325801675734102,
+            "occupancy_brier": 0.035499977074310116,
+            "boundary_brier": 0.016547809729522654,
+            "occupancy_calibrated_brier": 0.032091505568916816,
+            "boundary_calibrated_brier": 0.015065814237123915
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.822373190554215,
+            "boundary_iou": 0.45908551030888384,
+            "boundary_f1_20cm": 0.7486822251973864,
+            "boundary_chamfer_m": 0.26013103651268144,
+            "occupancy_brier": 0.010444350856727925,
+            "boundary_brier": 0.007272554955970536,
+            "occupancy_calibrated_brier": 0.009455829988394771,
+            "boundary_calibrated_brier": 0.0064857300972376375
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6725596099652003,
+            "boundary_iou": 0.5244364259188896,
+            "boundary_f1_20cm": 0.6679326962726995,
+            "boundary_chamfer_m": 2.6552225243904912,
+            "occupancy_brier": 0.00998712506223306,
+            "boundary_brier": 0.004982324140543928,
+            "occupancy_calibrated_brier": 0.009029473908190385,
+            "boundary_calibrated_brier": 0.004526611331231988
+          }
+        }
+      }
+    },
+    "D/correct/K2": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.7371029368339838,
+            "boundary_iou": 0.5208270403250664,
+            "boundary_f1_20cm": 0.7178236404696798,
+            "boundary_chamfer_m": 2.033313168107663,
+            "occupancy_brier": 0.005336663883731265,
+            "boundary_brier": 0.0038866837597565816,
+            "occupancy_calibrated_brier": 0.004880077780004074,
+            "boundary_calibrated_brier": 0.003467771246416443
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6847956625130387,
+            "boundary_iou": 0.29326513510659813,
+            "boundary_f1_20cm": 0.6230557564900537,
+            "boundary_chamfer_m": 0.41255788456887227,
+            "occupancy_brier": 0.03133353090073734,
+            "boundary_brier": 0.01584247358213144,
+            "occupancy_calibrated_brier": 0.028437315967958,
+            "boundary_calibrated_brier": 0.014470736208169714
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.775200537523297,
+            "boundary_iou": 0.3992243883100129,
+            "boundary_f1_20cm": 0.7138065040812467,
+            "boundary_chamfer_m": 0.3065040718319987,
+            "occupancy_brier": 0.012742331870462533,
+            "boundary_brier": 0.008916074393133312,
+            "occupancy_calibrated_brier": 0.011557706264229379,
+            "boundary_calibrated_brier": 0.007944002762652154
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7345388191206135,
+            "boundary_iou": 0.3911376982602068,
+            "boundary_f1_20cm": 0.7166964089329312,
+            "boundary_chamfer_m": 0.3222844076948464,
+            "occupancy_brier": 0.02404634768735316,
+            "boundary_brier": 0.011395171031477365,
+            "occupancy_calibrated_brier": 0.022070653530614156,
+            "boundary_calibrated_brier": 0.010421847146158186
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.5022781292439682,
+            "boundary_iou": 0.148509903196107,
+            "boundary_f1_20cm": 0.44994231051610495,
+            "boundary_chamfer_m": 0.6309837371063961,
+            "occupancy_brier": 0.03555547448523695,
+            "boundary_brier": 0.016551624195870338,
+            "occupancy_calibrated_brier": 0.03207519685001668,
+            "boundary_calibrated_brier": 0.015049295301388032
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.821831260088899,
+            "boundary_iou": 0.4606842446855545,
+            "boundary_f1_20cm": 0.7486889295593023,
+            "boundary_chamfer_m": 0.2572420804645706,
+            "occupancy_brier": 0.010383142122568974,
+            "boundary_brier": 0.007267098506795526,
+            "occupancy_calibrated_brier": 0.009412128852771054,
+            "boundary_calibrated_brier": 0.0064817686577377815
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6770147515251884,
+            "boundary_iou": 0.5269329925574578,
+            "boundary_f1_20cm": 0.6706755439423159,
+            "boundary_chamfer_m": 2.6527245236157673,
+            "occupancy_brier": 0.009715317580858559,
+            "boundary_brier": 0.004930666203656376,
+            "occupancy_calibrated_brier": 0.008809784258466537,
+            "boundary_calibrated_brier": 0.004481790069833418
+          }
+        }
+      }
+    },
+    "D/correct/K4": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.7289061932765627,
+            "boundary_iou": 0.5177910714533941,
+            "boundary_f1_20cm": 0.716199423171474,
+            "boundary_chamfer_m": 2.038961134062558,
+            "occupancy_brier": 0.005283946903493923,
+            "boundary_brier": 0.0038888604650431213,
+            "occupancy_calibrated_brier": 0.004832883387263913,
+            "boundary_calibrated_brier": 0.0034670975315040423
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6846678603296795,
+            "boundary_iou": 0.2938932246346021,
+            "boundary_f1_20cm": 0.6229563723249529,
+            "boundary_chamfer_m": 0.41142324682516873,
+            "occupancy_brier": 0.031248557819196644,
+            "boundary_brier": 0.01582275885290952,
+            "occupancy_calibrated_brier": 0.028410282620077196,
+            "boundary_calibrated_brier": 0.014456759700046028
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.776900888823671,
+            "boundary_iou": 0.39910074919782634,
+            "boundary_f1_20cm": 0.7135186272747592,
+            "boundary_chamfer_m": 0.30692696854239315,
+            "occupancy_brier": 0.012647255015501704,
+            "boundary_brier": 0.008909890996318332,
+            "occupancy_calibrated_brier": 0.011494193547562093,
+            "boundary_calibrated_brier": 0.00793317212798485
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7358460510744933,
+            "boundary_iou": 0.39101257865288863,
+            "boundary_f1_20cm": 0.7163572936005993,
+            "boundary_chamfer_m": 0.3194178025748923,
+            "occupancy_brier": 0.02402466769667875,
+            "boundary_brier": 0.011365362627741776,
+            "occupancy_calibrated_brier": 0.02203580043241581,
+            "boundary_calibrated_brier": 0.010394180434324708
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.5039739058263946,
+            "boundary_iou": 0.14742463877342812,
+            "boundary_f1_20cm": 0.44971289298467276,
+            "boundary_chamfer_m": 0.6319538688181694,
+            "occupancy_brier": 0.0355215753475533,
+            "boundary_brier": 0.016592108168384925,
+            "occupancy_calibrated_brier": 0.03215744908556277,
+            "boundary_calibrated_brier": 0.015092566688374245
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8215710604857773,
+            "boundary_iou": 0.45933047283438067,
+            "boundary_f1_20cm": 0.747655031464945,
+            "boundary_chamfer_m": 0.25989978364655236,
+            "occupancy_brier": 0.010327608309991337,
+            "boundary_brier": 0.007256950666106351,
+            "occupancy_calibrated_brier": 0.009371677376429374,
+            "boundary_calibrated_brier": 0.00647096462873987
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.668562871285466,
+            "boundary_iou": 0.5248440721186219,
+            "boundary_f1_20cm": 0.6690266362218635,
+            "boundary_chamfer_m": 2.6587611263990887,
+            "occupancy_brier": 0.009683731458214327,
+            "boundary_brier": 0.004920278380812001,
+            "occupancy_calibrated_brier": 0.008794413319759354,
+            "boundary_calibrated_brier": 0.004472265467565601
+          }
+        }
+      }
+    },
+    "D/correct/K8": {
+      "coverage_bin": {
+        "high": {
+          "rooms": 51,
+          "samples": 331,
+          "metrics": {
+            "occupancy_iou": 0.7305882236929605,
+            "boundary_iou": 0.5189870567817583,
+            "boundary_f1_20cm": 0.7180577953884607,
+            "boundary_chamfer_m": 2.0381086851536674,
+            "occupancy_brier": 0.005223628093099112,
+            "boundary_brier": 0.003866125504986758,
+            "occupancy_calibrated_brier": 0.004777335464324882,
+            "boundary_calibrated_brier": 0.0034493493730576776
+          }
+        },
+        "low": {
+          "rooms": 37,
+          "samples": 219,
+          "metrics": {
+            "occupancy_iou": 0.6843571707373092,
+            "boundary_iou": 0.29383198894822926,
+            "boundary_f1_20cm": 0.6242741172563665,
+            "boundary_chamfer_m": 0.41220882119956154,
+            "occupancy_brier": 0.031207124938730357,
+            "boundary_brier": 0.015796419834308996,
+            "occupancy_calibrated_brier": 0.028367373089379415,
+            "boundary_calibrated_brier": 0.014436946168119653
+          }
+        },
+        "mid": {
+          "rooms": 51,
+          "samples": 348,
+          "metrics": {
+            "occupancy_iou": 0.7749995496996777,
+            "boundary_iou": 0.3987811313818969,
+            "boundary_f1_20cm": 0.7139681568956162,
+            "boundary_chamfer_m": 0.30790238230764005,
+            "occupancy_brier": 0.012825386565861917,
+            "boundary_brier": 0.008900289692412845,
+            "occupancy_calibrated_brier": 0.011627173635357847,
+            "boundary_calibrated_brier": 0.007931530572841614
+          }
+        }
+      },
+      "occlusion_type": {
+        "doorway": {
+          "rooms": 51,
+          "samples": 231,
+          "metrics": {
+            "occupancy_iou": 0.7362247502307173,
+            "boundary_iou": 0.39009487360454725,
+            "boundary_f1_20cm": 0.7167255193155236,
+            "boundary_chamfer_m": 0.32199527221393753,
+            "occupancy_brier": 0.023939486680786763,
+            "boundary_brier": 0.011341466416700703,
+            "occupancy_calibrated_brier": 0.021980893555792885,
+            "boundary_calibrated_brier": 0.010378623105224727
+          }
+        },
+        "l_wing": {
+          "rooms": 13,
+          "samples": 112,
+          "metrics": {
+            "occupancy_iou": 0.5045770649705567,
+            "boundary_iou": 0.14747814629983627,
+            "boundary_f1_20cm": 0.4521407758708644,
+            "boundary_chamfer_m": 0.6309884661530206,
+            "occupancy_brier": 0.03531123130061415,
+            "boundary_brier": 0.01653296379333832,
+            "occupancy_calibrated_brier": 0.03194110130099131,
+            "boundary_calibrated_brier": 0.015054257961441837
+          }
+        },
+        "missing_wall": {
+          "rooms": 51,
+          "samples": 323,
+          "metrics": {
+            "occupancy_iou": 0.8207114917630386,
+            "boundary_iou": 0.4602681029269607,
+            "boundary_f1_20cm": 0.7492743701550049,
+            "boundary_chamfer_m": 0.2598862334928216,
+            "occupancy_brier": 0.010462910219796102,
+            "boundary_brier": 0.007253464255207935,
+            "occupancy_calibrated_brier": 0.009467798170181438,
+            "boundary_calibrated_brier": 0.006472017156037734
+          }
+        },
+        "viewpoint": {
+          "rooms": 51,
+          "samples": 232,
+          "metrics": {
+            "occupancy_iou": 0.6687609430529711,
+            "boundary_iou": 0.5254976023402758,
+            "boundary_f1_20cm": 0.6700117647210336,
+            "boundary_chamfer_m": 2.658382027947863,
+            "occupancy_brier": 0.009728667579911985,
+            "boundary_brier": 0.004897339013607379,
+            "occupancy_calibrated_brier": 0.008818013356793022,
+            "boundary_calibrated_brier": 0.004453160396826825
+          }
+        }
+      }
+    }
+  },
+  "verification": {
+    "cpu_regression": "169 passed, 2 CUDA-only cases deselected",
+    "focused_p11": "19 passed (includes a later C/S orchestration test)",
+    "parent_continuation_gate": "correctly blocked: final selection/results absent",
+    "figures": "coverage/occlusion and both negative-case pages rendered; first page and strata plot visually inspected"
+  },
+  "versions": {
+    "python": "3.11.9",
+    "torch": "2.5.1+cu121",
+    "numpy": "1.26.4",
+    "scipy": "1.11.3",
+    "matplotlib": "3.11.2"
+  },
+  "pending": [
+    "finish and freeze current dual study",
+    "full C/S controls after Stage I lock",
+    "apply matched controls/reporting to final dual-study checkpoints",
+    "retrained window sweeps (40/60/80 ms)",
+    "independent measured-room audit and evaluation",
+    "validated uncertainty/rejection behavior and release/rollback package"
+  ]
+}
