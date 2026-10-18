@@ -83,6 +83,8 @@ jobs:
           python -m pip install -e '.[test,audit,model]'
       - name: Check EchoFusion guarantees, audio freezes, random K and the runner
         run: python -m pytest tests/test_echofusion.py tests/test_demo.py -q
+      - name: Check WallFusion, dual-study data and boundary quality metrics
+        run: python -m pytest tests/test_wallfusion.py tests/test_study_data.py tests/test_quality.py -q
 
   inference-tests:
     runs-on: ubuntu-latest
