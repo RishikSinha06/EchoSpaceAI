@@ -57,6 +57,9 @@ function acousticRoomsPlugin(rootPath) {
 }
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), 'ACOUSTICROOMS_');
-  return { plugins: [acousticRoomsPlugin(env.ACOUSTICROOMS_ROOT)] };
+  const env = loadEnv(mode, process.cwd(), ['ACOUSTICROOMS_', 'ECHOSPACE_']);
+  // The local inference API (uvicorn echospace.inference.api:app) is reached through /svc,
+  // so the browser needs no CORS exception and the API stays bound to localhost.
+  const api = { '/svc': { target: env.ECHOSPACE_API_URL || 'http://127.0.0.1:8000', changeOrigin: true, rewrite: (p) => p.replace(/^\/svc/, '') } };
+  return { plugins: [acousticRoomsPlugin(env.ACOUSTICROOMS_ROOT)], server: { proxy: api }, preview: { proxy: api } };
 });

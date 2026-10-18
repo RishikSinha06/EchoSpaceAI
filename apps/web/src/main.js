@@ -21,6 +21,8 @@ document.querySelector('#app').innerHTML = `
       <label class="layer"><input type="checkbox" id="floor" checked><span class="swatch floor"></span> Interior floor</label>
       <label class="layer"><input type="checkbox" id="observed" checked><span class="swatch observed"></span> Observed boundary</label>
       <label class="layer"><input type="checkbox" id="inferred" checked><span class="swatch inferred"></span> Inferred boundary</label>
+      <label class="layer"><input type="checkbox" id="truth" checked><span class="swatch truth"></span> Ground truth outline</label>
+      <label class="layer"><input type="checkbox" id="measurements" checked><span class="swatch measurements"></span> Sources / receivers</label>
       <div class="section-label">04 / OUTPUT</div>
       <button class="outline" id="export" disabled>Export GLB <span>↓</span></button>
       <p class="hint">Open exported scenes in Blender or another native GLB viewer. The wall height is assumed for display.</p>
@@ -45,11 +47,18 @@ document.querySelector('#app').innerHTML = `
       <div class="section-label">BOUNDARY</div>
       <div class="metric"><span>Observed</span><b id="obs-length">—</b></div>
       <div class="metric"><span>Inferred</span><b id="inf-length">—</b></div>
-      <div class="inspector-note">Observed and inferred refer to the input mask. Source meshes are displayed without invented provenance.</div>
+      <div class="section-label">RECONSTRUCTION</div>
+      <div class="metric"><span>Unseen occupancy IoU</span><b id="occ-iou">—</b></div>
+      <div class="metric"><span>Unseen boundary IoU</span><b id="bnd-iou">—</b></div>
+      <div class="metric"><span>RIRs used (K)</span><b id="k-used">—</b></div>
+      <div class="metric"><span>Scan coverage</span><b id="coverage">—</b></div>
+      <div class="metric"><span>Room split</span><b id="split">—</b></div>
+      <div class="inspector-note">Observed boundary: wall faces against measured wall hits. Inferred: everything the model completed. IoU is scored only on cells the scan never saw. Wall height is assumed for display; the model predicts a 2D footprint. Source meshes are displayed without invented provenance.</div>
     </aside>
   </main>`;
 
 const byId = (id) => document.getElementById(id);
+const LAYER_KEYS = ['floor', 'observed', 'inferred', 'truth', 'measurements'];
 const host = byId('canvas-host');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x101c26);
@@ -90,6 +99,13 @@ function updateInspector() {
   metric('width', stats?.width_m); metric('depth', stats?.depth_m); metric('area', stats?.area_m2, 'm²');
   metric('cell', stats?.cell_m); metric('height', stats?.height_m);
   metric('obs-length', stats?.observed_wall_m); metric('inf-length', stats?.inferred_wall_m);
+  const rec = active?.reconstruction;
+  const text = (id, value) => { byId(id).textContent = value ?? '—'; };
+  text('occ-iou', rec ? rec.metrics.occupancy_iou.toFixed(3) : null);
+  text('bnd-iou', rec ? rec.metrics.boundary_iou.toFixed(3) : null);
+  text('k-used', rec ? `${rec.k_used} of ${rec.k_requested}` : null);
+  text('coverage', rec ? `${Math.round(rec.coverage * 100)} %` : null);
+  text('split', rec ? `${rec.split_for_model_fold} (fold-held-out)`.replace('test (fold-held-out)', 'held-out test') : null);
 }
 function fitView(mode = 'perspective') {
   if (!bounds) return;
@@ -113,8 +129,8 @@ function show(result) {
   if (bounds.isEmpty()) throw new Error('This file contains no visible geometry.');
   fitView();
   byId('scene-name').textContent = result.name || result.group.name;
-  byId('scene-kind').textContent = result.kind === 'grid' ? 'PREDICTION / GRID' : 'SOURCE / MESH';
-  for (const key of ['floor', 'observed', 'inferred']) { byId(key).disabled = !result.layers[key]; result.layers[key] && (result.layers[key].visible = byId(key).checked); }
+  byId('scene-kind').textContent = result.reconstruction ? 'RECONSTRUCTION / ' + result.reconstruction.model_id.toUpperCase() : result.kind === 'grid' ? 'PREDICTION / GRID' : 'SOURCE / MESH';
+  for (const key of LAYER_KEYS) { byId(key).disabled = !result.layers[key]; result.layers[key] && (result.layers[key].visible = byId(key).checked); }
   byId('export').disabled = false;
   updateInspector(); setStatus('Scene ready');
 }
@@ -128,7 +144,7 @@ byId('file-input').onchange = async (event) => {
 byId('example').onclick = async () => {
   try { setStatus('Loading example…'); const response = await fetch('/examples/example-grid.json'); if (!response.ok) throw new Error('Example scene unavailable.'); const result = buildGridScene(await response.json()); show({ ...result, kind: 'grid', name: 'Example L-shaped room' }); } catch (error) { setStatus(error.message, true); }
 };
-for (const key of ['floor', 'observed', 'inferred']) byId(key).onchange = (event) => { if (active?.layers[key]) active.layers[key].visible = event.target.checked; };
+for (const key of LAYER_KEYS) byId(key).onchange = (event) => { if (active?.layers[key]) active.layers[key].visible = event.target.checked; };
 byId('reset-view').onclick = () => fitView();
 byId('top-view').onclick = () => fitView('top');
 byId('perspective-view').onclick = () => fitView('perspective');
@@ -151,4 +167,5 @@ zone.addEventListener('drop', async (e) => { e.preventDefault(); dragDepth = 0; 
 byId('example').click();
 
 renderer.localClippingEnabled = true;
+import('./service.js').then((module) => module.attachReconstructionPanel(show, setStatus));
 import('./dataset.js').then((module) => module.attachDatasetBrowser(show, setStatus));

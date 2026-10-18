@@ -1,0 +1,60 @@
+{
+  "gate": "PASS",
+  "model_id": "echofusion-d-fold0-seed0",
+  "checkpoint_sha256": "7482ee9a6c9df9d728fc566f4d5dee12ceb4994d5eb4f2689b1df5e5cadad55e",
+  "split": "test",
+  "fold": 0,
+  "samples": 898,
+  "rooms": 51,
+  "device": "cpu",
+  "code_revision": "73ff57a",
+  "checks": {
+    "all_samples_verified_and_scored": true,
+    "k8_matches_recorded_within_tolerance": true,
+    "glb_matches_grid_geometry": true
+  },
+  "tolerance": 0.001,
+  "recorded_k8": {
+    "rooms": 51,
+    "samples": 898,
+    "occupancy_iou": 0.74971186475368,
+    "boundary_iou": 0.4381717313182783
+  },
+  "replayed": {
+    "1": {
+      "rooms": 51,
+      "samples": 898,
+      "occupancy_iou": 0.7515178016937523,
+      "boundary_iou": 0.43776914332363726
+    },
+    "2": {
+      "rooms": 51,
+      "samples": 898,
+      "occupancy_iou": 0.752108417770929,
+      "boundary_iou": 0.43923361854128745
+    },
+    "4": {
+      "rooms": 51,
+      "samples": 898,
+      "occupancy_iou": 0.749908251971175,
+      "boundary_iou": 0.43803108274000546
+    },
+    "8": {
+      "rooms": 51,
+      "samples": 898,
+      "occupancy_iou": 0.749711864895713,
+      "boundary_iou": 0.43817172868273035
+    }
+  },
+  "abs_delta_k8": {
+    "occupancy_iou": 1.4203294096404306e-10,
+    "boundary_iou": 2.6355479465500764e-09
+  },
+  "glb_checked": 36,
+  "model_load_s": 2.92,
+  "latency_s": {
+    "median": 0.0227,
+    "p95": 0.0261
+  },
+  "failures": []
+}

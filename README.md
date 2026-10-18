@@ -60,6 +60,9 @@ confirmation are described in [docs/p9_iterations_handoff.md](docs/p9_iterations
 The full-fold augmented A/P/D training workflow and recovery commands are in
 [docs/p9_full_training_handoff.md](docs/p9_full_training_handoff.md).
 
+P10's inference service, viewer reconstruction panel, grid v2 and GLB export,
+and its replay gate are described in [docs/p10_inference_handoff.md](docs/p10_inference_handoff.md).
+
 P7's B0/A/P baselines, frozen-sample training foundation and checkpoint lifecycle
 are described in [docs/p7_baselines_handoff.md](docs/p7_baselines_handoff.md).
 
