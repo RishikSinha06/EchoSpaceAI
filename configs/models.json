@@ -2,10 +2,60 @@
   "format": "echospace.models.1",
   "models": [
     {
+      "model_id": "echofusion-a-fold0-seed0",
+      "family": "EchoFusion",
+      "variant": "A",
+      "description": "EchoFusion A, original P9 full fold-0 training, seed 0, best epoch 40",
+      "checkpoint": "artifacts/models/echofusion_a_fold0_seed0/best.pt",
+      "checkpoint_sha256": "3dae169e5fca1403c275332fee18d16b38766a39c178b914d3805ee37088bd20",
+      "checkpoint_format": "p8.checkpoint.1",
+      "frozen_checksum": "6d4231aa85fa39f84de064116d9c9b03f6725a69dabfbedbd1cf0147b4c91b28",
+      "training_source_commit": "65b3566f103061631d044a008928634816eb2dd8",
+      "fold": 0,
+      "seed": 0,
+      "folds_file_sha256": "b6e8d8ed28fc533abf2a72710e898d8cbd52861f00b41e0927edd98a185bed84",
+      "eval_spec_checksum": "8cfcc7781a5824481f3019f9668b1dbcf7a8ff123fd22e9fbfd0d8cc3b80f186",
+      "threshold": 0.5,
+      "recorded_test_k8_room_weighted": {
+        "rooms": 51,
+        "samples": 898,
+        "occupancy_iou": 0.7281791412311536,
+        "boundary_iou": 0.4155705556849851,
+        "loss": 0.4897052155426253
+      },
+      "scope": "one fold, one seed; fold-0 test pool had earlier project use; exploratory, no general acoustic-gain claim",
+      "obtain": "Copy the verified original artifacts/p9_full_fold0/A/best.pt to this checkpoint path; weights are excluded from Git."
+    },
+    {
+      "model_id": "echofusion-p-fold0-seed0",
+      "family": "EchoFusion",
+      "variant": "P",
+      "description": "EchoFusion P, original P9 full fold-0 training, seed 0, best epoch 29",
+      "checkpoint": "artifacts/models/echofusion_p_fold0_seed0/best.pt",
+      "checkpoint_sha256": "0526fb15e766332419c23d85a15f4a87be10e8f258c4aea8b549c2e489cf6275",
+      "checkpoint_format": "p8.checkpoint.1",
+      "frozen_checksum": "6d4231aa85fa39f84de064116d9c9b03f6725a69dabfbedbd1cf0147b4c91b28",
+      "training_source_commit": "65b3566f103061631d044a008928634816eb2dd8",
+      "fold": 0,
+      "seed": 0,
+      "folds_file_sha256": "b6e8d8ed28fc533abf2a72710e898d8cbd52861f00b41e0927edd98a185bed84",
+      "eval_spec_checksum": "8cfcc7781a5824481f3019f9668b1dbcf7a8ff123fd22e9fbfd0d8cc3b80f186",
+      "threshold": 0.5,
+      "recorded_test_k8_room_weighted": {
+        "rooms": 51,
+        "samples": 898,
+        "occupancy_iou": 0.7368728675356965,
+        "boundary_iou": 0.40641654254329124,
+        "loss": 0.48402419158079324
+      },
+      "scope": "one fold, one seed; fold-0 test pool had earlier project use; exploratory, no general acoustic-gain claim",
+      "obtain": "Copy the verified original artifacts/p9_full_fold0/P/best.pt to this checkpoint path; weights are excluded from Git."
+    },
+    {
       "model_id": "echofusion-d-fold0-seed0",
       "family": "EchoFusion",
       "variant": "D",
-      "description": "EchoFusion D (geometry + positions + RIRs), P9 full fold-0 training, seed 0, best epoch 68",
+      "description": "EchoFusion D, original P9 full fold-0 training, seed 0, best epoch 68",
       "checkpoint": "artifacts/models/echofusion_d_fold0_seed0/best.pt",
       "checkpoint_sha256": "7482ee9a6c9df9d728fc566f4d5dee12ceb4994d5eb4f2689b1df5e5cadad55e",
       "checkpoint_format": "p8.checkpoint.1",
@@ -20,10 +70,11 @@
         "rooms": 51,
         "samples": 898,
         "occupancy_iou": 0.74971186475368,
-        "boundary_iou": 0.4381717313182783
+        "boundary_iou": 0.4381717313182783,
+        "loss": 0.4710248727383677
       },
       "scope": "one fold, one seed; fold-0 test pool had earlier project use; exploratory, no general acoustic-gain claim",
-      "obtain": "EchoSpace_EchoFusion_D.zip shared by the P9 owner: copy artifacts/p9_full_fold0/D/best.pt to the checkpoint path"
+      "obtain": "Copy the verified original artifacts/p9_full_fold0/D/best.pt to this checkpoint path; weights are excluded from Git."
     }
   ]
 }

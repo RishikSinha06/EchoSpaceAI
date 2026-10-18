@@ -48,7 +48,7 @@ with the unresolved D-vs-P question in `docs/architecture_research_2026-10-17.md
 - **grid v2.** P4 grids are rotated to the scan's dominant wall; v1 could only
   express axis-aligned grids, so v2 carries origin and axes in scene metres.
   v1 files still load.
-- **Weights stay out of Git.** Put the D checkpoint at
+- **Weights stay out of Git.** Put the original D checkpoint at
   `artifacts/models/echofusion_d_fold0_seed0/best.pt` (from
   `EchoSpace_EchoFusion_D.zip`). The registry reports it unavailable, with the
   reason, until the hash matches.
@@ -63,38 +63,58 @@ uvicorn echospace.inference.api:app --host 127.0.0.1 --port 8000
 pnpm --dir apps/web dev                                             # open the printed URL
 ```
 
-## Left for the teammate
+## Completion update (2026-10-18)
 
-These parts of P10 are not done. Each can be added without changing the code
-above, unless stated.
+A/P/D are now registered against their original P9 run/checkpoint hashes.
+A and P passed all 898 fold-0 samples (51 rooms); see the A/P replay reports.
+The D completion replay verifies the same path after these changes.
+Weights and evaluation arrays stay local and are never committed.
 
-1. **A and P checkpoints.** Only D was available. Copy
-   `artifacts/p9_full_fold0/A/best.pt` and `P/best.pt` to
-   `artifacts/models/`, add two entries to `configs/models.json` (hashes from
-   their `run.json`; recorded K = 8 room-weighted: A 0.728179 / 0.415571,
-   P 0.736873 / 0.406417), then run
-   `python scripts/check_inference.py --model <id>` for each. No code change.
-2. **Side-by-side comparison view.** The plan asks to compare observation,
-   A, D and truth. The viewer shows one model with the truth outline and lets
-   you switch models; a split or overlay view of several reconstructions of the
-   same sample still needs building in `apps/web/src/service.js`. The API
-   already serves any registered model on the same sample.
-3. **RoomScene v1 export.** The contract's `room-scene.schema.json` is not yet
-   written by the service; only grid v2, GLB, NPZ and provenance are. Add an
-   exporter that places measured geometry and inferred geometry in separate
-   provenance layers.
-4. **WallFusion.** If the dual-architecture study selects WallFusion, register
-   its checkpoint (the loader already builds the `WallFusion` family through
-   `models/factory.py`) and run the gate for it.
-5. **Native-viewer check by eye.** GLBs were verified programmatically. Open
-   one in Blender once to confirm colours, names and orientation look right
-   next to the source OBJ rotated by `source_to_scene`.
-6. **AcousticRooms mesh panel.** The existing panel needs an extracted
-   `room_mesh_obj_format/` folder (`ACOUSTICROOMS_ROOT`); with the zipped
-   dataset it reports unavailable. Serving meshes from the zips through the
-   P2 adapter would fix it.
-7. **Persistence.** Results are kept in memory (last 128). Restarting the
-   service forgets them; ids are deterministic, so re-posting recreates them.
+The viewer's **Compare observation / A / D / truth** action reconstructs A
+and D on the same sample and K, checks grid/mask/truth equality, and opens
+four panels. Occupancy and boundary are selectable; each model can be
+inspected in 3D. This is a held-out benchmark comparison, not user uploads.
 
-Out of scope for H1: arbitrary user scans or WAV uploads (H2), editing and
-redesign (H3), GPU serving, authentication.
+**RoomScene v1** is downloadable beside grid/GLB/NPZ. Its measured layer is
+built only from observed free/hit interfaces, independent of the prediction.
+The model layer contains the remaining composed floor-plan interfaces.
+Both are quantized 2D floor projections; they do not recover wall height.
+Observation references resolve to an observation-only NPZ without target
+labels. Acoustic records retain the verified positions and emission timing.
+
+The source mesh panel now proxies to the API when no extracted folder is
+configured. Set `ECHOSPACE_ACOUSTICROOMS_ROOT` to the dataset directory.
+The audited P2 inventory locates extracted OBJs or nested ZIP members; ZIPs
+are read through P2 without bulk extraction. Source meshes are reference
+geometry, never additional reconstruction input.
+
+The last 128 request records persist in `artifacts/inference/results`.
+After a restart a requested result is deterministically recomputed and its
+ID checked. Weights and samples are reverified. Set `ECHOSPACE_RESULTS_DIR`
+to an empty string to disable disk persistence.
+
+WallFusion promotion remains conditional on selection by the ongoing dual
+study. No interim checkpoint has been promoted. Arbitrary scans/WAV uploads,
+editing/redesign, GPU serving and authentication remain outside H1.
+
+See `reports/p10_completion.md` for final checks and the native export check.
+This completion branch must receive teammate review before merging.
+
+### Restore the original A/P/D weights locally
+
+If `artifacts/p9_full_fold0` is already present on this machine:
+
+```powershell
+foreach ($variant in @('A','P','D')) {
+    $target = "artifacts/models/echofusion_$($variant.ToLower())_fold0_seed0"
+    New-Item -ItemType Directory -Force $target | Out-Null
+    Copy-Item "artifacts/p9_full_fold0/$variant/best.pt" "$target/best.pt"
+}
+```
+
+The registry checks every SHA before serving; copying a different study's
+checkpoint into these paths will be rejected. On another machine transfer
+these permitted model weights separately from Git and place them at the
+registry paths. Do not regenerate eval samples if the verified P6 folder
+already exists. A missing file should appear unavailable, never silently
+fall back to another model.

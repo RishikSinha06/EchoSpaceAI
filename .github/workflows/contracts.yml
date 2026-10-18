@@ -35,6 +35,8 @@ jobs:
       - run: pnpm build
       - name: Browser grid geometry matches the Python GLB exporter
         run: node apps/web/scripts/check-grid.mjs
+      - name: Comparison panels use identical samples and exact threshold maps
+        run: node apps/web/scripts/check-comparison.mjs
 
   python-tests:
     runs-on: ubuntu-latest

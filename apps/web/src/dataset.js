@@ -82,7 +82,7 @@ export async function attachDatasetBrowser(show, setStatus) {
         group: object, layers: {}, kind: 'mesh', name: selected.name,
         stats: { width_m: size.x, depth_m: size.z, height_m: size.y }
       });
-      note.textContent = 'AcousticRooms Z-up OBJ rotated into the Y-up viewer. Section cut hides upper geometry; RIR archives are absent locally.';
+      note.textContent = 'Source OBJ in metres, rotated from Z up to scene Y up. Section cut hides upper geometry. Reconstruction uses separately verified RIR samples.';
     } catch (error) {
       setStatus('Dataset load failed: ' + error.message, true);
     } finally {
@@ -105,8 +105,7 @@ export async function attachDatasetBrowser(show, setStatus) {
     }));
     categorySelect.value = categories.includes('Bedrooms') ? 'Bedrooms' : categories[0];
     fillRooms();
-    note.textContent = rooms.length + ' OBJ room meshes available locally. Acoustic files are not present.';
-    openButton.click();
+    note.textContent = rooms.length + ' audited source meshes available locally (archives or extracted files). Choose a room to inspect.';
   } catch (error) {
     note.textContent = error.message;
     openButton.disabled = true;
