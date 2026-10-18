@@ -5,7 +5,8 @@ from pathlib import Path
 
 import numpy as np
 import pytest
-import torch
+
+torch = pytest.importorskip("torch")  # skip in the no-torch python-tests job
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from echospace.models.wallfusion import build, reflection_delays, sample_delay_features

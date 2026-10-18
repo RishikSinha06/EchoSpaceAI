@@ -7,6 +7,8 @@ import sys
 import numpy as np
 import pytest
 
+pytest.importorskip("torch")  # echospace.training imports torch; skip in the no-torch python-tests job
+
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src'))
 from echospace.training import study_data
 from echospace.training.audio_frozen import FrozenAudioDataset
