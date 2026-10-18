@@ -281,3 +281,73 @@ def test_committed_agreement_fixture_matches_python_geometry() -> None:
     assert export.geometry_stats(fixture["document"]) == fixture["expected"]
     digest = hashlib.sha256(json.dumps(fixture["document"], sort_keys=True).encode()).hexdigest()
     assert fixture["document_sha256"] == digest
+
+
+def test_room_scene_schema_and_prediction_independent_measured_layer(repo: Path) -> None:
+    from dataclasses import replace
+    from jsonschema import Draft202012Validator
+    from echospace.inference.room_scene import room_scene_document
+    store, registry = _store(repo), _registry(repo)
+    result = reconstruct(registry.load('tiny-d'),registry.get('tiny-d'),
+                         store.load('RoomTest_idx_0__viewpoint__mid__1'),4,split='test',revision='test')
+    scene = room_scene_document(result)
+    schema = Path(__file__).resolve().parents[1]/'contracts/v0.1.0/room-scene.schema.json'
+    Draft202012Validator(json.loads(schema.read_text(encoding='utf-8'))).validate(scene)
+    changed = room_scene_document(replace(result,interior=1-result.interior))
+    assert scene['observed_geometry'] and scene['observed_geometry']==changed['observed_geometry']
+    assert scene['inferred_geometry']!=changed['inferred_geometry']
+    assert all(w['provenance']=='measured' for w in scene['observed_geometry'])
+    assert all(w['provenance']=='model' for w in scene['inferred_geometry'])
+    assert len(scene['acoustic_measurements'])==4
+    assert scene['acoustic_measurements'][0]['source_scene_m']==result.sample.arrays['rir_positions_scene_m'][0,0].tolist()
+    assert scene['observations'][0]['sensor_type']=='simulated_partial_scan'
+
+
+def test_room_scene_and_observation_downloads_and_restart_recovery(repo: Path) -> None:
+    import io
+    client = _app(repo)
+    created = client.post('/v1/reconstructions',json=_request(k=4)).json()
+    original = client.get(created['links']['room_scene'])
+    assert original.status_code==200
+    scene = original.json()
+    observation = client.get(scene['observations'][0]['payload_ref'])
+    assert observation.status_code==200
+    with np.load(io.BytesIO(observation.content),allow_pickle=False) as data:
+        assert 'target_occupancy' not in data and 'target_boundary' not in data
+        assert 'observed_points_scene_m' in data and 'rir_waveforms' in data
+    restarted = _app(repo)
+    assert restarted.get('/health').json()['persistent_requests'] is True
+    restored = restarted.get(created['links']['grid'])
+    assert restored.status_code==200
+    assert restored.json()==client.get(created['links']['grid']).json()
+    path = repo/'artifacts/inference/results'/f"{created['reconstruction_id']}.json"
+    path.write_text(json.dumps(_request(k=1)),encoding='utf-8')
+    assert _app(repo).get(created['links']['grid']).status_code==409
+
+
+def test_archived_mesh_store_and_api_reuse_p2_without_extraction(repo: Path) -> None:
+    import io
+    import zipfile
+    from echospace.inference.meshes import MeshStore
+    root = repo/'raw'; root.mkdir()
+    body = b'v 0 0 0\nv 1 0 0\nv 0 1 0\nf 1 2 3\n'
+    inner = io.BytesIO()
+    member = 'room_mesh_obj_format/Test/Room_idx_0.obj'
+    with zipfile.ZipFile(inner,'w') as z: z.writestr(member,body)
+    with zipfile.ZipFile(root/'outer.zip','w') as z: z.writestr('meshes.zip',inner.getvalue())
+    manifest = repo/'meshes.jsonl'
+    manifest.write_text(json.dumps({'room_id':'Room_idx_0','category':'Test','mesh_bytes':len(body),
+                                    'mesh_path':'outer.zip :: meshes.zip :: '+member})+'\n',encoding='utf-8')
+    store = MeshStore(root,manifest)
+    assert store.catalogue()['rooms'][0]['storage']=='archive'
+    assert store.read('Test/Room_idx_0')[0]==body
+    with pytest.raises(LookupError): store.read('../outer.zip')
+    settings = Settings(repo_root=repo,models='models.json',eval_dir='eval',eval_spec='spec.json',folds='folds.json',
+                        mesh_root='raw',mesh_manifest='meshes.jsonl')
+    client = TestClient(create_app(settings))
+    assert client.get('/v1/acousticrooms').json()['available']
+    response = client.get('/v1/acousticrooms/mesh',params={'id':'Test/Room_idx_0'})
+    assert response.status_code==200 and response.content==body
+    assert response.headers['etag']=='"'+hashlib.sha256(body).hexdigest()+'"'
+    assert client.get('/v1/acousticrooms/mesh',params={'id':'../outer.zip'}).status_code==404
+    assert sorted(p.name for p in root.iterdir())==['outer.zip']

@@ -1,4 +1,5 @@
 import { buildGridScene } from './grid.js';
+import { comparisonModels, showComparison } from './comparison.js';
 
 // Reconstruction panel: talks to the local inference API through the Vite
 // proxy at /svc (see vite.config.js). Only committed, hash-verified test
@@ -34,13 +35,29 @@ export async function attachReconstructionPanel(show, setStatus) {
     '<label class="dataset-label" for="svc-k">RIR measurements (K)</label>',
     '<select id="svc-k"><option value="1">1</option><option value="2">2</option><option value="4">4</option><option value="8" selected>8</option></select>',
     '<button class="primary" id="svc-run" type="button">Reconstruct <span>→</span></button>',
-    '<div class="svc-downloads"><button class="subtle" id="svc-glb" disabled>GLB</button><button class="subtle" id="svc-grid" disabled>Grid JSON</button><button class="subtle" id="svc-prov" disabled>Provenance</button></div>',
+    '<button class="outline" id="svc-compare" type="button" disabled>Compare observation / A / D / truth</button>',
+    '<div class="svc-downloads"><button class="subtle" id="svc-glb" disabled>GLB</button><button class="subtle" id="svc-grid" disabled>Grid JSON</button><button class="subtle" id="svc-scene" disabled>RoomScene</button><button class="subtle" id="svc-prov" disabled>Provenance</button></div>',
     '<p class="hint" id="svc-note">Connecting to the inference service…</p>',
   ].join('');
   anchor.before(panel);
   const $ = (id) => panel.querySelector('#' + id);
   let samples = [];
   let current = null;
+  let registered = [];
+
+  async function reconstruct(modelId, sampleId, k) {
+    const result = await call('/v1/reconstructions', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schema_version: 'echospace.reconstruction_request.v1', model_id: modelId, sample_id: sampleId, k }),
+    });
+    return { result, grid: await call(result.links.grid) };
+  }
+  function inspect(item) {
+    const scene = buildGridScene(item.grid);
+    current = item.result;
+    show({ ...scene, kind: 'grid', name: item.grid.name, reconstruction: item.result });
+    for (const id of ['svc-glb', 'svc-grid', 'svc-prov', 'svc-scene']) $(id).disabled = false;
+  }
 
   function fillSamples() {
     const chosen = samples.filter((s) => s.room_id === $('svc-room').value);
@@ -63,30 +80,36 @@ export async function attachReconstructionPanel(show, setStatus) {
     button.disabled = true;
     setStatus('Reconstructing…');
     try {
-      const created = await call('/v1/reconstructions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ schema_version: 'echospace.reconstruction_request.v1', model_id: $('svc-model').value, sample_id: $('svc-sample').value, k: Number($('svc-k').value) }),
-      });
-      const grid = await call(created.links.grid);
-      const scene = buildGridScene(grid);
-      current = created;
-      show({ ...scene, kind: 'grid', name: grid.name, reconstruction: created });
-      for (const id of ['svc-glb', 'svc-grid', 'svc-prov']) $(id).disabled = false;
-      setStatus(`Reconstruction ${created.reconstruction_id} ready`);
+      const item = await reconstruct($('svc-model').value, $('svc-sample').value, Number($('svc-k').value));
+      inspect(item);
+      setStatus(`Reconstruction ${item.result.reconstruction_id} ready`);
     } catch (error) {
       setStatus(`Reconstruction failed: ${error.message}`, true);
     } finally {
       button.disabled = false;
     }
   });
+  $('svc-compare').addEventListener('click', async () => {
+    $('svc-compare').disabled = true;
+    setStatus('Comparing A and D on the same verified scan…');
+    try {
+      const pair = comparisonModels(registered, $('svc-model').value);
+      const sampleId = $('svc-sample').value, k = Number($('svc-k').value);
+      const items = await Promise.all(pair.map((m) => reconstruct(m.model_id, sampleId, k)));
+      showComparison(items, inspect);
+      setStatus('Comparison ready: observation, A, D and ground truth');
+    } catch (error) { setStatus(`Comparison failed: ${error.message}`, true); }
+    finally { $('svc-compare').disabled = false; }
+  });
   $('svc-glb').addEventListener('click', () => current && download(current.links.glb));
   $('svc-grid').addEventListener('click', () => current && download(current.links.grid));
   $('svc-prov').addEventListener('click', () => current && download(current.links.provenance));
+  $('svc-scene').addEventListener('click', () => current && download(current.links.room_scene));
 
   try {
     const health = await call('/health');
     const { models } = await call('/v1/models');
+    registered = models;
     const servable = models.filter((m) => m.available);
     $('svc-model').replaceChildren(...models.map((m) => {
       const element = option(m.model_id, `${m.family} ${m.variant} · fold ${m.fold}${m.available ? '' : ' (unavailable)'}`);
@@ -95,6 +118,7 @@ export async function attachReconstructionPanel(show, setStatus) {
     }));
     if (!servable.length) throw new Error('No model can be served: ' + (models[0]?.unavailable_reason || 'registry empty'));
     $('svc-model').value = servable[0].model_id;
+    try { comparisonModels(models, $('svc-model').value); $('svc-compare').disabled = false; } catch { /* Registry explains unavailable checkpoints. */ }
     const listing = await loadSamples();
     $('svc-note').textContent = `${listing.count} held-out test scans from fold ${listing.fold}; service ${health.inference_version} at ${health.code_revision}. Rooms the model trained on are refused.`;
   } catch (error) {

@@ -1,0 +1,43 @@
+{
+  "gate": "PASS",
+  "model_id": "echofusion-a-fold0-seed0",
+  "checkpoint_sha256": "3dae169e5fca1403c275332fee18d16b38766a39c178b914d3805ee37088bd20",
+  "split": "test",
+  "fold": 0,
+  "samples": 898,
+  "rooms": 51,
+  "device": "cpu",
+  "code_revision": "0cd95cc",
+  "checks": {
+    "all_samples_verified_and_scored": true,
+    "k8_matches_recorded_within_tolerance": true,
+    "glb_matches_grid_geometry": true
+  },
+  "tolerance": 0.001,
+  "recorded_k8": {
+    "rooms": 51,
+    "samples": 898,
+    "occupancy_iou": 0.7281791412311536,
+    "boundary_iou": 0.4155705556849851,
+    "loss": 0.4897052155426253
+  },
+  "replayed": {
+    "8": {
+      "rooms": 51,
+      "samples": 898,
+      "occupancy_iou": 0.7281791409519108,
+      "boundary_iou": 0.41557055414094235
+    }
+  },
+  "abs_delta_k8": {
+    "occupancy_iou": 2.7924274004220706e-10,
+    "boundary_iou": 1.5440427270085877e-09
+  },
+  "glb_checked": 36,
+  "model_load_s": 1.72,
+  "latency_s": {
+    "median": 0.0211,
+    "p95": 0.0317
+  },
+  "failures": []
+}

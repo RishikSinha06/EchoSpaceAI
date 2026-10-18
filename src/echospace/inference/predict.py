@@ -75,7 +75,7 @@ def compose_interior(occupancy_probability: np.ndarray, observed_free: np.ndarra
 
 def code_revision(repo_root: Path) -> str:
     try:
-        result = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=repo_root, capture_output=True, text=True, check=True, timeout=5)
+        result = subprocess.run(["git", "-c", f"safe.directory={repo_root.resolve().as_posix()}", "rev-parse", "--short", "HEAD"], cwd=repo_root, capture_output=True, text=True, check=True, timeout=5)
         return result.stdout.strip() or "unknown"
     except (OSError, subprocess.SubprocessError):
         return "unknown"

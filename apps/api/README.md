@@ -33,3 +33,22 @@ Settings: `ECHOSPACE_MODELS`, `ECHOSPACE_EVAL_DIR`, `ECHOSPACE_EVAL_SPEC`,
 `ECHOSPACE_FOLDS`, `ECHOSPACE_DEVICE` (default `cpu`). The web viewer reaches
 the API through its `/svc` proxy; override the target with
 `ECHOSPACE_API_URL` in `apps/web/.env.local`.
+
+## P10 completion routes and storage
+
+- `GET /v1/reconstructions/{id}/room-scene.json`: schema-valid RoomScene v1,
+  separate observation-only measured interfaces and model interfaces.
+- `GET /v1/samples/{sample_id}/observation.npz`: observation masks, points,
+  verified audio and poses; no complete target labels.
+- `GET /v1/acousticrooms`: audited local source mesh catalogue.
+- `GET /v1/acousticrooms/mesh?id=category/room_id`: raw OBJ via P2 archive reader.
+
+Set `ECHOSPACE_ACOUSTICROOMS_ROOT` to the dataset directory and optionally
+`ECHOSPACE_MESH_MANIFEST` to an audited P2 inventory. These reference meshes
+are not model inputs. The Vite `/api/acousticrooms` proxy supports zipped data.
+
+`ECHOSPACE_RESULTS_DIR` defaults to `artifacts/inference/results`; an empty
+value disables persistence. Only the last 128 small request records are
+saved. GET after restart recomputes and verifies the deterministic ID.
+Model/sample validation failures remain errors rather than serving stale data.
+Use one local service process; this filesystem cache is not a distributed store.
