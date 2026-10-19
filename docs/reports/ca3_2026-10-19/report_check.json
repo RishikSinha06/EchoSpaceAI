@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "pages": 24,
+  "figures": 7,
+  "references": 11,
+  "identity_fields": "blank as requested",
+  "numeric_tables": "verified against saved manifests",
+  "visual_review": "all 24 final page images inspected",
+  "renderer": "Microsoft Word 16 PDF export plus bundled Poppler; packaged LibreOffice renderer unavailable on this Windows runtime",
+  "AI_or_similarity_certification": "not supplied; user must comply with institutional policy",
+  "files": {
+    "EchoSpace_AI_CA3_Report.docx": "aaf67955a228adbd99afad7aab1f493d84de805a793e49e50fbfcfc407733d77",
+    "EchoSpace_AI_CA3_Report.pdf": "e26b671e9396d0860df44462eaa4eca2f9cd2bc09277f9fef4d7d9c3edc61a05"
+  },
+  "training": "remains paused"
+}

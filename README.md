@@ -87,3 +87,11 @@ The browser currently lists meshes but does not display RIRs or source/receiver
 markers. Some `simulation_info` JSON names disagree with their folders; the
 audited folder key must be used when joining positions. AcousticRooms OBJ files
 use Z as the vertical axis. The browser rotates them into its Y-up frame.
+
+
+## CA3 project report
+
+The revised 24-page report, editable Word version, figure attribution and compact
+experiment evidence are available in [docs/reports/ca3_2026-10-19](docs/reports/ca3_2026-10-19/README.md).
+It distinguishes the completed fold-0 A/P/D experiment from the ongoing WallFusion
+study and reports the unresolved waveform-specific contribution.
