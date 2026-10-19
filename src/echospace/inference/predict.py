@@ -130,7 +130,7 @@ def reconstruct(model: Any, entry: ModelEntry, sample: ServedSample, k: int, *, 
         "display_convention": DISPLAY_CONVENTION,
         "wall_height": "assumed for display; the model predicts a 2D footprint only",
         "versions": {"python": platform.python_version(), "numpy": np.__version__, "torch": torch.__version__},
-        "data_attribution": "AcousticRooms (Meta Platforms, Inc.), CC BY 4.0; see DATA_LICENSE.md",
+        "data_attribution": record.get("data_attribution", "AcousticRooms (Meta Platforms, Inc.), CC BY 4.0; see DATA_LICENSE.md"),
     }
     interior = compose_interior(occupancy, arrays["observed_free"], arrays["observed_wall"], entry.threshold)
     return Reconstruction(identifier, entry, sample, k, k_used, occupancy, boundary, interior, metrics, provenance)

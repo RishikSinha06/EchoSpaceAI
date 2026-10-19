@@ -290,6 +290,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             raise HTTPException(503,'Source mesh could not be read') from exc
         return Response(data,media_type='text/plain',headers={'ETag':'"'+sha+'"','Cache-Control':'private, max-age=3600'})
 
+    from echospace.simulation.api import router as simulation_router
+    app.include_router(simulation_router(registry,store,remember,_summary,revision,settings.device))
+
     app.state.registry, app.state.store, app.state.settings = registry, store, settings
     return app
 

@@ -1,0 +1,55 @@
+{
+  "schema_version": "echospace.simulation_config.v1",
+  "config": {
+    "mode": "virtual",
+    "seed": 0,
+    "sample_id": null,
+    "k": 1,
+    "room": {
+      "shape": "rectangle",
+      "width_m": 6.0,
+      "depth_m": 5.0,
+      "height_m": 2.8,
+      "reflection": 0.65
+    },
+    "scanner": {
+      "position_m": [
+        2.0,
+        1.1,
+        2.5
+      ],
+      "heading_deg": 0.0,
+      "fov_deg": 120.0,
+      "rays": 361,
+      "range_m": 12.0,
+      "range_std_m": 0.0,
+      "dropout": 0.0
+    },
+    "audio": {
+      "excitation": "impulse",
+      "speed_m_s": 343.0,
+      "noise_snr_db": null,
+      "gain_db": 0.0,
+      "lowpass_hz": null,
+      "offset_ms": 0.0,
+      "clock_drift_ppm": 0.0,
+      "adc_bits": 16,
+      "clip_level": 1.0,
+      "pose_noise_m": 0.0
+    },
+    "pairs": [
+      {
+        "source_m": [
+          2.8,
+          1.2,
+          2.5
+        ],
+        "receiver_m": [
+          3.8,
+          1.2,
+          2.5
+        ]
+      }
+    ]
+  }
+}

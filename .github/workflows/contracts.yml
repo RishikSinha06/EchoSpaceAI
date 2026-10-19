@@ -102,4 +102,4 @@ jobs:
           python -m pip install 'torch>=2.5,<3' --index-url https://download.pytorch.org/whl/cpu
           python -m pip install -e '.[test,audit,model,api]'
       - name: Check registry, verified samples, reconstruction, exports and the API (synthetic, no weights)
-        run: python -m pytest tests/test_inference.py -q
+        run: python -m pytest tests/test_inference.py tests/test_simulation.py -q

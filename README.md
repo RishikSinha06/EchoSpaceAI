@@ -87,3 +87,12 @@ The browser currently lists meshes but does not display RIRs or source/receiver
 markers. Some `simulation_info` JSON names disagree with their folders; the
 audited folder key must be used when joining positions. AcousticRooms OBJ files
 use Z as the vertical axis. The browser rotates them into its Y-up frame.
+
+## Software sensor lab
+
+The viewer's **Open sensor lab** supports audited dataset replay and an interactive
+virtual room with a moving scanner, speaker/microphone pairs, synthetic RIR capture,
+device faults and registered-model comparison. Virtual results are labeled as
+synthetic diagnostics and are not eligible training data. See
+[the simulation handoff](docs/simulation_handoff.md) for setup, physics limits,
+API/CLI contracts and verification.
