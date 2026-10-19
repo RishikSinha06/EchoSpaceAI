@@ -46,7 +46,7 @@ export function showComparison(items, onInspect) {
   dialog.innerHTML = '<header><div><h2 id="comparison-title">Compare the same partial scan</h2><p id="comparison-sample"></p></div><button id="comparison-close" type="button" autofocus>Close</button></header>' +
     '<div class="comparison-controls"><label for="comparison-head">Map</label><select id="comparison-head"><option value="occupancy">Room occupancy</option><option value="boundary">Wall boundary</option></select><span>Teal: observed wall · muted teal: observed free · amber: model · cream: truth</span></div><div class="comparison-panels"></div>' +
     '<p class="comparison-caption">All panels use the same scanner grid frame (u →, v ↓). Dark cells in the observation are unknown, not measured empty. Predictions are thresholded raw probabilities in unseen cells; measured cells are shown as observation context. Scores use valid unseen cells only.</p>';
-  dialog.querySelector('#comparison-sample').textContent = `${a.result.room_id} · ${a.result.sample_id} · K=${a.result.k_used} · ${grid.cell_size_m.toFixed(2)} m/cell`;
+  dialog.querySelector('#comparison-sample').textContent = `${a.result.room_id} · ${a.result.sample_id} · K=${a.result.k_used} · ${grid.cell_size_m.toFixed(2)} m/cell${a.result.split_for_model_fold === 'synthetic_diagnostic' ? ' · SYNTHETIC DIAGNOSTIC, NOT HELD-OUT' : ''}`;
   const panels = [
     { title: 'Observation only', kind: 'observation', item: a },
     { title: 'A · Geometry only', kind: 'model', item: a },
@@ -60,7 +60,7 @@ export function showComparison(items, onInspect) {
     panel.canvas.setAttribute('aria-label', panel.title + ', scanner-aligned grid'); panel.canvas.setAttribute('role', 'img');
     figure.append(panel.canvas);
     const score = document.createElement('p'); score.className = 'comparison-score';
-    score.textContent = panel.kind === 'model' ? `Unseen IoU: occupancy ${panel.item.result.metrics.occupancy_iou.toFixed(3)} · boundary ${panel.item.result.metrics.boundary_iou.toFixed(3)}` : panel.kind === 'observation' ? `${Math.round(a.result.coverage * 100)}% observed · no hidden labels` : 'Evaluation labels only · never model input';
+    score.textContent = panel.kind === 'model' ? `Unseen IoU: occupancy ${panel.item.result.metrics.occupancy_iou.toFixed(3)} · boundary ${panel.item.result.metrics.boundary_iou.toFixed(3)}` : panel.kind === 'observation' ? `${Math.round(grid.observed.flat().filter(Boolean).length / (grid.width * grid.height) * 100)}% of canvas observed · no hidden labels` : 'Evaluation labels only · never model input';
     figure.append(score);
     if (panel.kind === 'model') {
       const inspect = document.createElement('button'); inspect.textContent = 'Inspect in 3D';

@@ -18,7 +18,7 @@ def room_scene_document(result):
     u, v = np.asarray(grid['axis_u_scene'],float), np.asarray(grid['axis_v_scene'],float)
     size = float(grid['cell_size_m'])
     observation_id = result.sample.sample_id + ':partial-scan'
-    source = '/v1/samples/' + quote(result.sample.sample_id,safe='') + '/observation.npz'
+    source = record.get('observation_payload_ref', '/v1/samples/' + quote(result.sample.sample_id,safe='') + '/observation.npz')
 
     def segment(row,col,index):
         _, _, a, b = _EDGES[index]
@@ -56,7 +56,7 @@ def room_scene_document(result):
     return {'format':'echospace.room-scene.v1','scene_id':result.reconstruction_id,'scene_version':1,
             'units':'m','coordinate_system':'scene: X right, Y up, Z forward','world_origin_m':[0.,0.,0.],
             'source_sample_id':result.sample.sample_id,'observed_geometry':measured,'inferred_geometry':inferred,
-            'observations':[{'observation_id':observation_id,'sensor_type':'simulated_partial_scan',
+            'observations':[{'observation_id':observation_id,'sensor_type':record.get('observation_sensor_type','simulated_partial_scan'),
                              'payload_ref':source}], 'acoustic_measurements':acoustic,
             'grid_frame':grid,'geometry_interpretation':'2D raster interfaces projected to Y=0; measured layer uses only scan free/hit masks',
             'quantization_m':size,'wall_height_recovered':False,

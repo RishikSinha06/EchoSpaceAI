@@ -95,7 +95,7 @@ function metric(id, value, unit = 'm') { byId(id).textContent = value == null ? 
 function updateInspector() {
   const stats = active?.stats;
   byId('info-name').textContent = active?.name || '—';
-  byId('info-type').textContent = active?.kind === 'grid' ? 'GRID RECONSTRUCTION' : active ? 'SOURCE MESH' : 'No scene';
+  byId('info-type').textContent = active?.kind === 'observation' ? 'SENSOR OBSERVATION' : active?.kind === 'grid' ? 'GRID RECONSTRUCTION' : active ? 'SOURCE MESH' : 'No scene';
   metric('width', stats?.width_m); metric('depth', stats?.depth_m); metric('area', stats?.area_m2, 'm²');
   metric('cell', stats?.cell_m); metric('height', stats?.height_m);
   metric('obs-length', stats?.observed_wall_m); metric('inf-length', stats?.inferred_wall_m);
@@ -129,7 +129,7 @@ function show(result) {
   if (bounds.isEmpty()) throw new Error('This file contains no visible geometry.');
   fitView();
   byId('scene-name').textContent = result.name || result.group.name;
-  byId('scene-kind').textContent = result.reconstruction ? 'RECONSTRUCTION / ' + result.reconstruction.model_id.toUpperCase() : result.kind === 'grid' ? 'PREDICTION / GRID' : 'SOURCE / MESH';
+  byId('scene-kind').textContent = result.reconstruction ? 'RECONSTRUCTION / ' + result.reconstruction.model_id.toUpperCase() : result.kind === 'observation' ? 'SIMULATED OBSERVATION' : result.kind === 'grid' ? 'PREDICTION / GRID' : 'SOURCE / MESH';
   for (const key of LAYER_KEYS) { byId(key).disabled = !result.layers[key]; result.layers[key] && (result.layers[key].visible = byId(key).checked); }
   byId('export').disabled = false;
   updateInspector(); setStatus('Scene ready');
@@ -169,3 +169,5 @@ byId('example').click();
 renderer.localClippingEnabled = true;
 import('./service.js').then((module) => module.attachReconstructionPanel(show, setStatus));
 import('./dataset.js').then((module) => module.attachDatasetBrowser(show, setStatus));
+
+import('./simulation.js').then((module) => module.attachSimulationLab(show, setStatus));
