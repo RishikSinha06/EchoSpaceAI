@@ -1,0 +1,13 @@
+CA3 REPORT HANDOFF
+
+Report length: 24 pages including title page and references.
+
+Rubric evidence
+- Introduction and literature: pages 3-5, primary-source citations.
+- Methodology: pages 6-13, data audit, architecture diagrams, controls and training protocol.
+- Experiments and interpretation: pages 14-22, matched results, uncertainty, ablations, failure cases, actual interface screenshots and implementation checks.
+- AI and plagiarism: no zero-AI or zero-similarity claim is made. This is an AI-assisted working draft. Under a no-AI submission rule, the team must rewrite the prose independently and follow the teacher's policy. Do not submit a false AI-free declaration. Use the college's approved similarity check if required; references, names and standard terms can produce legitimate matches.
+- Timely submission: fill the blank identity fields, review the final PDF and upload through the official channel before the teacher's deadline. No upload has been performed.
+
+Verify that every team member can explain M=0 masking, group splits, D-versus-P, the zero/swap result, and why the simulator is not physical validation.
+The Word version is editable. After editing, export a new PDF and confirm it still stays below 26 pages.

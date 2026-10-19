@@ -1,0 +1,13 @@
+{
+  "snapshot": "2026-10-19",
+  "source_sha256": {
+    "artifacts/report_20261019/report_evidence.json": "65212ac0711e7ef5278f169806d856359ece01b7831776610657e12894624c3a",
+    "artifacts/p9_full_fold0/results.json": "97f27293b01a8547604d072e17fe523ee081468817c08d87c481f78e4677c864",
+    "artifacts/p9_full_fold0/review/summary.json": "d1599e1dd4f76f60ca813bce6cf1e3dd3b0266814a0e9be3971838981f99c144",
+    "artifacts/simulation_workspace/reports/simulation_check.md": "cc1f6355aa2caf93cc7ad0bbeeac398ff70dfe1050f3b8dd692449aa1331e47f",
+    "artifacts/simulation_workspace/artifacts/simulation_review/committed_gate/real_gate.json": "42cce2fc6db0a75a11aed23837d0c267295b988e41b67a82c3bd1837b87d549b"
+  },
+  "training_action": "none; remains paused",
+  "identity_fields": "intentionally blank",
+  "AI_policy": "working draft; no AI-free or zero-similarity certification"
+}

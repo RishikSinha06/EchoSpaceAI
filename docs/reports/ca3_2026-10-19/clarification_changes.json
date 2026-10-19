@@ -1,0 +1,15 @@
+{
+  "changed_pages": [
+    2,
+    11,
+    14,
+    16,
+    22,
+    23
+  ],
+  "completed_experiment": "EchoFusion A/P/D full fold0 training, validation selection and evaluation",
+  "ongoing_extension": "larger grouped EchoFusion/WallFusion study",
+  "acoustic_claim": "configuration improvement; waveform-specific benefit not established",
+  "new_experiments": "none",
+  "training": "not resumed"
+}
